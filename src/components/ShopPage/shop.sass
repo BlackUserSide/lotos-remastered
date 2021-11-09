@@ -1,0 +1,76 @@
+.shop-page-wrapper
+    .main-wrapper-shop
+        display: flex
+        max-width: 100%
+        padding: 30px 70px
+        .category-wrapper
+            width: 25%
+            background: #F4F7F9
+            border-radius: 10px
+            padding: 65px 30px
+            .top-line
+                .h4
+                    font-size: 18px
+                    line-height: 22px
+                    letter-spacing: 0.02em
+                    text-transform: uppercase
+                    color: #4F4F4F
+            .list-wrapper-category
+                display: flex
+                flex-direction: column
+                .item-list-wrapper
+                    position: relative
+                    overflow: hidden
+                    p
+                        cursor: pointer
+                        margin-bottom: 10px
+                    .hidden-list-category
+                        display: flex
+                        flex-direction: column
+                        margin-bottom: -40px
+                        //animation: test 3s ease-in-out infinite
+                        span
+                            cursor: pointer
+                            margin-bottom: 10px
+                            display: inline-block
+
+        .main-shop-wrapper
+            width: 100%
+            margin-left: 30px
+            .container-main-shop
+                background: url('../../img/bg-shop.png')
+                width: 100%
+                height: 420px
+                background-size: cover
+                position: relative
+                border-radius: 10px
+                .text-composition
+                    position: relative
+                    top: 130px
+                    left: 51px
+                    width: 80%
+                    .h2
+                        font-size: 54px
+                        line-height: 65px
+                        color: #FFFFFF
+                    p
+                        font-size: 18px
+                        line-height: 140%
+                        color: #FFFFFF
+                        width: 50%
+                    .btn-shop-main
+                        width: 164px
+                        height: 50px
+                        background: #1FBB83
+                        border-radius: 6px
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        color: #fff
+                        cursor: pointer
+
+@keyframes test
+    0%
+        margin-bottom: -40px
+    100%
+        margin-bottom: 0

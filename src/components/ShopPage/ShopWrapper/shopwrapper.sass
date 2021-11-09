@@ -1,0 +1,236 @@
+.shop-wrapper
+    display: flex
+    justify-content: flex-end
+    .container-wrapper-shop
+        width: 72%
+        .main-item-wrapper-shop
+            display: flex
+            align-items: center
+            justify-content: space-between
+            padding-bottom: 35px
+            border-bottom: 1px solid #E0E0E0
+            .container-filter
+                .filter-wrapper
+                    position: relative
+                    .main-fillter
+                        cursor: pointer
+                        p
+                            font-weight: 600
+                            font-size: 14px
+                            line-height: 17px
+                            span
+                                opacity: .5
+                    .hidden-wrapper
+                        position: absolute
+                        display: flex
+                        flex-direction: column
+                        background-color: #fff
+                        padding: 15px 0
+                        border-radius: 10px
+                        display: none
+                        span
+                            display: inline-block
+                            margin-bottom: 5px
+                            padding: 10px 25px
+                            text-transform: lowercase
+                            &:hover
+                                background: #F4F7F9
+            .search-wrapper
+                padding-right: 135px
+                .input-wrapper
+                    position: relative
+                    input
+                        background: #F4F7F9
+                        border-radius: 6px
+                        padding: 12px 20px
+                        outline: none
+                        border: none
+                    img
+                        position: absolute
+                        right: 5px
+                        top: 12px
+                        width: 15px
+                        height: 15px
+                        cursor: pointer
+
+.data-item-shop
+    padding: 30px 0
+
+    .container-item
+        display: flex
+        justify-content: space-between
+        .item-product-wrapper
+            position: relative
+            border-radius: 10px
+            box-shadow: 0px 10px 40px rgba(98, 98, 98, 0.1)
+            border-radius: 10px
+            cursor: pointer
+            .text-composition
+                padding: 0 20px
+            .image-wrapper
+                width: 100%
+                margin-bottom: 20px
+                img
+                    width: 100%
+                    border-radius: 10px 10px 0 0
+                    object-fit: cover
+            .h3
+                margin: 0
+                font-weight: 600
+                font-size: 16px
+                line-height: 19px
+                color: #4F4F4F
+                margin-bottom: 10px
+            .desc-wrapper
+                font-size: 12px
+                line-height: 14px
+                color: #4F4F4F
+                margin: 0
+                margin-bottom: 20px
+            .discount-wrapper
+                margin-bottom: 10px
+                .full-price
+                    font-size: 12px
+                    line-height: 14px
+                    text-decoration-line: line-through
+                    color: #BDBDBD
+                    margin: 0
+                .discount-price
+                    font-size: 16px
+                    line-height: 14px
+                    color: #4F4F4F
+                    font-weight: bold
+                    margin-left: 5px
+                    margin: 0
+            .price-for-user
+                p
+                    margin: 0
+                    margin-bottom: 20px
+                    font-size: 12px
+                    line-height: 14px
+                    color: #828282
+            .amount-wrapper
+                display: flex
+                align-items: center
+                justify-content: space
+                margin-bottom: 10px
+                input
+                    border: 1px solid #E0E0E0
+                    box-sizing: border-box
+                    border-radius: 6px
+                    height: 42px
+                    width: 100%
+                    text-align: center
+                    font-size: 14px
+                    user-select: none
+                .left-ico
+                    position: relative
+                    left: 10px
+                    cursor: pointer
+                .right-ico
+                    position: relative
+                    right: 10px
+                    cursor: pointer
+            .btn-wrapper-item-product
+                display: flex
+                flex-direction: column
+                .btn-add-to-cart
+                    background: #1FBB83
+                    border-radius: 6px
+                    color: #fff
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    height: 42px
+                    cursor: pointer
+                    transition: .3s ease
+                    margin-bottom: 10px
+                    &:hover
+                        background: #30D398
+                .btn-bay-on-click
+                    background: #F4F7F9
+                    border-radius: 6px
+                    color: #000
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    height: 42px
+                    cursor: pointer
+                    transition: .3s ease
+                    margin-bottom: 10px
+                    &:hover
+                        background: #4F4F4F
+                        color: #fff
+            .list-info-prod
+                position: absolute
+                top: 10px
+                display: flex
+                .bonus-ico-wrapper
+                    width: 40px
+                    height: 40px
+                    border-radius: 50%
+                    background: #F4F7F9
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    margin-right: 10px
+                    position: relative
+                    transition: .3s ease
+                    &:hover
+                        .hidden-wrapper
+                            opacity: 1
+                            z-index: 2
+                    .hidden-wrapper
+                        background: #FFFFFF
+                        border-radius: 6px
+                        position: absolute
+                        width: 150px
+                        top: -60px
+                        left: 10px
+                        padding: 15px 20px
+                        filter: drop-shadow(0px 5px 10px rgba(98, 98, 98, 0.1))
+                        opacity: 0
+                        z-index: -2
+                        p
+                            margin: 0
+                            font-size: 12px
+                            line-height: 14px
+                            color: #4F4F4F
+
+                .discount-wrapper
+                    width: 40px
+                    height: 40px
+                    border-radius: 50%
+                    background: #FFF2E7
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    margin-right: 10px
+                    position: relative
+                    &:hover
+                        .hidden-wrapper
+                            opacity: 1
+                            z-index: 2
+                    .hidden-wrapper
+                        background: #FFFFFF
+                        border-radius: 6px
+                        position: absolute
+                        width: 150px
+                        top: -0px
+                        left: 10px
+                        padding: 15px 20px
+                        filter: drop-shadow(0px 5px 10px rgba(98, 98, 98, 0.1))
+                        opacity: 0
+                        z-index: -2
+                        p
+                            margin: 0
+                            font-size: 12px
+                            line-height: 14px
+                            color: #4F4F4F
+.container-wrapper-new
+    padding: 35px 135px
+    .top-line-wrapper-new
+        .h3
+            font-size: 40px
+            line-height: 48px
+            color: #4F4F4F
