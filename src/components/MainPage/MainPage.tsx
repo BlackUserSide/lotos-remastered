@@ -18,7 +18,7 @@ export const MainPage: React.FC = () => {
       <AuthSection />
       <ListImage />
       <TextComposition />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

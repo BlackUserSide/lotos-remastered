@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import nameImage from "../../../../img/iconCabinet/IconMainHome/name.png";
 import classIco from "../../../../img/iconCabinet/IconMainHome/classImage.png";
 import hzIcon from "../../../../img/iconCabinet/IconMainHome/hzIcon.png";
 import idIcon from "../../../../img/iconCabinet/IconMainHome/idIcon.png";
 import copy from "../../../../img/iconCabinet/IconMainHome/copyBtn.png";
+import { getDataUser } from "../../../api/user";
+import { useHistory } from "react-router";
 export const MainInfoWrapper: React.FC = () => {
-  const testFunct = () => {
-    navigator.clipboard.writeText("http://www.lotus-namaste.com/");
+  const [dataUser, setDataUser] = useState<any>({});
+  const [dataInvite, setDataInvite] = useState<any>();
+  const testFunct = (link: string) => {
+    navigator.clipboard.writeText(link);
   };
+  let history = useHistory();
+  useEffect(() => {
+    getDataUser()
+      .then((res) => {
+        if (res) {
+          console.log(res);
+
+          switch (res.status) {
+            case 200:
+              setDataUser(res.data[0]);
+              setDataInvite(res.data[1]);
+              break;
+            case 401:
+              //localStorage.clear();
+              //history.push("/login");
+              break;
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [history]);
+  console.log(dataInvite);
+
   return (
     <div className="main-info-wrapper">
       <div className="top-line">
@@ -19,13 +46,13 @@ export const MainInfoWrapper: React.FC = () => {
             <div className="image-wrapper">
               <img src={nameImage} alt="" />
             </div>
-            <p>Антохіна Антоніна Анатоліївна</p>
+            <p>{`${dataUser.surname} ${dataUser.firstName} ${dataUser.lastName}`}</p>
           </div>
           <div className="class-wrapper item-block-inform">
             <div className="image-wrapper">
               <img src={classIco} alt="" />
             </div>
-            <p>S3</p>
+            <p>S1</p>
             <div className="inform-ico item-block-inform">
               <img src={""} alt="" />
             </div>
@@ -35,13 +62,13 @@ export const MainInfoWrapper: React.FC = () => {
             <div className="image-wrapper">
               <img src={idIcon} alt="" />
             </div>
-            <p>9912315</p>
+            <p>{dataUser.id}</p>
           </div>
           <div className="bonust-to-user item-block-inform">
             <div className="image-wrapper">
               <img src={hzIcon} alt="" />
             </div>
-            <p>Винагорода за попередній період: 2 000 Lt</p>
+            <p>Винагорода за попередній період: 0 Lt</p>
           </div>
         </div>
         <div className="second-block-information">
@@ -53,9 +80,16 @@ export const MainInfoWrapper: React.FC = () => {
               <input
                 type="text"
                 disabled={true}
-                value="http://www.lotus-namaste.com/"
+                value={`http://www.lotus-namaste.com/${dataUser.myInviteLink}`}
               />
-              <div className="btn-wrapper-copy" onClick={testFunct}>
+              <div
+                className="btn-wrapper-copy"
+                onClick={() =>
+                  testFunct(
+                    `http://www.lotus-namaste.com/${dataUser.myInviteLink}`
+                  )
+                }
+              >
                 <img src={copy} alt="" />
               </div>
             </div>
@@ -69,7 +103,11 @@ export const MainInfoWrapper: React.FC = () => {
                 <div className="image-wrapper">
                   <img src={nameImage} alt="" />
                 </div>
-                <p>Іванов Іван Іванович</p>
+                {dataInvite ? (
+                  <p>{`${dataInvite.surname} ${dataInvite.firstName} ${dataInvite.lastName}`}</p>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="inform-class-user wrapper-inform-section">
                 <div className="image-wrapper">

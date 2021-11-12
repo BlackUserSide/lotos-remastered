@@ -10,6 +10,7 @@
         height: 100%
         position: relative
         overflow: hidden
+        border-radius: 10px
         .text-main-collection
             padding-top: 102px
             padding-left: 85px
@@ -23,10 +24,10 @@
                 margin: 0
                 color: #4F4F4F
                 font-size: 18px
-                line-height: 140%;
+                line-height: 140%
                 margin-bottom: 30px
             .btn-main-screen-wrapper
-                display: flex;
+                display: flex
                 .green-btn
                     background-color: #1FBB83
                     border-radius: 6px
@@ -34,21 +35,42 @@
                     cursor: pointer
                     span
                         color: #fff
-                        order: 0;
-                        flex-grow: 0;
+                        order: 0
+                        flex-grow: 0
                         font-size: 16px
                 .light-btn
                     background-color: #F4F7F9
                     border-radius: 6px
                     span
                         color: #4F4F4F
-                        order: 0;
-                        flex-grow: 0;
+                        order: 0
+                        flex-grow: 0
                         font-size: 16px
 
-.btn-main-collection 
+.btn-main-collection
     cursor: pointer
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row
+    justify-content: center
+    align-items: center
     padding: 15px 32px
+@media screen and ( max-width: 780px )
+    .main-screen-wrapper .container-image .text-main-collection .h1
+        font-size: 28px
+    .main-screen-wrapper .container-image .text-main-collection .text-main-wrapper
+        font-size: 12px
+@media screen and ( max-width: 575px )
+    .main-screen-wrapper .container-image .text-main-collection
+        padding-left: 10px
+        padding-top: 70px
+    .main-screen-wrapper .container-image .text-main-collection .btn-main-screen-wrapper
+        flex-direction: column
+        padding-right: 10px
+    .main-screen-wrapper .container-image .text-main-collection .btn-main-screen-wrapper .green-btn
+        margin-right: 0
+    .main-screen-wrapper .container-image .text-main-collection .btn-main-screen-wrapper
+        margin-bottom: 15px
+    .btn-main-collection
+        text-align: center
+        margin-bottom: 20px
+    .main-screen-wrapper
+        padding: 0 15px

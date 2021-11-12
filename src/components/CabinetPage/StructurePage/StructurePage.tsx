@@ -11,7 +11,7 @@ export const StructurePage: React.FC = () => {
           </Link>
           <span>/</span>
           <Link to="/cabinet/business" className="active-link">
-            Мій бізнес
+            Моя структура
           </Link>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import imgs from "../../../img/textProd.png";
+import imgs from "../../../img/testProd.png";
 import left from "../../../img/prodIcon/left.png";
 import right from "../../../img/prodIcon/right.png";
 import cart from "../../../img/prodIcon/cart.png";

@@ -52,7 +52,12 @@ export const MainCabinetLink: React.FC = () => {
             <p>Дані про виплати оновлюються раз на місяць</p>
           </div>
         </div>
-        <div className="item-link-wrapper">
+        <div
+          className="item-link-wrapper"
+          onClick={() => {
+            pushHistory("/cabinet/bonus");
+          }}
+        >
           <div className="top-line-link">
             <div className="name-image-wrapper">
               <img src={image3} alt="" />
@@ -91,7 +96,12 @@ export const MainCabinetLink: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="item-link-wrapper">
+        <div
+          className="item-link-wrapper"
+          onClick={() => {
+            pushHistory("/cabinet/profile");
+          }}
+        >
           <div className="top-line-link">
             <div className="name-image-wrapper">
               <img src={image5} alt="" />
