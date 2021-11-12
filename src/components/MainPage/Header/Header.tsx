@@ -133,7 +133,10 @@ export const Header: React.FC = () => {
                 <span>UK</span>
               </div>
               <div className="btn-login-wrapper">
-                <div className="btn-main-container">
+                <div
+                  className="btn-main-container"
+                  onClick={() => history.push("/login")}
+                >
                   <span>Авторизуватись</span>
                 </div>
               </div>
