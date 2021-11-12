@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.63775406.chunk.css",
+    "main.js": "/static/js/main.a6d871bd.chunk.js",
+    "main.js.map": "/static/js/main.a6d871bd.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e86bb4af.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e86bb4af.js.map",
+    "static/js/2.c368f37f.chunk.js": "/static/js/2.c368f37f.chunk.js",
+    "static/js/2.c368f37f.chunk.js.map": "/static/js/2.c368f37f.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.63775406.chunk.css.map": "/static/css/main.63775406.chunk.css.map",
+    "static/js/2.c368f37f.chunk.js.LICENSE.txt": "/static/js/2.c368f37f.chunk.js.LICENSE.txt",
+    "static/media/Gilroy.css": "/static/media/Gilroy-Regular.ab96f7e6.eot",
+    "static/media/authsection.sass": "/static/media/bg-auth.29d6cb18.png",
+    "static/media/mainscreen.sass": "/static/media/photo.56bad7d1.jpg",
+    "static/media/section.sass": "/static/media/photo6.1f9a77bf.png",
+    "static/media/prod1.4ae290f4.png": "/static/media/prod1.4ae290f4.png",
+    "static/media/prod2.0db95f5b.png": "/static/media/prod2.0db95f5b.png",
+    "static/media/prod3.453c012b.png": "/static/media/prod3.453c012b.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e86bb4af.js",
+    "static/js/2.c368f37f.chunk.js",
+    "static/css/main.63775406.chunk.css",
+    "static/js/main.a6d871bd.chunk.js"
+  ]
+}
