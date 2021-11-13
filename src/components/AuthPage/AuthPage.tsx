@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Footer } from "../MainPage/Footer/Footer";
+//import { Footer } from "../MainPage/Footer/Footer";
 import { Header } from "../MainPage/Header/Header";
 import showPasss from "../../img/cabinetIcon/showPass.png";
 import "./auth.sass";
@@ -47,7 +47,7 @@ export const AuthPage: React.FC = () => {
           switch (res.status) {
             case 200:
               localStorage.setItem("token", res.data.token);
-              history.push("/cabinet");
+              window.location.href = "/cabinet";
               break;
             case 422:
               setErr(true);

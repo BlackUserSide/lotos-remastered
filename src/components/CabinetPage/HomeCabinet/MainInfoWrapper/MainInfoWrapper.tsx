@@ -25,8 +25,8 @@ export const MainInfoWrapper: React.FC = () => {
               setDataInvite(res.data[1]);
               break;
             case 401:
-              //localStorage.clear();
-              //history.push("/login");
+              localStorage.clear();
+              history.push("/login");
               break;
           }
         }
@@ -36,90 +36,96 @@ export const MainInfoWrapper: React.FC = () => {
   console.log(dataInvite);
 
   return (
-    <div className="main-info-wrapper">
-      <div className="top-line">
-        <h1 className="h1">Особиста інформація</h1>
-      </div>
-      <div className="container-wrapper-inform-cabinet">
-        <div className="first-block-inform">
-          <div className="name-user-wrapper item-block-inform">
-            <div className="image-wrapper">
-              <img src={nameImage} alt="" />
-            </div>
-            <p>{`${dataUser.surname} ${dataUser.firstName} ${dataUser.lastName}`}</p>
+    <>
+      {dataUser.surname ? (
+        <div className="main-info-wrapper">
+          <div className="top-line">
+            <h1 className="h1">Особиста інформація</h1>
           </div>
-          <div className="class-wrapper item-block-inform">
-            <div className="image-wrapper">
-              <img src={classIco} alt="" />
-            </div>
-            <p>S1</p>
-            <div className="inform-ico item-block-inform">
-              <img src={""} alt="" />
-            </div>
-            <div className="information-hidden"></div>
-          </div>
-          <div className="id-wrapper-user item-block-inform">
-            <div className="image-wrapper">
-              <img src={idIcon} alt="" />
-            </div>
-            <p>{dataUser.id}</p>
-          </div>
-          <div className="bonust-to-user item-block-inform">
-            <div className="image-wrapper">
-              <img src={hzIcon} alt="" />
-            </div>
-            <p>Винагорода за попередній період: 0 Lt</p>
-          </div>
-        </div>
-        <div className="second-block-information">
-          <div className="invite-link-wrapper">
-            <div className="top-line-wrapper">
-              <p>Реферальне посилання для запрошення:</p>
-            </div>
-            <div className="input-wrapper">
-              <input
-                type="text"
-                disabled={true}
-                value={`http://www.lotus-namaste.com/${dataUser.myInviteLink}`}
-              />
-              <div
-                className="btn-wrapper-copy"
-                onClick={() =>
-                  testFunct(
-                    `http://www.lotus-namaste.com/${dataUser.myInviteLink}`
-                  )
-                }
-              >
-                <img src={copy} alt="" />
-              </div>
-            </div>
-          </div>
-          <div className="invite-user-wrapper">
-            <div className="top-line-wrapper">
-              <p>Вас запросив:</p>
-            </div>
-            <div className="inform-invite-user">
-              <div className="inform-user wrapper-inform-section">
+          <div className="container-wrapper-inform-cabinet">
+            <div className="first-block-inform">
+              <div className="name-user-wrapper item-block-inform">
                 <div className="image-wrapper">
                   <img src={nameImage} alt="" />
                 </div>
-                {dataInvite ? (
-                  <p>{`${dataInvite.surname} ${dataInvite.firstName} ${dataInvite.lastName}`}</p>
-                ) : (
-                  ""
-                )}
+                <p>{`${dataUser.surname} ${dataUser.firstName} ${dataUser.lastName}`}</p>
               </div>
-              <div className="inform-class-user wrapper-inform-section">
+              <div className="class-wrapper item-block-inform">
                 <div className="image-wrapper">
                   <img src={classIco} alt="" />
                 </div>
+                <p>1</p>
+                <div className="inform-ico item-block-inform">
+                  <img src={""} alt="" />
+                </div>
+                <div className="information-hidden"></div>
+              </div>
+              <div className="id-wrapper-user item-block-inform">
+                <div className="image-wrapper">
+                  <img src={idIcon} alt="" />
+                </div>
+                <p>{dataUser.id}</p>
+              </div>
+              <div className="bonust-to-user item-block-inform">
+                <div className="image-wrapper">
+                  <img src={hzIcon} alt="" />
+                </div>
+                <p>Винагорода за попередній період: 0 Lt</p>
+              </div>
+            </div>
+            <div className="second-block-information">
+              <div className="invite-link-wrapper">
+                <div className="top-line-wrapper">
+                  <p>Реферальне посилання для запрошення:</p>
+                </div>
+                <div className="input-wrapper">
+                  <input
+                    type="text"
+                    disabled={true}
+                    value={`http://134.0.115.16/register/${dataUser.myInviteLink}`}
+                  />
+                  <div
+                    className="btn-wrapper-copy"
+                    onClick={() =>
+                      testFunct(
+                        `http://134.0.115.16/register/${dataUser.myInviteLink}`
+                      )
+                    }
+                  >
+                    <img src={copy} alt="" />
+                  </div>
+                </div>
+              </div>
+              <div className="invite-user-wrapper">
+                <div className="top-line-wrapper">
+                  <p>Вас запросив:</p>
+                </div>
+                <div className="inform-invite-user">
+                  <div className="inform-user wrapper-inform-section">
+                    <div className="image-wrapper">
+                      <img src={nameImage} alt="" />
+                    </div>
+                    {dataInvite ? (
+                      <p>{`${dataInvite.surname} ${dataInvite.firstName} ${dataInvite.lastName}`}</p>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="inform-class-user wrapper-inform-section">
+                    <div className="image-wrapper">
+                      <img src={classIco} alt="" />
+                    </div>
 
-                <p>S4</p>
+                    <p>S4</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        ""
+      )}
+    </>
   );
 };

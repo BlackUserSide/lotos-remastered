@@ -1,7 +1,7 @@
 import React from "react";
 import { ActualProducts } from "./ActualProdutcs/ActualProducts";
 import { AuthSection } from "./AuthSection/AuthSection";
-import { Footer } from "./Footer/Footer";
+//import { Footer } from "./Footer/Footer";
 import { Header } from "./Header/Header";
 import { ListImage } from "./ListImage/ListImage";
 import { MainScreeen } from "./MainScreen/MainScreen";
