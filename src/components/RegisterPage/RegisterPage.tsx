@@ -5,7 +5,7 @@ import InputMask from "react-input-mask";
 import "./registerpage.sass";
 import { IErrRegister, IRegisterData } from "./type";
 import { validEmail } from "./validation";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Prealoder } from "../ui/Preloader/Preloader";
 import { checkLinkData, registerUser } from "../api/user";
 import { PopUpPassword } from "../ui/PopUpPassword/PopUpPassword";
@@ -13,6 +13,7 @@ type Params = {
   link: string;
 };
 export const RegisterPage: React.FC = () => {
+  let history = useHistory();
   let params: Params = useParams();
   const [dataForm, setDataForm] = useState<IRegisterData>({
     name: "",
@@ -31,11 +32,6 @@ export const RegisterPage: React.FC = () => {
   });
   const [activePop, setActivePop] = useState<boolean>(false);
   useEffect(() => {
-    console.log(
-      params.link ===
-        "U2FsdGVkX1/UAox1QBUAh0ez2AS4zsQevMZ+vtaWwcSO3Z6PJycls7d47RLS8ywz"
-    );
-
     checkLinkData(params.link)
       .then((res) => {
         if (res) {
@@ -55,7 +51,13 @@ export const RegisterPage: React.FC = () => {
       if (dataForm.password) {
         registerUser(dataForm)
           .then((res) => {
-            console.log(res);
+            if (res) {
+              switch (res.status) {
+                case 200:
+                  history.push("/login");
+                  break;
+              }
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -244,3 +246,4 @@ export const RegisterPage: React.FC = () => {
   );
 };
 //TODO Доп проверка на заполнение формы регистрации
+// TODO Сделать ошибку для существующего юзера

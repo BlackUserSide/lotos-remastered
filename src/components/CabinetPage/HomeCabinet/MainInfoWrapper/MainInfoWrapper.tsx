@@ -82,13 +82,13 @@ export const MainInfoWrapper: React.FC = () => {
                   <input
                     type="text"
                     disabled={true}
-                    value={`http://134.0.115.16/register/${dataUser.myInviteLink}`}
+                    value={`http://91.228.155.147/register/${dataUser.myInviteLink}`}
                   />
                   <div
                     className="btn-wrapper-copy"
                     onClick={() =>
                       testFunct(
-                        `http://134.0.115.16/register/${dataUser.myInviteLink}`
+                        `http://91.228.155.147/register/${dataUser.myInviteLink}`
                       )
                     }
                   >
