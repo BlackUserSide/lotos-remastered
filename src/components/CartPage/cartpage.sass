@@ -1,0 +1,106 @@
+.cart-wrapper-main
+    padding: 30px 135px
+    min-height: 650px
+    height: 100%
+    position: relative
+    background: #F5F7F9
+.main-cart-wrapper
+    position: absolute
+    top: 50%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, -50%)
+    background: #FFFFFF
+    box-shadow: 0px 5px 30px rgba(98, 98, 98, 0.1)
+    border-radius: 6px
+    padding: 30px
+    max-width: 80%
+    width: 100%
+    display: flex
+    flex-direction: column
+    .main-cart-item
+        max-width: 100%
+        padding-bottom: 20px
+        padding-top: 20px
+        border-bottom: 1px solid #0a0909
+        .container-item-wrapper
+            display: flex
+            align-items: center
+            .image-wrapper
+                max-width: 15%
+                border-radius: 6px
+                margin-right: 25px
+                img
+                    width: 100%
+                    object-fit: cover
+                    border-radius: 6px
+            .name-wrapper
+                width: 25%
+                margin-right: 25px
+                p
+                    margin: 0
+                    font-size: 16px
+                    line-height: 19px
+                    color: #4F4F4F
+                    margin-bottom: 10px
+                span
+                    font-size: 14px
+                    line-height: 16px
+                    color: #828282
+            .amount-wrapper-basic
+                display: flex
+                align-items: center
+                justify-content: space
+                width: 25%
+                margin-right: 25px
+                input
+                    border: 1px solid #E0E0E0
+                    box-sizing: border-box
+                    border-radius: 6px
+                    height: 42px
+                    width: 100%
+                    text-align: center
+                    font-size: 14px
+                    user-select: none
+                .left-ico
+                    position: relative
+                    left: 10px
+                    cursor: pointer
+                .right-ico
+                    position: relative
+                    right: 10px
+                    cursor: pointer
+            .price-wrapper
+                width: 25%
+                .full-price-wrapper
+                    p
+                        font-size: 16px
+                        line-height: 19px
+                        color: #4F4F4F
+                        font-weight: 600
+                .discount-wrapper-price
+                    display: flex
+                    align-items: center
+                    .full-price-wrapper-discount
+                        margin-right: 5px
+                        p
+                            margin: 0
+                            font-size: 12px
+                            line-height: 14px
+                            text-decoration-line: line-through
+                            color: #4F4F4F
+                    .discount-price-wrapper
+                        p
+                            font-size: 16px
+                            line-height: 19px
+                            color: #4F4F4F
+                            font-weight: 600
+            .delete-btn-wrapper
+                width: 40px
+                height: 40px
+                display: flex
+                align-items: center
+                justify-content: center
+                background: #F4F7F9
+                border-radius: 50%
+                cursor: pointer

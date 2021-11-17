@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../img/Logo.png";
 import search from "../../../img/iconHeader/search.png";
@@ -9,6 +9,7 @@ import uk from "../../../img/countries/uk.png";
 import { useHistory } from "react-router";
 import "./header.sass";
 import "../../ui/hamburgers-master/dist/hamburgers.min.css";
+import { CartContext } from "../../CartContext/CartContext";
 export const Header: React.FC = () => {
   const history = useHistory();
   const pushHandler = (link: string) => {
@@ -22,6 +23,14 @@ export const Header: React.FC = () => {
     }
     setActiveMobile(true);
   };
+  const [countCartHeader, setCountCartHeader] = useState<number>();
+  const { countCart } = useContext(CartContext);
+  useEffect(() => {
+    if (countCart !== undefined) {
+      setCountCartHeader(countCart);
+    }
+  }, [countCart]);
+
   return (
     <>
       <header className="main-header-wrapper">
@@ -58,8 +67,16 @@ export const Header: React.FC = () => {
                 </div>
               </li>
               <li className="main-btn-wrapper">
-                <div className="btn-header cart-link">
+                <div
+                  className="btn-header cart-link"
+                  onClick={() => {
+                    pushHandler("/cart");
+                  }}
+                >
                   <img src={cart} alt="" />
+                  <div className="hidden-wrapper-count">
+                    <span>{countCartHeader}</span>
+                  </div>
                 </div>
               </li>
               <li className="main-btn-wrapper">
@@ -105,7 +122,16 @@ export const Header: React.FC = () => {
               <img src={search} alt="" />
             </div>
             <div className="btn-header cart-link">
-              <img src={cart} alt="" />
+              <img
+                src={cart}
+                onClick={() => {
+                  pushHandler("/cart");
+                }}
+                alt=""
+              />
+              <div className="hidden-wrapper-count">
+                <span>{countCartHeader}</span>
+              </div>
             </div>
           </div>
         </div>

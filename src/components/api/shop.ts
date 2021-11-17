@@ -45,3 +45,46 @@ export const getSubCategory = async (id: number) => {
   });
   return response;
 };
+export const getAllProduct = async () => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "GET",
+    url: `/product/get_all/`,
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};
+export const getCartProducts = async (arr: number[]) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "POST",
+    url: `/product/get_by_array`,
+    data: arr,
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};

@@ -47,7 +47,7 @@
         .structure-container
             background: #FFFFFF
             border-radius: 6px
-            width: 100%
+
             min-height: 497px
             filter: drop-shadow(0px 5px 30px rgba(98, 98, 98, 0.1))
             overflow-x: scroll
@@ -67,6 +67,8 @@
                     padding: 20px
                     margin-right: 30px
                     flex-shrink: 0
+                    cursor: pointer
+                    z-index: 3
                     .top-line-user
                         display: flex
                         max-width: 100%
@@ -155,3 +157,30 @@
                             color: #4F4F4F
                             &:nth-child(1)
                                 margin-bottom: 10px
+@media screen and ( max-width: 1200px )
+    .structure-page-wrapper
+        .structure-wrapper
+            .top-line-wrapper
+                .h1
+                    font-size: 21px
+                p
+                    font-size: 14px
+        .link-wrapper-navigation
+            .container-navigatin-link
+                width: 28%
+
+@media screen and ( max-width: 820px )
+    .structure-page-wrapper
+        padding: 30px 10px
+        .structure-wrapper
+            .top-line-wrapper
+                .h1
+                    font-size: 21px
+                    line-height: 20px
+                p
+                    font-size: 14px
+            .structure-container
+                max-width: 100%
+        .link-wrapper-navigation
+            .container-navigatin-link
+                width: 28%

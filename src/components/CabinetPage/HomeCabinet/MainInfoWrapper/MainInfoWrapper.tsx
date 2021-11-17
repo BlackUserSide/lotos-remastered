@@ -9,8 +9,28 @@ import { useHistory } from "react-router";
 export const MainInfoWrapper: React.FC = () => {
   const [dataUser, setDataUser] = useState<any>({});
   const [dataInvite, setDataInvite] = useState<any>();
+  function fallbackCopyTextToClipboard(text: string) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand("copy");
+    } catch (err) {}
+    document.body.removeChild(textArea);
+  }
   const testFunct = (link: string) => {
-    navigator.clipboard.writeText(link);
+    if (navigator.clipboard === undefined) {
+      fallbackCopyTextToClipboard(link);
+      return;
+    }
+    navigator.clipboard.writeText(link).then();
   };
   let history = useHistory();
   useEffect(() => {

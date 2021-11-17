@@ -41,12 +41,30 @@
                         margin-right: 15px
                         cursor: pointer
                         transition: .3s ease
+                        position: relative
+
                         &:hover
                             transform: scale(1.1)
                             background: #E5FFF6
                         img
                             width: 15px
                             height: 15px
+                    .cart-link
+                        .hidden-wrapper-count
+                            position: absolute
+                            top: 0
+                            right: -5px
+                            width: 16px
+                            height: 16px
+                            background: #1FBB83
+                            border: 2px solid #FFFFFF
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            border-radius: 50%
+                            span
+                                font-size: 10px
+                                color: #fff
             .leng-wrapper
                 .btn-leng-header
                     display: flex
@@ -79,8 +97,25 @@
                 justify-content: center
                 background: #F4F7F9
                 border-radius: 50%
+                position: relative
                 &:nth-child(1)
                     margin-right: 15px
+            .cart-link
+                .hidden-wrapper-count
+                    position: absolute
+                    top: -5px
+                    right: -12px
+                    width: 16px
+                    height: 16px
+                    background: #1FBB83
+                    border: 2px solid #FFFFFF
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    border-radius: 50%
+                    span
+                        font-size: 10px
+                        color: #fff
     .mobile-nav-header
         position: fixed
         z-index: -2
