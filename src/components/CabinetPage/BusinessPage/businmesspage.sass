@@ -78,3 +78,41 @@
                             margin: 0
                             span
                                 font-weight: bold
+
+@media screen and ( max-width: 1200px )
+    .business-page-wrapper
+        .link-wrapper-navigation
+            .container-navigatin-link
+                width: 20%
+        .inform-business-wrapper
+            .container-item-business
+                display: flex
+                flex-direction: column
+                align-items: center
+                .item-wrapper-business
+                    width: 80%
+                .item-wrapper-business:nth-child(2)
+                    margin-left: 0
+                .item-wrapper-business:nth-child(4)
+                    margin-left: 0
+@media screen and ( max-width: 640px )
+    .business-page-wrapper
+        padding: 30px 15px
+        .link-wrapper-navigation
+            .container-navigatin-link
+                width: 30%
+
+        .top-line-wrapper-business
+            .h1
+                font-size: 26px
+        .inform-business-wrapper
+            .container-item-business
+                display: flex
+                flex-direction: column
+                align-items: center
+                .item-wrapper-business
+                    width: 80%
+                .item-wrapper-business:nth-child(2)
+                    margin-left: 0
+                .item-wrapper-business:nth-child(4)
+                    margin-left: 0

@@ -53,11 +53,11 @@ export const MainInfoWrapper: React.FC = () => {
       })
       .catch((err) => console.log(err));
   }, [history]);
-  console.log(dataInvite);
+  console.log(dataUser);
 
   return (
     <>
-      {dataUser.surname ? (
+      {dataUser.firstName ? (
         <div className="main-info-wrapper">
           <div className="top-line">
             <h1 className="h1">Особиста інформація</h1>
@@ -102,13 +102,13 @@ export const MainInfoWrapper: React.FC = () => {
                   <input
                     type="text"
                     disabled={true}
-                    value={`http://91.228.155.147/register/${dataUser.myInviteLink}`}
+                    value={`http://lotus-namaste.online/register/${dataUser.myInviteLink}`}
                   />
                   <div
                     className="btn-wrapper-copy"
                     onClick={() =>
                       testFunct(
-                        `http://91.228.155.147/register/${dataUser.myInviteLink}`
+                        `http://lotus-namaste.online/register/${dataUser.myInviteLink}`
                       )
                     }
                   >

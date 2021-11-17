@@ -53,7 +53,7 @@ export const RegisterPage: React.FC = () => {
           .then((res) => {
             if (res) {
               switch (res.status) {
-                case 200:
+                case 201:
                   history.push("/login");
                   break;
               }
