@@ -20,7 +20,6 @@ export const CartPage: React.FC<IProms> = ({ routes }) => {
   return (
     <>
       <Header />
-
       <OrderContextComponent>
         <div className="cart-wrapper-main">
           <Switch>

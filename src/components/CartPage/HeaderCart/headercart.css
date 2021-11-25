@@ -1,0 +1,49 @@
+.header-cart-wrapper {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-right: -50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.header-cart-wrapper .list-wrapper-main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.header-cart-wrapper .list-wrapper-main .item-list-wrapper {
+  padding: 15px 47px;
+  background: #fff;
+  color: #E0E0E0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.header-cart-wrapper .list-wrapper-main .item-list-wrapper:nth-child(1) {
+  border-radius: 6px 0 0 6px;
+}
+
+.header-cart-wrapper .list-wrapper-main .item-list-wrapper:nth-child(4) {
+  border-radius: 0px 6px 6px 0px;
+}
+
+.header-cart-wrapper .list-wrapper-main .active-step {
+  background: #1FBB83;
+  color: #fff;
+}
+
+.header-cart-wrapper .list-wrapper-main .passed-step {
+  color: #828282;
+}
+/*# sourceMappingURL=headercart.css.map */

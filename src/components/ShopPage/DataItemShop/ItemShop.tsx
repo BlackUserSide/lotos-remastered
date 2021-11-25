@@ -7,10 +7,12 @@ import cart from "../../../img/prodIcon/cart.png";
 import bonus from "../../../img/prodIcon/bonus.png";
 import discountIco from "../../../img/prodIcon/discount.png";
 import { CartContext } from "../../CartContext/CartContext";
+import { useHistory } from "react-router";
 type TProps = {
   content: IDataProd;
 };
 export const ItemShop: React.FC<TProps> = ({ content }) => {
+  const history = useHistory();
   const [amount, setAmount] = useState<number>(1);
   const changeHandler = (val: number) => {
     if (val <= 0) {
@@ -26,16 +28,22 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
       return;
     }
   };
+
   return (
-    <div className="item-product-wrapper">
+    <div
+      className="item-product-wrapper"
+      onClick={() => {
+        history.push(`/card-product/${content.id}`);
+      }}
+    >
       <div className="image-wrapper">
-        <img src={`http://192.168.31.149/img/${content.src}`} alt="" />
+        <img src={`http://91.228.155.147/img/${content.src}`} alt="" />
       </div>
       <div className="text-composition">
         <h3 className="h3">{content.name}</h3>
         <p className="desc-wrapper">{content.desc}</p>
         <div className="discount-wrapper">
-          {content.discount !== 0 ? (
+          {content.discount !== null ? (
             <>
               <span className="full-price">{content.price} грн</span>
               <span className="discount-price">{content.discount} грн</span>
@@ -46,9 +54,13 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
             </span>
           )}
         </div>
-        <div className="price-for-user">
-          <p>Ціна для учасників програми {content.priceForUser} грн.</p>
-        </div>
+        {content.priceForUser ? (
+          <div className="price-for-user">
+            <p>Ціна для учасників програми {content.priceForUser} грн.</p>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="amount-wrapper">
           <img
             src={left}
@@ -74,9 +86,14 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
               <img src={cart} alt="" /> У кошик
             </span>
           </div>
-          <div className="btn-bay-on-click">
-            <span>Купити в 1 клік </span>
-          </div>
+          {localStorage.getItem("token") !== null ? (
+            <div className="btn-bay-on-click">
+              <span>Купити в 1 клік </span>
+            </div>
+          ) : (
+            ""
+          )}
+
           <div className="list-info-prod">
             <div className="bonus-ico-wrapper">
               <img src={bonus} alt="" />

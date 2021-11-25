@@ -88,3 +88,24 @@ export const getCartProducts = async (arr: number[]) => {
   });
   return response;
 };
+export const getProductById = async (id: number) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "GET",
+    url: `/product/get_by_id/${id}`,
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};

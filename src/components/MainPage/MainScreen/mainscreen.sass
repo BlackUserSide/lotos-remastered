@@ -3,14 +3,17 @@
     padding: 0 50px
     min-height: 420px
     height: 100%
+    position: relative
     .container-image
-        background: url('../../../img/photo.jpg')
+        background: url('../../../img/1920.jpg')
         background-size: cover
         min-height: 420px
         height: 100%
         position: relative
         overflow: hidden
         border-radius: 10px
+        position: relative
+        background-repeat: no-repeat
         .text-main-collection
             padding-top: 102px
             padding-left: 85px
@@ -53,6 +56,14 @@
     justify-content: center
     align-items: center
     padding: 15px 32px
+@media screen and ( max-width: 1370px )
+    .main-screen-wrapper
+        .container-image
+            background: url('../../../img/1366.jpg')
+@media screen and ( max-width: 1024px )
+    .main-screen-wrapper
+        .container-image
+            background: url('../../../img/1024.jpg')
 @media screen and ( max-width: 780px )
     .main-screen-wrapper .container-image .text-main-collection .h1
         font-size: 28px

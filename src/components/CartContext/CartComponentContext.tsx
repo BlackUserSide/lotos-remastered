@@ -7,12 +7,32 @@ export const CartComponentContext: React.FC = ({ children }) => {
 
   const val: ICartContext = {
     dataCart: dataCart,
-    changeAmount: (id: number, amount: number) => {},
+    clearCart: () => {
+      localStorage.removeItem("cart");
+      window.location.reload();
+    },
+    changeAmount: (id: number, amount: number) => {
+      let tmpData = localStorage.getItem("cart");
+      if (tmpData !== null) {
+        let parseData: TDataCart[] = JSON.parse(tmpData);
+        let newData = parseData.map((k) => {
+          if (k.id === id) {
+            k.amount = amount;
+          }
+          return k;
+        });
+        console.log(newData);
+
+        localStorage.setItem("cart", JSON.stringify(newData));
+        updateDataCart();
+      }
+    },
     deleteItem: (id: number) => {
       const newArr = dataCart.filter((e) => e.id !== id);
       localStorage.removeItem("cart");
       localStorage.setItem("cart", JSON.stringify(newArr));
       setDataCart(newArr);
+      window.location.reload();
     },
     countCart: countCart,
     addCart: (id, amount) => {

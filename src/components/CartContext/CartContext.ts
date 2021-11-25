@@ -6,6 +6,7 @@ export interface ICartContext {
   deleteItem: (id: number) => void;
   countCart: number;
   addCart: (id: number, amount: number) => void;
+  clearCart: () => void;
 }
 export type TDataCart = {
   id: number;

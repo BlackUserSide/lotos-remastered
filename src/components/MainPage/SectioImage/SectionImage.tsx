@@ -94,6 +94,21 @@ export const SectionImage: React.FC = () => {
             <span>Дивитись продукцію</span>
           </div>
         </div>
+        <div className="item-image-wrapper light-item-image">
+          <div className="qnt-wrapp">
+            <p>23 товари</p>
+          </div>
+          <div className="text-container">
+            <h3 className="h3">Брендована продукція</h3>
+            <p>
+              Різноманітна брендована продукція компанії та дрібниці для Вашого
+              зручного використання.
+            </p>
+          </div>
+          <div className="btn-main-collection light-btn">
+            <span>Дивитись продукцію</span>
+          </div>
+        </div>
       </div>
     </div>
   );

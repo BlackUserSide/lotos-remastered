@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../img/Logo.png";
+import logo from "../../../img/logo_lotus.png";
 import search from "../../../img/iconHeader/search.png";
 import cart from "../../../img/iconHeader/cart.png";
 import user from "../../../img/iconHeader/user.png";
@@ -16,6 +16,7 @@ export const Header: React.FC = () => {
     history.push(link);
   };
   const [activeMobile, setActiveMobile] = useState<boolean>(false);
+  const [activeLink, setActiveLink] = useState<string>("");
   const changeActive = () => {
     if (activeMobile) {
       setActiveMobile(false);
@@ -23,6 +24,8 @@ export const Header: React.FC = () => {
     }
     setActiveMobile(true);
   };
+  console.log(activeLink);
+
   const [countCartHeader, setCountCartHeader] = useState<number>();
   const { countCart } = useContext(CartContext);
   useEffect(() => {
@@ -30,6 +33,11 @@ export const Header: React.FC = () => {
       setCountCartHeader(countCart);
     }
   }, [countCart]);
+  useEffect(() => {
+    let parseLink = history.location.pathname.split("/");
+    let test: string = parseLink[0];
+    setActiveLink(test);
+  }, [history]);
 
   return (
     <>

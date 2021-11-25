@@ -16,10 +16,16 @@ export const OrderContextComponent: React.FC = ({ children }) => {
   const [fullPrice, setFullPrice] = useState<number>(0);
   const val: IDataOrder = {
     dataOrder: dataUser,
-    changeHandler: (e) => {},
+    changeHandler: (newObjOrder) => {
+      setDataUser(newObjOrder);
+    },
     fullPrice: fullPrice,
-    setFullPrices: () => {},
+    setFullPrices: (price: number) => {
+      setFullPrice(price);
+    },
   };
+  //console.log(fullPrice, "fullprice");
+
   return (
     <>
       <ContextOrder.Provider value={val}>{children}</ContextOrder.Provider>

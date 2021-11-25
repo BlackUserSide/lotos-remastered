@@ -1,6 +1,7 @@
 .shop-wrapper
     display: flex
     justify-content: flex-end
+    max-width: 95%
     .container-wrapper-shop
         width: 72%
         .main-item-wrapper-shop
@@ -27,7 +28,10 @@
                         background-color: #fff
                         padding: 15px 0
                         border-radius: 10px
-                        display: none
+                        z-index: 3
+                        top: 20px
+                        left: 20px
+                        width: 250px
                         span
                             display: inline-block
                             margin-bottom: 5px
@@ -234,3 +238,34 @@
             font-size: 40px
             line-height: 48px
             color: #4F4F4F
+@media screen and ( max-width: 1200px )
+    .shop-wrapper
+        .container-wrapper-shop
+            .main-item-wrapper-shop
+                .category-mobile-wrapper
+                    display: block
+                    width: 164px
+                    height: 50px
+                    background: #1FBB83
+                    border-radius: 6px
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    color: #fff
+                    cursor: pointer
+
+@media screen and ( max-width: 775px )
+    .data-item-shop
+        .container-item
+            flex-wrap: wrap
+            flex-direction: column
+            align-items: center
+            .item-product-wrapper
+                max-width: 80%
+                margin-bottom: 45px
+@media screen and ( min-width: 1200px )
+    .shop-wrapper
+        .container-wrapper-shop
+            .main-item-wrapper-shop
+                .category-mobile-wrapper
+                    display: none

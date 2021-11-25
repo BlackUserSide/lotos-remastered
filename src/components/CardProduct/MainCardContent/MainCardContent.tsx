@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import mainImage from "../../../img/testProd.png";
 import right from "../../../img/prodIcon/right.png";
 import left from "../../../img/prodIcon/left.png";
 import { Link } from "react-router-dom";
-export const MainCardContent: React.FC = () => {
+import { IDataProduct } from "../type";
+import { useParams } from "react-router-dom";
+type TParamas = {
+  data: IDataProduct;
+};
+type Params = {
+  id: string;
+};
+export const MainCardContent: React.FC<TParamas> = ({ data }) => {
+  const params: Params = useParams();
   const [amoun, setAmount] = useState<number>(1);
   const changeAmount = (newAmount: number) => {
     if (newAmount <= 0) {
@@ -18,26 +26,23 @@ export const MainCardContent: React.FC = () => {
       <div className="main-container-card">
         <div className="image-wrapper-card">
           <div className="main-image-container">
-            <img src={mainImage} alt="" />
+            <img src={`http://91.228.155.147/img/${data.src}`} alt="" />
           </div>
           <div className="collection-wrapper-image">
-            <img src={mainImage} alt="" />
+            <img src={`http://91.228.155.147/img/${data.src}`} alt="" />
           </div>
         </div>
         <div className="text-collection-card">
           <div className="id-product-wrapper">
-            <p>42806</p>
+            <p>{params?.id}</p>
           </div>
           <div className="name-product">
-            <h2 className="h2">Назва препарату</h2>
+            <h2 className="h2">{data.name}</h2>
           </div>
           <div className="desc-product">
-            <p>
-              Короткий опис даного препаратуКороткий опис даного
-              препаратуКороткий опис даного препарату
-            </p>
+            <p>{data.desc}</p>
           </div>
-          <div className="star-wrapper">
+          {/* <div className="star-wrapper">
             <svg
               width="20"
               height="19"
@@ -98,16 +103,22 @@ export const MainCardContent: React.FC = () => {
                 fill="#E0E0E0"
               />
             </svg>
-          </div>
+          </div> */}
           <div className="price-wrapper">
-            <div className="discount-wrapper">
-              <div className="full-price">
-                <p>950 грн</p>
+            {data.discount !== null ? (
+              <div className="discount-wrapper">
+                <div className="full-price">
+                  <p>{data.price} грн</p>
+                </div>
+                <div className="discount-price">
+                  <p>{data.discount} грн</p>
+                </div>
               </div>
-              <div className="discount-price">
-                <p>890 грн</p>
+            ) : (
+              <div className="full-price-wrapper">
+                <p className="full-prie">{data.price} грн</p>
               </div>
-            </div>
+            )}
           </div>
           <div className="amount-wrapper">
             <img
@@ -136,10 +147,17 @@ export const MainCardContent: React.FC = () => {
               <span>Додати у кошик</span>
             </div>
           </div>
-          <div className="price-for-user">
-            <p>Ціна за одиницю для учасників програми 800 грн.</p>
-            <Link to="/login">Стати учасником</Link>
-          </div>
+          {data.priceForUser ? (
+            <div className="price-for-user">
+              <p>
+                Ціна за одиницю для учасників програми {data.priceForUser} грн.
+              </p>
+
+              <Link to="/login">Стати учасником</Link>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

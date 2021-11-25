@@ -1,8 +1,8 @@
 import React from "react";
 import "./actual.sass";
-import photo1 from "../../../img/actual/prod1.png";
-import photo2 from "../../../img/actual/prod2.png";
-import photo3 from "../../../img/actual/prod3.png";
+import photo1 from "../../../img/aktual_propos.jpg";
+import photo2 from "../../../img/actual1.jpg";
+import photo3 from "../../../img/actual2.jpg";
 export const ActualProducts: React.FC = () => {
   return (
     <div className="actual-products">

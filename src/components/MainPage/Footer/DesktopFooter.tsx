@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../img/LogoFooter.png";
+import logo from "../../../img/logo_lotus.png";
 export const DesktopFooter: React.FC = () => {
   return (
     <div className="desktop-footer">
@@ -32,7 +32,7 @@ export const DesktopFooter: React.FC = () => {
         </ul>
       </nav>
       <div className="btn-main-auth-footer">
-        <span>Авторизуватись</span>
+        {localStorage.getItem("token") ? `До кабінету` : `Авторизуватись`}
       </div>
     </div>
   );

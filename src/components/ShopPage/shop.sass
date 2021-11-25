@@ -1,4 +1,5 @@
 .shop-page-wrapper
+    overflow-x: hidden
     .main-wrapper-shop
         display: flex
         max-width: 100%
@@ -80,3 +81,28 @@
         margin-bottom: -40px
     100%
         margin-bottom: 0
+
+@media screen and ( max-width: 1200px )
+    .shop-page-wrapper
+        .main-wrapper-shop
+            .category-wrapper
+                display: none
+        .shop-wrapper
+            .container-wrapper-shop
+                width: 100%
+                padding: 30px
+
+@media screen and ( max-width: 705px )
+    .shop-page-wrapper
+        .main-wrapper-shop
+            .main-shop-wrapper
+                .container-main-shop
+                    .text-composition
+                        .h2
+                            font-size: 26px
+                        p
+                            width: 80%
+@media screen and ( max-width: 480px )
+    .shop-page-wrapper
+        .main-wrapper-shop
+            padding: 30px 10px

@@ -1,0 +1,25 @@
+.header-cart-wrapper
+    position: absolute
+    top: 20%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, -50%)
+    width: 100%
+    .list-wrapper-main
+        display: flex
+        align-items: center
+        justify-content: center
+        .item-list-wrapper
+            padding: 15px 47px
+            background: #fff
+            color: #E0E0E0
+            user-select: none
+            &:nth-child(1)
+                border-radius: 6px 0 0 6px
+            &:nth-child(4)
+                border-radius: 0px 6px 6px 0px
+        .active-step
+            background: #1FBB83
+            color: #fff
+        .passed-step
+            color: #828282

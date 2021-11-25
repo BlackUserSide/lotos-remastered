@@ -1,12 +1,13 @@
-import { createContext, FormEvent } from "react";
+import { createContext } from "react";
 
 export interface IDataOrder {
   dataOrder: TDataOrder;
-  changeHandler: (e: FormEvent<HTMLInputElement> | number) => void;
+  changeHandler: (newObjOrder: TDataOrder) => void;
   fullPrice: number;
   setFullPrices: (price: number) => void;
 }
 export type TDataOrder = {
+  [key: string]: string | number;
   dataCart: any;
   allPrice: number;
   deliveryMethod: number;
