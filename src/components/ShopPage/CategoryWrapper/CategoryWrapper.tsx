@@ -8,7 +8,8 @@ export const CategoryWrapper: React.FC = () => {
   const [dataCategory, setDataCategory] = useState<ICategory[]>([]);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const [dataSubCategory, setDataSubCategory] = useState<ISubCategory[]>();
-  const { catergoryFilter, clearFilterCategory } = useContext(ShopContext);
+  const { catergoryFilter, clearFilterCategory, subCategoryFilter } =
+    useContext(ShopContext);
   useEffect(() => {
     getCategory()
       .then((res) => {
@@ -41,6 +42,11 @@ export const CategoryWrapper: React.FC = () => {
       catergoryFilter(id);
     }
   };
+  const changeSubCategory = (id: number) => {
+    if (subCategoryFilter) {
+      subCategoryFilter(id);
+    }
+  };
   return (
     <div className="category-wrapper">
       <div className="top-line">
@@ -64,7 +70,9 @@ export const CategoryWrapper: React.FC = () => {
             {activeCategory === e.id ? (
               <div className="hidden-list-category">
                 {dataSubCategory?.map((s, a) => (
-                  <span key={a}>{s.name}</span>
+                  <span key={a} onClick={() => changeSubCategory(s.id)}>
+                    {s.name}
+                  </span>
                 ))}
               </div>
             ) : (

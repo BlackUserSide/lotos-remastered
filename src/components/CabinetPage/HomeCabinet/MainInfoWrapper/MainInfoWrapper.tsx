@@ -136,7 +136,7 @@ export const MainInfoWrapper: React.FC = () => {
                       <img src={classIco} alt="" />
                     </div>
 
-                    <p>S4</p>
+                    <p>1</p>
                   </div>
                 </div>
               </div>

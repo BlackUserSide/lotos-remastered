@@ -6,5 +6,7 @@ export interface IShopData {
   catergoryFilter: (category: number) => void;
   clearFilterCategory: () => void;
   activeFilter: number;
+  subCategoryFilter: (id: number) => void;
+  dataFilter: IDataProd[];
 }
 export const ShopContext = createContext<Partial<IShopData>>({});

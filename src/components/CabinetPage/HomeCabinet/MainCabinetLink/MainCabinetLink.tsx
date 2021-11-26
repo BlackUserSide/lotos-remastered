@@ -16,18 +16,27 @@ export const MainCabinetLink: React.FC = () => {
     email: "",
     phone: "",
   });
+  const history = useHistory();
   useEffect(() => {
     getDataUser()
       .then((res) => {
         if (res) {
-          setDataUser(res.data[0]);
+          switch (res.status) {
+            case 200:
+              setDataUser(res.data[0]);
+              break;
+            case 401:
+              localStorage.removeItem("token");
+              history.push("/login");
+              break;
+          }
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-  const history = useHistory();
+  }, [history]);
+
   const pushHistory = (page: string) => {
     history.push(page);
   };
@@ -98,7 +107,7 @@ export const MainCabinetLink: React.FC = () => {
           </div>
           <div className="inform-link-wrapper">
             <div className="bonus-wrapper">
-              <span>Бонусів:</span> <span>2 000 Lt</span>
+              <span>Бонусів:</span> <span>Не разраховано</span>
             </div>
             <div className="dops-inform">
               <p>(за попередній період)</p>
@@ -117,12 +126,13 @@ export const MainCabinetLink: React.FC = () => {
           </div>
           <div className="inform-link-wrapper">
             <div className="lessons-wrapper">
-              <span>Кількість заходів:</span>
-              <span>14</span>
+              <span>Сторінка не доступна</span>
+              {/* <span>Кількість заходів:</span>
+              <span>14</span> */}
             </div>
-            <div className="dops-inform">
+            {/* <div className="dops-inform">
               <p>(за попередній період)</p>
-            </div>
+            </div> */}
           </div>
         </div>
         <div

@@ -3,12 +3,13 @@ import { ShopContext } from "../ShopContext/ShopContext";
 import { ItemShop } from "./ItemShop";
 
 export const DataItemShop: React.FC = () => {
-  const { dataProduct } = useContext(ShopContext);
+  const { dataFilter } = useContext(ShopContext);
+
   return (
     <div className="data-item-shop">
       <div className="container-item">
-        {dataProduct
-          ? dataProduct.map((e, i) => <ItemShop content={e} key={i} />)
+        {dataFilter
+          ? dataFilter.map((e, i) => <ItemShop content={e} key={i} />)
           : ""}
       </div>
     </div>

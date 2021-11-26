@@ -56,6 +56,23 @@ export const RegisterPage: React.FC = () => {
                 case 201:
                   history.push("/login");
                   break;
+                case 500:
+                  setErr({
+                    name: "userAlredyExist",
+                    message: "Користувач з таким Email вже зареестрований",
+                  });
+                  setActivePop(false);
+                  setDataForm({
+                    name: "",
+                    lastName: "",
+                    sex: "",
+                    email: "",
+                    phone: "",
+                    surname: "",
+                    password: "",
+                    inviteLink: "",
+                  });
+                  break;
               }
             }
           })
@@ -121,6 +138,12 @@ export const RegisterPage: React.FC = () => {
                 <div className="top-line">
                   <h1 className="h1">Реєстрація</h1>
                   <p>Щоб пройти реєстрацію, заповніть, будь ласка поля.</p>
+                  <p>Уважно перевірте всі введені дані</p>
+                  {err.name === "userAlredyExist" ? (
+                    <span>{err.message}</span>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="collection-input">
                   <div className="input-wrapper">

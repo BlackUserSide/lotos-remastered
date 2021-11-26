@@ -63,7 +63,7 @@ export const CardProduct: React.FC = () => {
       <Header />
       <div className="card-product">
         <MainCardContent data={dataProduct} />
-        <InstuctionsProduct />
+        <InstuctionsProduct dataManual={dataProduct.menual} />
         {/* <ReviewCollection /> */}
         {/* <div className="container-wrapper-new">
           <div className="top-line-wrapper-new">

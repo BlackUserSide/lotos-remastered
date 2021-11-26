@@ -131,7 +131,7 @@ export const ProfilePage: React.FC = () => {
           <div className="container-content-shop-order">
             <div className="content-shop-wrapper">
               <table>
-                <thead>
+                {/* <thead>
                   <tr>
                     <th>Номер замовлення</th>
                     <th>Дата</th>
@@ -152,7 +152,7 @@ export const ProfilePage: React.FC = () => {
                     <td>2 002 грн.</td>
                     <td>Доставлено</td>
                   </tr>
-                </tbody>
+                </tbody> */}
               </table>
             </div>
           </div>

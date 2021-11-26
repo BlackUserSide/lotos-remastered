@@ -56,7 +56,11 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
         </div>
         {content.priceForUser ? (
           <div className="price-for-user">
-            <p>Ціна для учасників програми {content.priceForUser} грн.</p>
+            {localStorage.getItem("token") !== null ? (
+              <p>Ціна для учасників програми {content.priceForUser} грн.</p>
+            ) : (
+              ""
+            )}
           </div>
         ) : (
           ""
@@ -101,7 +105,7 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
                 <p>Даний препарат можна придбати за бонуси.</p>
               </div>
             </div>
-            {content.discount !== 0 ? (
+            {content.discount !== null ? (
               <div className="discount-wrapper">
                 <img src={discountIco} alt="" />
                 <div className="hidden-wrapper">
