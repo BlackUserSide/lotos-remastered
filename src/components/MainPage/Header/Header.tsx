@@ -154,13 +154,17 @@ export const Header: React.FC = () => {
                 <Link to="/">Головна</Link>
               </li>
               <li>
-                <Link to="/">Про компанію</Link>
+                <Link to="/shop">Магазин</Link>
               </li>
               <li>
-                <Link to="/">Технології виготовлення</Link>
+                <Link to="/about-us">Про компанію</Link>
+              </li>
+
+              <li>
+                <Link to="/restore">Технології виготовлення</Link>
               </li>
               <li>
-                <Link to="/">Рекомендації щодо лікування</Link>
+                <Link to="/recomendation">Рекомендації щодо лікування</Link>
               </li>
 
               <div className="lang-wrapper">
