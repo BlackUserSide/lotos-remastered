@@ -63,17 +63,12 @@ export const Header: React.FC = () => {
                 <Link to="/restore">Технології виготовлення</Link>
               </li>
               <li className="link-nav">
-                <Link to="/recomendation">Рекомендації щодо лікування</Link>
+                <Link to="/delivery-payment">Доставка і оплата</Link>
               </li>
             </ul>
           </nav>
           <div className="btn-header-wrapper">
             <ul className="main-wrapper-header">
-              <li className="main-btn-wrapper">
-                <div className="btn-header search-link">
-                  <img src={search} alt="" />
-                </div>
-              </li>
               <li className="main-btn-wrapper">
                 <div
                   className="btn-header cart-link"
@@ -164,7 +159,7 @@ export const Header: React.FC = () => {
                 <Link to="/restore">Технології виготовлення</Link>
               </li>
               <li>
-                <Link to="/recomendation">Рекомендації щодо лікування</Link>
+                <Link to="/delivery-payment">Доставка і оплата</Link>
               </li>
 
               <div className="lang-wrapper">

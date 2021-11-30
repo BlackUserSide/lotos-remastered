@@ -1,7 +1,10 @@
 import React from "react";
 import "./mainscreen.sass";
 import downRight from "../../../img/down-right.png";
+import { useHistory } from "react-router";
 export const MainScreeen: React.FC = () => {
+  const history = useHistory();
+
   return (
     <div className="main-screen-wrapper">
       <div className="container-image">
@@ -16,7 +19,9 @@ export const MainScreeen: React.FC = () => {
               <span>Приєднатись</span>
             </div>
             <div className="btn-main-collection light-btn">
-              <span>Дивитись продукцію</span>
+              <span onClick={() => history.push("/shop")}>
+                Дивитись продукцію
+              </span>
               <img src={downRight} alt="" />
             </div>
           </div>

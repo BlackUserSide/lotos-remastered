@@ -7,7 +7,13 @@ export const DesktopFooter: React.FC = () => {
       <div className="logo-wrapper">
         <img src={logo} alt="" />
         <span>© 2021 Lotus</span>
-        <Link to={"#"}>Політика конфіденційності</Link>
+        <a
+          href={
+            "https://docs.google.com/document/d/1vz07RqZ-910cg69EqjSCgk6BQUBXimAPQLi_EF5MkqE/edit?usp=sharing"
+          }
+        >
+          Політика конфіденційності
+        </a>
       </div>
       <nav className="list-nav-wrapper">
         <ul>

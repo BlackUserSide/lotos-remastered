@@ -1,6 +1,8 @@
 import React from "react";
+import { useHistory } from "react-router";
 import "./section.sass";
 export const SectionImage: React.FC = () => {
+  const history = useHistory();
   return (
     <div className="section-image">
       <div className="container-image-section">
@@ -16,7 +18,13 @@ export const SectionImage: React.FC = () => {
             </p>
           </div>
           <div className="btn-main-collection light-btn">
-            <span>Дивитись продукцію</span>
+            <span
+              onClick={() => {
+                history.push("/shop");
+              }}
+            >
+              Дивитись продукцію
+            </span>
           </div>
         </div>
         <div className="item-image-wrapper light-item-image">
@@ -31,7 +39,13 @@ export const SectionImage: React.FC = () => {
             </p>
           </div>
           <div className="btn-main-collection light-btn">
-            <span>Дивитись продукцію</span>
+            <span
+              onClick={() => {
+                history.push("/err");
+              }}
+            >
+              Дивитись продукцію
+            </span>
           </div>
         </div>
         <div className="item-image-wrapper dark-item-image">
@@ -46,7 +60,13 @@ export const SectionImage: React.FC = () => {
             </p>
           </div>
           <div className="btn-main-collection light-btn">
-            <span>Дивитись продукцію</span>
+            <span
+              onClick={() => {
+                history.push("/err");
+              }}
+            >
+              Дивитись продукцію
+            </span>
           </div>
         </div>
         <div className="item-image-wrapper dark-item-image">
@@ -61,7 +81,13 @@ export const SectionImage: React.FC = () => {
             </p>
           </div>
           <div className="btn-main-collection light-btn">
-            <span>Дивитись продукцію</span>
+            <span
+              onClick={() => {
+                history.push("/err");
+              }}
+            >
+              Дивитись продукцію
+            </span>
           </div>
         </div>
         <div className="item-image-wrapper light-item-image">
@@ -76,7 +102,13 @@ export const SectionImage: React.FC = () => {
             </p>
           </div>
           <div className="btn-main-collection light-btn">
-            <span>Дивитись продукцію</span>
+            <span
+              onClick={() => {
+                history.push("/err");
+              }}
+            >
+              Дивитись продукцію
+            </span>
           </div>
         </div>
         <div className="item-image-wrapper light-item-image">
@@ -91,7 +123,13 @@ export const SectionImage: React.FC = () => {
             </p>
           </div>
           <div className="btn-main-collection light-btn">
-            <span>Дивитись продукцію</span>
+            <span
+              onClick={() => {
+                history.push("/err");
+              }}
+            >
+              Дивитись продукцію
+            </span>
           </div>
         </div>
         <div className="item-image-wrapper light-item-image">
@@ -106,11 +144,16 @@ export const SectionImage: React.FC = () => {
             </p>
           </div>
           <div className="btn-main-collection light-btn">
-            <span>Дивитись продукцію</span>
+            <span
+              onClick={() => {
+                history.push("/err");
+              }}
+            >
+              Дивитись продукцію
+            </span>
           </div>
         </div>
       </div>
     </div>
   );
 };
-//TODO Доделать последний итем)

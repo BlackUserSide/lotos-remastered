@@ -5,9 +5,12 @@ import image1 from "../../../img/iconCabinet/iconProfile/1.png";
 //import image2 from "../../../img/iconCabinet/iconProfile/2.png";
 import image3 from "../../../img/iconCabinet/iconProfile/3.png";
 import image4 from "../../../img/iconCabinet/iconProfile/4.png";
+import image5 from "../../../img/iconCabinet/iconProfile/5.png";
+import editIcon from "../../../img/iconCabinet/iconProfile/edit.png";
 import { getDataUser } from "../../api/user";
 import { IDataProfile } from "./type";
 import { useHistory } from "react-router";
+import { ChangePass } from "../../ui/ChangePass/ChangePass";
 export const ProfilePage: React.FC = () => {
   let history = useHistory();
   const [dataUser, setDataUser] = useState<IDataProfile>({
@@ -17,6 +20,8 @@ export const ProfilePage: React.FC = () => {
     phone: "",
     email: "",
   });
+  const [activeChange, setActiveChange] = useState<boolean>(false);
+
   useEffect(() => {
     getDataUser()
       .then((res) => {
@@ -33,6 +38,13 @@ export const ProfilePage: React.FC = () => {
       })
       .catch((err) => console.log(err));
   }, [history]);
+  const changeHandler = () => {
+    if (activeChange) {
+      setActiveChange(false);
+      return;
+    }
+    setActiveChange(true);
+  };
   return (
     <div className="profile-page">
       <div className="link-wrapper-navigation">
@@ -86,6 +98,15 @@ export const ProfilePage: React.FC = () => {
                 </div>
                 <div className="text-compose">
                   <p>{dataUser.email}</p>
+                </div>
+              </div>
+              <div className="list-item">
+                <div className="image-wrapper">
+                  <img src={image5} alt="" />
+                </div>
+                <div className="text-compose">
+                  <p>{"********"}</p>{" "}
+                  <img src={editIcon} alt="" onClick={changeHandler} />
                 </div>
               </div>
             </div>
@@ -158,6 +179,7 @@ export const ProfilePage: React.FC = () => {
           </div>
         </div>
       </div>
+      {activeChange ? <ChangePass setActiveChange={setActiveChange} /> : ""}
     </div>
   );
 };

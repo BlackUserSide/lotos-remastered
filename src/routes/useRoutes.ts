@@ -1,5 +1,7 @@
-//import { MainCart } from "./../components/CartPage/MainCart/MainCart";
-//import { CartPage } from "./../components/CartPage/CartPage";
+import { DeliveryPay } from "./../components/Docs/DeliveryPay";
+import { ForgotPassPage } from "./../components/ForgotPassPage/ForgotPassPage";
+import { MainCart } from "./../components/CartPage/MainCart/MainCart";
+import { CartPage } from "./../components/CartPage/CartPage";
 import { ControllerStructure } from "./../components/CabinetPage/StructurePage/ControlletSturcture";
 import { ErrorPage } from "./../components/ErrorPage/ErrorPage";
 import { RegisterPage } from "./../components/RegisterPage/RegisterPage";
@@ -15,8 +17,8 @@ import { MainPage } from "./../components/MainPage/MainPage";
 import { TRoutesWrapper } from "./RoutesContext";
 import { AboutUs } from "../components/AboutUs/AboutUs";
 import { BusinessPage } from "../components/CabinetPage/BusinessPage/BusinessPage";
-//import { DeliveryOrder } from "../components/CartPage/DeliveryOrder/DeliveryOrder";
-//import { PayMethod } from "../components/CartPage/PayMethod/PayMethod";
+import { DeliveryOrder } from "../components/CartPage/DeliveryOrder/DeliveryOrder";
+import { PayMethod } from "../components/CartPage/PayMethod/PayMethod";
 export const useRoutes: TRoutesWrapper = {
   routes: [
     { path: "/", exact: true, component: MainPage, routes: [] },
@@ -33,6 +35,18 @@ export const useRoutes: TRoutesWrapper = {
       path: "/card-product/:id",
       exact: false,
       component: CardProduct,
+      routes: [],
+    },
+    {
+      path: "/forgot-password",
+      exact: false,
+      component: ForgotPassPage,
+      routes: [],
+    },
+    {
+      path: "/delivery-payment",
+      exact: false,
+      component: DeliveryPay,
       routes: [],
     },
     {
@@ -72,33 +86,33 @@ export const useRoutes: TRoutesWrapper = {
         },
       ],
     },
-    // {
-    //   path: "/cart/",
-    //   exact: false,
-    //   component: CartPage,
-    //   routes: [
-    //     {
-    //       path: "/cart/main/",
-    //       exact: false,
-    //       component: MainCart,
-    //       routes: [],
-    //     },
-    //     {
-    //       path: "/cart/delivery/",
-    //       exact: false,
-    //       component: DeliveryOrder,
-    //       routes: [],
-    //     },
-    //     //payment
-    //     {
-    //       path: "/cart/payment/",
-    //       exact: false,
-    //       component: PayMethod,
-    //       routes: [],
-    //     },
-    //     { path: "*", exact: false, component: ErrorPage, routes: [] },
-    //   ],
-    // },
+    {
+      path: "/cart/",
+      exact: false,
+      component: CartPage,
+      routes: [
+        {
+          path: "/cart/main/",
+          exact: false,
+          component: MainCart,
+          routes: [],
+        },
+        {
+          path: "/cart/delivery/",
+          exact: false,
+          component: DeliveryOrder,
+          routes: [],
+        },
+        //payment
+        {
+          path: "/cart/payment/",
+          exact: false,
+          component: PayMethod,
+          routes: [],
+        },
+        { path: "*", exact: false, component: ErrorPage, routes: [] },
+      ],
+    },
     { path: "*", exact: false, component: ErrorPage, routes: [] },
   ],
 };

@@ -1,3 +1,4 @@
+import { ISubmitPass } from "./../ui/ChangePass/ChangePass";
 import { IRegisterData } from "./../RegisterPage/type";
 import { request } from ".";
 export interface Ires {
@@ -84,6 +85,28 @@ export const getDataUser = async () => {
   await request({
     method: "GET",
     url: `/get_user_by_token`,
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};
+export const changePassword = async (data: ISubmitPass) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "POST",
+    url: `/update_pass`,
+    data: data,
     validateStatus: () => true,
   }).then((res) => {
     if (res) {
