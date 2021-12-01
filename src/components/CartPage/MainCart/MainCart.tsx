@@ -69,6 +69,11 @@ export const MainCart: React.FC = () => {
       }
     }
   }, [dataCart, mainCart, setFullPrices, dataCarts]);
+  useEffect(() => {
+    if (fullPrice) {
+      console.log(fullPrice, "full price in mainCart");
+    }
+  }, [fullPrice]);
 
   return (
     <>

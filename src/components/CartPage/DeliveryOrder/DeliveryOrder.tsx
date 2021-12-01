@@ -48,7 +48,6 @@ export const DeliveryOrder: React.FC = () => {
       }
     }
   }, [changeHandler, dataForm, dataOrder]);
-  console.log(dataOrder);
   useEffect(() => {
     let cart = localStorage.getItem("cart");
     if (cart !== null) {
@@ -74,9 +73,9 @@ export const DeliveryOrder: React.FC = () => {
       }
     }
   }, [dataOrder]);
-  useEffect(() => {
-    submitHandler();
-  }, [dataForm, submitHandler]);
+  // useEffect(() => {
+  //   submitHandler();
+  // }, [dataForm, submitHandler]);
   const changeHandlerWrapper = (e: FormEvent<HTMLInputElement>) => {
     const name = e.currentTarget.name;
     const val = e.currentTarget.value;

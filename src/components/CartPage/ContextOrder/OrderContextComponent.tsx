@@ -24,7 +24,6 @@ export const OrderContextComponent: React.FC = ({ children }) => {
       setFullPrice(price);
     },
   };
-  //console.log(fullPrice, "fullprice");
 
   return (
     <>

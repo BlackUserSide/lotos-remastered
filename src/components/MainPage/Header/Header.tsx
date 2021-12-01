@@ -24,7 +24,6 @@ export const Header: React.FC = () => {
     }
     setActiveMobile(true);
   };
-  console.log(activeLink);
 
   const [countCartHeader, setCountCartHeader] = useState<number>();
   const { countCart } = useContext(CartContext);
@@ -35,8 +34,9 @@ export const Header: React.FC = () => {
   }, [countCart]);
   useEffect(() => {
     let parseLink = history.location.pathname.split("/");
-    let test: string = parseLink[0];
+    let test: string = parseLink[1];
     setActiveLink(test);
+    console.log(test);
   }, [history]);
 
   return (
@@ -50,19 +50,37 @@ export const Header: React.FC = () => {
           </div>
           <nav className="main-nav-wrapper">
             <ul className="main-container-nav">
-              <li className="link-nav">
+              <li
+                className={`link-nav ${activeLink === "" ? "active-link" : ""}`}
+              >
                 <Link to="/">Головна</Link>
               </li>
-              <li className="link-nav">
+              <li
+                className={`link-nav ${
+                  activeLink === "shop" ? "active-link" : ""
+                }`}
+              >
                 <Link to="/shop">Магазин</Link>
               </li>
-              <li className="link-nav">
+              <li
+                className={`link-nav ${
+                  activeLink === "about-us" ? "active-link" : ""
+                }`}
+              >
                 <Link to="/about-us">Про компанію</Link>
               </li>
-              <li className="link-nav">
+              <li
+                className={`link-nav ${
+                  activeLink === "restore" ? "active-link" : ""
+                }`}
+              >
                 <Link to="/restore">Технології виготовлення</Link>
               </li>
-              <li className="link-nav">
+              <li
+                className={`link-nav ${
+                  activeLink === "delivery-payment" ? "active-link" : ""
+                }`}
+              >
                 <Link to="/delivery-payment">Доставка і оплата</Link>
               </li>
             </ul>

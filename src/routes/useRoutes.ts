@@ -1,3 +1,4 @@
+import { PublicOffer } from "./../components/Docs/PublicOffer";
 import { DeliveryPay } from "./../components/Docs/DeliveryPay";
 import { ForgotPassPage } from "./../components/ForgotPassPage/ForgotPassPage";
 import { MainCart } from "./../components/CartPage/MainCart/MainCart";
@@ -47,6 +48,12 @@ export const useRoutes: TRoutesWrapper = {
       path: "/delivery-payment",
       exact: false,
       component: DeliveryPay,
+      routes: [],
+    },
+    {
+      path: "/public-offer",
+      exact: false,
+      component: PublicOffer,
       routes: [],
     },
     {

@@ -5,7 +5,6 @@ export const HeaderCart: React.FC = () => {
   const history = useHistory();
   const [activeStep, setActiveStep] = useState<number>(0);
   const [passedStep, setPassedStep] = useState<number[]>([]);
-  console.log(passedStep);
 
   useEffect(() => {
     const path = history.location.pathname.split("/");
