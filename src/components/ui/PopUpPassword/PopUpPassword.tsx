@@ -33,6 +33,7 @@ export const PopUpPassword: React.FC<IParams> = ({
   const submitHandlerPassword = () => {
     if (dataPassword.password.length >= 8) {
       if (dataPassword.password === dataPassword.replacePassword) {
+        //let rex = "/^[а-яА-ЯёЁ.a-zA-Z\w\d\-]*$/";
         setDataForm((prev) => ({
           ...prev,
           password: dataPassword.password,
@@ -61,7 +62,7 @@ export const PopUpPassword: React.FC<IParams> = ({
           <input
             type="password"
             name="password"
-            placeholder="Пароль"
+            placeholder="Пароль (Пароль повинен містити цифри та літери)"
             onChange={changeHandler}
             required
           />
@@ -70,7 +71,7 @@ export const PopUpPassword: React.FC<IParams> = ({
           <input
             type="password"
             name="replacePassword"
-            placeholder="Повторіть пароль"
+            placeholder="Повторіть пароль (Пароль повинен містити цифри та літери)"
             onChange={changeHandler}
             required
           />

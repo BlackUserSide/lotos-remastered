@@ -67,12 +67,14 @@ export const DeliveryOrder: React.FC = () => {
       ) {
         setActivePost(true);
       } else {
-        if (dataOrder.deliveryMethod === 3) {
+        console.log(dataOrder.deliveryMethod);
+
+        if (dataForm.deliveryMethod === 3) {
           setActivePost(true);
         }
       }
     }
-  }, [dataOrder]);
+  }, [dataOrder, dataForm]);
   // useEffect(() => {
   //   submitHandler();
   // }, [dataForm, submitHandler]);
@@ -304,6 +306,7 @@ export const DeliveryOrder: React.FC = () => {
                 className="btn-active-wrapper"
                 onClick={() => {
                   setActiveItem(3);
+
                   setDataForm((prev) => ({
                     ...prev,
                     deliveryMethod: 3,

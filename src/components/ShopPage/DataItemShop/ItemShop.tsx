@@ -30,92 +30,95 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
   };
 
   return (
-    <div
-      className="item-product-wrapper"
-      onClick={() => {
-        history.push(`/card-product/${content.id}`);
-      }}
-    >
-      <div className="image-wrapper">
-        <img src={`http://91.228.155.147/img/${content.src}`} alt="" />
-      </div>
-      <div className="text-composition">
-        <h3 className="h3">{content.name}</h3>
-        <p className="desc-wrapper">{content.desc}</p>
-        <div className="discount-wrapper">
-          {content.discount !== null ? (
-            <>
-              <span className="full-price">{content.price} грн</span>
-              <span className="discount-price">{content.discount} грн</span>
-            </>
-          ) : (
-            <span className="full-price-wrapper-not-discount">
-              {content.price} грн{" "}
-            </span>
-          )}
+    <div className="item-product-wrapper">
+      <div
+        className="container-wrapper-link"
+        onClick={() => {
+          history.push(`/card-product/${content.id}`);
+        }}
+      >
+        <div className="image-wrapper">
+          <img src={`http://91.228.155.147/img/${content.src}`} alt="" />
         </div>
-        {content.priceForUser ? (
-          <div className="price-for-user">
-            {localStorage.getItem("token") !== null ? (
-              <p>Ціна для учасників програми {content.priceForUser} грн.</p>
+        <div className="text-composition">
+          <h3 className="h3">{content.name}</h3>
+          <p className="desc-wrapper">{content.desc}</p>
+          <div className="discount-wrapper">
+            {content.discount !== null ? (
+              <>
+                <span className="full-price">{content.price} грн</span>
+                <span className="discount-price">{content.discount} грн</span>
+              </>
             ) : (
-              ""
+              <span className="full-price-wrapper-not-discount">
+                {content.price} грн{" "}
+              </span>
             )}
           </div>
-        ) : (
-          ""
-        )}
-        <div className="amount-wrapper">
-          <img
-            src={left}
-            onClick={() => {
-              changeHandler(amount - 1);
-            }}
-            className="left-ico"
-            alt=""
-          />
-          <input type="text" value={amount} disabled={true} />
-          <img
-            src={right}
-            onClick={() => {
-              changeHandler(amount + 1);
-            }}
-            className="right-ico"
-            alt=""
-          />
-        </div>
-        <div className="btn-wrapper-item-product">
-          <div className="btn-add-to-cart" onClick={addToCartHandler}>
-            <span>
-              <img src={cart} alt="" /> У кошик
-            </span>
-          </div>
-          {localStorage.getItem("token") !== null ? (
-            <div className="btn-bay-on-click">
-              <span>Купити в 1 клік </span>
+          {content.priceForUser ? (
+            <div className="price-for-user">
+              {localStorage.getItem("token") !== null ? (
+                <p>Ціна для учасників програми {content.priceForUser} грн.</p>
+              ) : (
+                ""
+              )}
             </div>
           ) : (
             ""
           )}
+          <div className="amount-wrapper">
+            <img
+              src={left}
+              onClick={() => {
+                changeHandler(amount - 1);
+              }}
+              className="left-ico"
+              alt=""
+            />
+            <input type="text" value={amount} disabled={true} />
+            <img
+              src={right}
+              onClick={() => {
+                changeHandler(amount + 1);
+              }}
+              className="right-ico"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
 
-          <div className="list-info-prod">
-            <div className="bonus-ico-wrapper">
-              <img src={bonus} alt="" />
+      <div className="btn-wrapper-item-product">
+        <div className="btn-add-to-cart" onClick={addToCartHandler}>
+          <span>
+            <img src={cart} alt="" /> У кошик
+          </span>
+        </div>
+        {localStorage.getItem("token") !== null ? (
+          <div className="btn-bay-on-click">
+            <span>Купити в 1 клік </span>
+          </div>
+        ) : (
+          ""
+        )}
+
+        <div className="list-info-prod">
+          <div className="bonus-ico-wrapper">
+            <img src={bonus} alt="" />
+            <div className="hidden-wrapper">
+              <p>Даний препарат можна придбати за бонуси.</p>
+            </div>
+          </div>
+          {content.discount !== null ? (
+            <div className="discount-wrapper">
+              <img src={discountIco} alt="" />
               <div className="hidden-wrapper">
-                <p>Даний препарат можна придбати за бонуси.</p>
+                <p>На даний препарат діє акція.</p>
               </div>
             </div>
-            {content.discount !== null ? (
-              <div className="discount-wrapper">
-                <img src={discountIco} alt="" />
-                <div className="hidden-wrapper">
-                  <p>На даний препарат діє акція.</p>
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

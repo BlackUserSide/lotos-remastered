@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import right from "../../../img/prodIcon/right.png";
 import left from "../../../img/prodIcon/left.png";
 import { Link } from "react-router-dom";
 import { IDataProduct } from "../type";
 import { useParams } from "react-router-dom";
+import { CartContext } from "../../CartContext/CartContext";
 type TParamas = {
   data: IDataProduct;
 };
@@ -12,6 +13,7 @@ type Params = {
 };
 export const MainCardContent: React.FC<TParamas> = ({ data }) => {
   const params: Params = useParams();
+  const { addCart } = useContext(CartContext);
   const [amoun, setAmount] = useState<number>(1);
   const changeAmount = (newAmount: number) => {
     if (newAmount <= 0) {
@@ -20,6 +22,13 @@ export const MainCardContent: React.FC<TParamas> = ({ data }) => {
     }
 
     setAmount(newAmount);
+  };
+  const addToCartHandler = () => {
+    if (addCart) {
+      console.log(1);
+
+      addCart(+params.id, amoun);
+    }
   };
   return (
     <div className="main-card-content">
@@ -143,7 +152,10 @@ export const MainCardContent: React.FC<TParamas> = ({ data }) => {
             <div className="btn-main-bay-in-click">
               <span>Купити в 1 клік </span>
             </div>
-            <div className="btn-main-wrapper-add-to-cart">
+            <div
+              className="btn-main-wrapper-add-to-cart"
+              onClick={addToCartHandler}
+            >
               <span>Додати у кошик</span>
             </div>
           </div>

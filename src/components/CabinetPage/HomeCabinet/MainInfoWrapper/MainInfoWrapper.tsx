@@ -37,8 +37,6 @@ export const MainInfoWrapper: React.FC = () => {
     getDataUser()
       .then((res) => {
         if (res) {
-          console.log(res);
-
           switch (res.status) {
             case 200:
               setDataUser(res.data[0]);
@@ -53,7 +51,6 @@ export const MainInfoWrapper: React.FC = () => {
       })
       .catch((err) => console.log(err));
   }, [history]);
-  console.log(dataUser);
 
   return (
     <>

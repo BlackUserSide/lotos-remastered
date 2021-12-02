@@ -38,7 +38,6 @@ export const Header: React.FC = () => {
     setActiveLink(test);
     console.log(test);
   }, [history]);
-
   return (
     <>
       <header className="main-header-wrapper">
@@ -69,13 +68,13 @@ export const Header: React.FC = () => {
               >
                 <Link to="/about-us">Про компанію</Link>
               </li>
-              <li
+              {/* <li
                 className={`link-nav ${
                   activeLink === "restore" ? "active-link" : ""
                 }`}
               >
                 <Link to="/restore">Технології виготовлення</Link>
-              </li>
+              </li> */}
               <li
                 className={`link-nav ${
                   activeLink === "delivery-payment" ? "active-link" : ""
@@ -173,9 +172,9 @@ export const Header: React.FC = () => {
                 <Link to="/about-us">Про компанію</Link>
               </li>
 
-              <li>
+              {/* <li>
                 <Link to="/restore">Технології виготовлення</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/delivery-payment">Доставка і оплата</Link>
               </li>

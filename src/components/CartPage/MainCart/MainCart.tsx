@@ -27,6 +27,8 @@ export const MainCart: React.FC = () => {
         getCartProducts(tmp)
           .then((res) => {
             if (res) {
+              console.log(res);
+
               setMainCart(res.data);
             }
           })
@@ -35,6 +37,7 @@ export const MainCart: React.FC = () => {
     }
     //setDataCart([]);
   }, []);
+
   const updateWrapper = useCallback(() => {
     if (dataCart) {
       setDataCarts(dataCart);
