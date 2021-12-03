@@ -9,7 +9,7 @@ export const DesktopFooter: React.FC = () => {
         <span>© 2021 Lotus</span>
         <Link to="/public-offer">Політика конфіденційності</Link>
       </div>
-      <nav className="list-nav-wrapper">
+      {/* <nav className="list-nav-wrapper">
         <ul>
           <li>
             <Link to="/">Головна</Link>
@@ -30,10 +30,10 @@ export const DesktopFooter: React.FC = () => {
             <Link to="/#">Особистий кабінет</Link>
           </li>
         </ul>
-      </nav>
-      <div className="btn-main-auth-footer">
+      </nav> */}
+      {/* <div className="btn-main-auth-footer">
         {localStorage.getItem("token") ? `До кабінету` : `Авторизуватись`}
-      </div>
+      </div> */}
     </div>
   );
 };
