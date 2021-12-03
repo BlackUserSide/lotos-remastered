@@ -2,8 +2,8 @@ import { Base64 } from "js-base64";
 export const paymentFunc = (amount: number, orderId: string) => {
   const data = {
     version: 3,
-    public_key: "sandbox_i7445548617",
-    private_key: "sandbox_J5x1Nf9bl29K1kevBPUgkLTmTNPMhvCxzcBpbDCl",
+    public_key: "i25971290945",
+    private_key: "cE5BNvHlypmSoYY7XAtgzQbZaiHESRoBcKaEuaoY",
     action: "pay",
     amount: amount,
     currency: "UAH",

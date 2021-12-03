@@ -40,9 +40,9 @@ export const PayMethod: React.FC = () => {
 
       if (dataOrders.signature === "") {
         const signString =
-          `sandbox_J5x1Nf9bl29K1kevBPUgkLTmTNPMhvCxzcBpbDCl` +
+          `cE5BNvHlypmSoYY7XAtgzQbZaiHESRoBcKaEuaoY` +
           data +
-          "sandbox_J5x1Nf9bl29K1kevBPUgkLTmTNPMhvCxzcBpbDCl";
+          "cE5BNvHlypmSoYY7XAtgzQbZaiHESRoBcKaEuaoY";
         const sha1 = crypto.createHash("sha1");
         sha1.update(signString);
         const signature = sha1.digest("base64");
