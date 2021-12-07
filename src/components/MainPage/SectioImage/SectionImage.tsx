@@ -44,7 +44,7 @@ export const SectionImage: React.FC = () => {
                 history.push("/err");
               }}
             >
-              Дивитись продукцію
+              В розробці
             </span>
           </div>
         </div>
@@ -65,7 +65,7 @@ export const SectionImage: React.FC = () => {
                 history.push("/err");
               }}
             >
-              Дивитись продукцію
+              В розробці
             </span>
           </div>
         </div>
@@ -86,7 +86,7 @@ export const SectionImage: React.FC = () => {
                 history.push("/err");
               }}
             >
-              Дивитись продукцію
+              В розробці
             </span>
           </div>
         </div>
@@ -107,7 +107,7 @@ export const SectionImage: React.FC = () => {
                 history.push("/err");
               }}
             >
-              Дивитись продукцію
+              В розробці
             </span>
           </div>
         </div>
@@ -128,7 +128,7 @@ export const SectionImage: React.FC = () => {
                 history.push("/err");
               }}
             >
-              Дивитись продукцію
+              В розробці
             </span>
           </div>
         </div>
@@ -149,7 +149,7 @@ export const SectionImage: React.FC = () => {
                 history.push("/err");
               }}
             >
-              Дивитись продукцію
+              В розробці
             </span>
           </div>
         </div>

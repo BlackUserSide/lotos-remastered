@@ -7,13 +7,15 @@ import React, {
 } from "react";
 import InputMask from "react-input-mask";
 import { useHistory } from "react-router";
+import { submitOrder } from "../../api/order";
 import { ContextOrder, TDataOrder } from "../ContextOrder/ContextOrder";
 import { HeaderCart } from "../HeaderCart/HeaderCart";
 import { IOrderDeliverty } from "../type";
 export const DeliveryOrder: React.FC = () => {
   const history = useHistory();
   const [activeItem, setActiveItem] = useState<number | null>(null);
-  const { dataOrder, changeHandler } = useContext(ContextOrder);
+  const { dataOrder, changeHandler, setOrderId, orderId } =
+    useContext(ContextOrder);
   const [dataForm, setDataForm] = useState<IOrderDeliverty>({
     deliveryMethod: 0,
     firstName: "",
@@ -36,6 +38,9 @@ export const DeliveryOrder: React.FC = () => {
         phone: "",
         email: "",
         payMethod: 0,
+        city: "",
+        typePay: 0,
+        numberPost: "",
       };
       for (let val in dataOrder) {
         if (val in dataForm) {
@@ -67,14 +72,13 @@ export const DeliveryOrder: React.FC = () => {
       ) {
         setActivePost(true);
       } else {
-        console.log(dataOrder.deliveryMethod);
-
         if (dataForm.deliveryMethod === 3) {
           setActivePost(true);
         }
       }
     }
   }, [dataOrder, dataForm]);
+
   // useEffect(() => {
   //   submitHandler();
   // }, [dataForm, submitHandler]);
@@ -89,7 +93,38 @@ export const DeliveryOrder: React.FC = () => {
   };
   const pushForPayMethod = () => {
     if (activePost) {
-      history.push("/cart/payment");
+      sendOrder();
+    }
+  };
+  useEffect(() => {
+    if (dataOrder) {
+      if (orderId) {
+        const data = {
+          typePost: dataOrder.deliveryMethod,
+          fullName: `${dataOrder.surname} ${dataOrder.firstName} ${dataOrder.lastName}`,
+          numberPost: dataOrder.numberPost,
+          phone: dataOrder.phone,
+          status: "",
+          productList: dataOrder.dataCart,
+          city: dataOrder.city,
+          typePay: 1,
+          orderId: orderId,
+        };
+        submitOrder(data)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+        history.push("/cart/payment");
+      }
+    }
+  }, [orderId, dataOrder, history]);
+  const sendOrder = () => {
+    if (dataOrder) {
+      if (setOrderId) {
+        let number = Math.random();
+        number.toString(36); // '0.xtis06h6'
+        let orderNumber = number.toString(36).substr(2, 9); // 'xtis06h6'
+        setOrderId(orderNumber);
+      }
     }
   };
   return (
@@ -229,6 +264,7 @@ export const DeliveryOrder: React.FC = () => {
                       type="text"
                       name="firstName"
                       placeholder="Ваше ім’я"
+                      onChange={changeHandlerWrapper}
                     />
                   </div>
                   <div className="input-wrapper">

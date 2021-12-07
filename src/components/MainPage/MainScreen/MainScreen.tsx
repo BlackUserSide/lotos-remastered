@@ -15,7 +15,12 @@ export const MainScreeen: React.FC = () => {
             близьких та будуйте свій бізнес разом з нами!
           </p>
           <div className="btn-main-screen-wrapper">
-            <div className="btn-main-collection green-btn">
+            <div
+              className="btn-main-collection green-btn"
+              onClick={() => {
+                history.push("/login");
+              }}
+            >
               <span>Приєднатись</span>
             </div>
             <div className="btn-main-collection light-btn">

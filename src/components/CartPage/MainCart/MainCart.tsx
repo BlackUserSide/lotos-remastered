@@ -7,10 +7,12 @@ import { ItemCartMain } from "./ItemCartMain";
 import deleteICO from "../../../img/iconCart/delete-white.png";
 import { HeaderCart } from "../HeaderCart/HeaderCart";
 import { useHistory } from "react-router";
+import { getDataUser } from "../../api/user";
 export const MainCart: React.FC = () => {
   const history = useHistory();
   const [dataCarts, setDataCarts] = useState<TDataCart[]>([]);
   const [mainCart, setMainCart] = useState<IOrderCartMain[]>([]);
+
   const { setFullPrices, fullPrice } = useContext(ContextOrder);
   const { dataCart, clearCart } = useContext(CartContext);
   const updateDataCart = useCallback(() => {
@@ -51,33 +53,80 @@ export const MainCart: React.FC = () => {
     updateDataCart();
   }, [updateDataCart]);
   useEffect(() => {
+    getDataUser()
+      .then((res) => {
+        if (res) {
+          switch (res.status) {
+            case 200:
+              break;
+            case 401:
+              localStorage.removeItem("token");
+              break;
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
     if (dataCarts.length >= 1) {
       let tmpPrice = 0;
       dataCarts.map((e) => {
         const tmpProd = mainCart.find((k) => {
           return k.id === e.id;
         });
+
+        const dataProdCart = dataCart?.find((t) => {
+          return t.id === tmpProd?.id;
+        });
+        const localData = localStorage.getItem("token");
         if (tmpProd) {
           if (tmpProd?.discount !== null) {
-            tmpPrice += e.amount * tmpProd.discount;
+            if (dataProdCart) {
+              if (localData !== null) {
+                if (dataProdCart.amount > 3) {
+                  tmpPrice += e.amount * tmpProd.discount - tmpProd.price;
+                } else {
+                  tmpPrice += e.amount * tmpProd.discount;
+                }
+              } else {
+                tmpPrice += e.amount * tmpProd.discount;
+              }
+            }
           } else {
-            tmpPrice += e.amount * tmpProd.price;
+            if (dataProdCart) {
+              if (localData) {
+                if (dataProdCart.amount > 3) {
+                  tmpPrice += e.amount * tmpProd.price - tmpProd.price;
+                } else {
+                  tmpPrice += e.amount * tmpProd.price;
+                }
+              } else {
+                tmpPrice += e.amount * tmpProd.price;
+              }
+            }
           }
         }
         return e;
       });
 
       if (setFullPrices) {
-        setFullPrices(tmpPrice);
+        const tmpLocal = localStorage.getItem("token");
+        if (tmpLocal) {
+          let newSum = 0;
+          if (tmpPrice >= 1200) {
+            let tmpProcent = (tmpPrice * 20) / 100;
+            newSum = tmpPrice - tmpProcent;
+          } else {
+            let tmpProcent = (tmpPrice * 10) / 100;
+            newSum = tmpPrice - tmpProcent;
+          }
+          setFullPrices(newSum);
+        } else {
+          setFullPrices(tmpPrice);
+        }
       }
     }
   }, [dataCart, mainCart, setFullPrices, dataCarts]);
-  useEffect(() => {
-    if (fullPrice) {
-      console.log(fullPrice, "full price in mainCart");
-    }
-  }, [fullPrice]);
-
   return (
     <>
       <HeaderCart />

@@ -13,8 +13,12 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
 }) => {
   const [dataCategory, setDataCategory] = useState<ICategory[]>([]);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [activeSubCategory, setSubActiveCategory] = useState<number | null>(
+    null
+  );
   const [dataSubCategory, setDataSubCategory] = useState<ISubCategory[]>([]);
-  const { catergoryFilter, clearFilterCategory } = useContext(ShopContext);
+  const { catergoryFilter, clearFilterCategory, subCategoryFilter } =
+    useContext(ShopContext);
   const updateCategory = useCallback(() => {
     console.log(1);
 
@@ -62,6 +66,12 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
       updateCategory();
     }
   };
+  const changeSubCategory = (id: number) => {
+    if (subCategoryFilter) {
+      subCategoryFilter(id);
+    }
+  };
+
   return (
     <div className="pop-up-mobile-category">
       <div className="bg-lock" onClick={() => setActiveMobileCat(false)}></div>
@@ -104,7 +114,7 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
                 <div
                   className="list-item-category"
                   onClick={() => {
-                    changeActiveCategory(e.id);
+                    setSubActiveCategory(e.id);
                   }}
                   key={i}
                 >
@@ -127,6 +137,10 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
           className="btn-save-wrapper"
           onClick={() => {
             changeCategory();
+            if (activeSubCategory !== null) {
+              changeSubCategory(activeSubCategory);
+            }
+            setActiveMobileCat(false);
           }}
         >
           <span>Зберегти</span>

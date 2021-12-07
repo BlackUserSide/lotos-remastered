@@ -39,7 +39,9 @@ export const CategoryWrapper: React.FC = () => {
   };
   const changeCategory = (id: number) => {
     if (catergoryFilter) {
-      catergoryFilter(id);
+      if (activeCategory) {
+        catergoryFilter(activeCategory);
+      }
     }
   };
   const changeSubCategory = (id: number) => {

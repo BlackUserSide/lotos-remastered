@@ -11,25 +11,16 @@ interface IPayment {
 }
 export const PayMethod: React.FC = () => {
   const { fullPrice } = useContext(ContextOrder);
-  const [orderId, setOrderId] = useState<any>("");
   const [dataOrders, setDataOrders] = useState<IPayment>({
     data: "",
     signature: "",
   });
-
-  useEffect(() => {
-    if (orderId === "") {
-      let number = Math.random();
-      number.toString(36); // '0.xtis06h6'
-      let orderNumber = number.toString(36).substr(2, 9); // 'xtis06h6'
-      setOrderId(orderNumber);
-    }
-  }, [orderId]);
+  const { orderId } = useContext(ContextOrder);
 
   useEffect(() => {
     console.log(fullPrice, "full price in paymthod");
 
-    if (fullPrice) {
+    if (fullPrice && orderId) {
       const data = paymentFunc(fullPrice, orderId);
       if (dataOrders.data === "") {
         setDataOrders((prev) => ({
@@ -53,6 +44,8 @@ export const PayMethod: React.FC = () => {
       }
     }
   }, [fullPrice, orderId, dataOrders.data, dataOrders.signature]);
+  console.log(orderId);
+
   return (
     <>
       <HeaderCart />

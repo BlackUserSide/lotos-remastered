@@ -17,6 +17,7 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
     id: 0,
     amount: 0,
   });
+  const [auth, setAuth] = useState<boolean>(false);
   useEffect(() => {
     if (dataCart) {
       let tmp = dataCart.find((e) => {
@@ -39,7 +40,14 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
       updateDataCart();
     }
   };
-
+  useEffect(() => {
+    const localData = localStorage.getItem("token");
+    if (localData !== null) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, []);
   return (
     <div className="main-cart-item">
       {dataCart ? (
@@ -61,6 +69,9 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
               alt=""
             />
             <input type="text" value={dataCartIn.amount} disabled={true} />
+            <span>
+              {auth ? (dataCartIn.amount > 3 ? "Акция 3 + 1" : "") : ""}
+            </span>
             <img
               src={right}
               onClick={() => {
@@ -74,15 +85,15 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
             {content.discount !== null ? (
               <div className="discount-wrapper-price">
                 <div className="full-price-wrapper-discount">
-                  <p>{content.price} грн</p>
+                  <p>{content.price * dataCartIn.amount} грн</p>
                 </div>
                 <div className="discount-price-wrapper">
-                  <p>{content.discount} грн</p>
+                  <p>{content.discount * dataCartIn.amount} грн</p>
                 </div>
               </div>
             ) : (
               <div className="full-price-wrapper">
-                <p>{content.price} грн</p>
+                <p>{content.price * dataCartIn.amount} грн</p>
               </div>
             )}
           </div>

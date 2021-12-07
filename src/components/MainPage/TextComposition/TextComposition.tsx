@@ -8,7 +8,7 @@ export const TextComposition: React.FC = () => {
       <h2 className="h2">“ Ты и я, семья, друзья - все находят для себя! ”</h2>
       <p>— Сергій, посада</p>
       <div className="btn-btn-wrapper">
-        <span onClick={() => history.push("/err")}>Приєднатись</span>
+        <span onClick={() => history.push("/login")}>Приєднатись</span>
       </div>
     </div>
   );

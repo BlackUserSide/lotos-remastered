@@ -5,6 +5,8 @@ export interface IDataOrder {
   changeHandler: (newObjOrder: TDataOrder) => void;
   fullPrice: number;
   setFullPrices: (price: number) => void;
+  orderId: string;
+  setOrderId: (id: string) => void;
 }
 export type TDataOrder = {
   [key: string]: string | number;
@@ -17,5 +19,8 @@ export type TDataOrder = {
   phone: string;
   email: string;
   payMethod: number;
+  city: string;
+  typePay: number;
+  numberPost: string;
 };
 export const ContextOrder = createContext<Partial<IDataOrder>>({});

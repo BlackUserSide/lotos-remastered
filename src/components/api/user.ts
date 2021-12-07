@@ -119,3 +119,69 @@ export const changePassword = async (data: ISubmitPass) => {
   });
   return response;
 };
+export const sendUpaderCodePass = async (phone: string) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "POST",
+    url: `/update_pass_code`,
+    data: { phone: phone },
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};
+export const checkCodePass = async (code: string) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "POST",
+    url: `/confirm_code`,
+    data: { code: code },
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};
+export const resetPasswordWrapper = async (data: any) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "POST",
+    url: `/update_pass_by_code `,
+    data: data,
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};

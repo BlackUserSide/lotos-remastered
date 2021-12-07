@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MainRoutes } from "./routes/MainRouter";
 import "./components/ui/anim.css";
 import { RoutesContext } from "./routes/RoutesContext";
@@ -7,17 +7,8 @@ import "./main.sass";
 import "./font/Gilroy.css";
 import { CartComponentContext } from "./components/CartContext/CartComponentContext";
 import { OrderContextComponent } from "./components/CartPage/ContextOrder/OrderContextComponent";
-import { FormCallBack } from "./components/ui/FormCallback/FormCallback";
-import phoneImage from "./img/phone-call.png";
+//import { FormCallBack } from "./components/ui/FormCallback/FormCallback";
 export const App: React.FC = () => {
-  const [activeCall, setActiveCall] = useState<boolean>(false);
-  const changeHandler = () => {
-    if (activeCall) {
-      setActiveCall(false);
-      return;
-    }
-    setActiveCall(true);
-  };
   return (
     <>
       <div className="main-app-wrapper">
@@ -29,10 +20,8 @@ export const App: React.FC = () => {
           </OrderContextComponent>
         </CartComponentContext>
       </div>
-      <div className="btn-active-callback" onClick={changeHandler}>
-        <img src={phoneImage} alt="" />
-      </div>
-      {activeCall ? <FormCallBack changeHandler={changeHandler} /> : ""}
+
+      {/* {activeCall ? <FormCallBack changeHandler={changeHandler} /> : ""} */}
     </>
   );
 };
