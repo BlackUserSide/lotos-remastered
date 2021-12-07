@@ -29,7 +29,7 @@ export const DeliveryOrder: React.FC = () => {
   const submitHandler = useCallback(() => {
     if (dataOrder) {
       const newObj: TDataOrder = {
-        dataCart: "",
+        dataCart: [],
         allPrice: 0,
         deliveryMethod: 0,
         firstName: "",
@@ -110,6 +110,7 @@ export const DeliveryOrder: React.FC = () => {
           typePay: 1,
           orderId: orderId,
         };
+
         submitOrder(data)
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
@@ -117,6 +118,7 @@ export const DeliveryOrder: React.FC = () => {
       }
     }
   }, [orderId, dataOrder, history]);
+
   const sendOrder = () => {
     if (dataOrder) {
       if (setOrderId) {
@@ -127,6 +129,8 @@ export const DeliveryOrder: React.FC = () => {
       }
     }
   };
+  console.log(dataOrder?.dataCart);
+
   return (
     <>
       <HeaderCart />

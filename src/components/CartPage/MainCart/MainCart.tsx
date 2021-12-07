@@ -113,13 +113,10 @@ export const MainCart: React.FC = () => {
         const tmpLocal = localStorage.getItem("token");
         if (tmpLocal) {
           let newSum = 0;
-          if (tmpPrice >= 1200) {
-            let tmpProcent = (tmpPrice * 20) / 100;
-            newSum = tmpPrice - tmpProcent;
-          } else {
-            let tmpProcent = (tmpPrice * 10) / 100;
-            newSum = tmpPrice - tmpProcent;
-          }
+
+          let tmpProcent = (tmpPrice * 10) / 100;
+          newSum = tmpPrice - tmpProcent;
+
           setFullPrices(newSum);
         } else {
           setFullPrices(tmpPrice);

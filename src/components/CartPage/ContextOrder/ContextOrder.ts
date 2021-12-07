@@ -1,3 +1,4 @@
+import { TDataCart } from "./../../CartContext/CartContext";
 import { createContext } from "react";
 
 export interface IDataOrder {
@@ -7,10 +8,11 @@ export interface IDataOrder {
   setFullPrices: (price: number) => void;
   orderId: string;
   setOrderId: (id: string) => void;
+  setDataCart: () => void;
 }
 export type TDataOrder = {
-  [key: string]: string | number;
-  dataCart: any;
+  [key: string]: string | number | TDataCart[];
+  dataCart: TDataCart[];
   allPrice: number;
   deliveryMethod: number;
   firstName: string;

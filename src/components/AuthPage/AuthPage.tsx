@@ -97,7 +97,7 @@ export const AuthPage: React.FC = () => {
               />
             </div>
             <div className="reset-password">
-              <Link to={"/reset-password"}>Забули пароль?</Link>
+              <Link to={"/forgot-password"}>Забули пароль?</Link>
             </div>
             <button className="main-btn-login">
               <span>Увійти</span>
