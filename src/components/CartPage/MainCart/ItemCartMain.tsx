@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { IOrderCartMain } from "../type";
 import deleteICO from "../../../img/iconCart/delete.png";
-import test from "../../../img/testProd.png";
 import left from "../../../img/prodIcon/left.png";
 import right from "../../../img/prodIcon/right.png";
 import { CartContext, TDataCart } from "../../CartContext/CartContext";
@@ -17,7 +16,6 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
     id: 0,
     amount: 0,
   });
-  const [auth, setAuth] = useState<boolean>(false);
   useEffect(() => {
     if (dataCart) {
       let tmp = dataCart.find((e) => {
@@ -40,20 +38,12 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
       updateDataCart();
     }
   };
-  useEffect(() => {
-    const localData = localStorage.getItem("token");
-    if (localData !== null) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }, []);
   return (
     <div className="main-cart-item">
       {dataCart ? (
         <div className="container-item-wrapper">
           <div className="image-wrapper">
-            <img src={test} alt="" />
+            <img src={`http://91.228.155.147/img/${content.src}`} alt="" />
           </div>
           <div className="name-wrapper">
             <p>{content.name}</p>
@@ -69,9 +59,7 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
               alt=""
             />
             <input type="text" value={dataCartIn.amount} disabled={true} />
-            <span>
-              {auth ? (dataCartIn.amount > 3 ? "Акция 3 + 1" : "") : ""}
-            </span>
+
             <img
               src={right}
               onClick={() => {

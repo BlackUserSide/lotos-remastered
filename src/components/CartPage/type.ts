@@ -3,6 +3,7 @@ export interface IOrderCartMain {
   id: number;
   name: string;
   price: number;
+  src: string;
 }
 export interface IOrderDeliverty {
   [key: string]: string | number;

@@ -8,13 +8,25 @@ import deleteICO from "../../../img/iconCart/delete-white.png";
 import { HeaderCart } from "../HeaderCart/HeaderCart";
 import { useHistory } from "react-router";
 import { getDataUser } from "../../api/user";
+interface ISalesManage {
+  firstProcent: boolean;
+  secondProcent: boolean;
+  manSale: boolean;
+}
 export const MainCart: React.FC = () => {
   const history = useHistory();
   const [dataCarts, setDataCarts] = useState<TDataCart[]>([]);
   const [mainCart, setMainCart] = useState<IOrderCartMain[]>([]);
-
+  const [activeSale, setActiveSale] = useState<number | null>(null);
   const { setFullPrices, fullPrice } = useContext(ContextOrder);
   const { dataCart, clearCart } = useContext(CartContext);
+  const [activePop, setActivePop] = useState<boolean>(false);
+  const [saleProdName, setSaleProdName] = useState<string>("");
+  const [dataSales, setDataSales] = useState<ISalesManage>({
+    firstProcent: false,
+    secondProcent: false,
+    manSale: false,
+  });
   const updateDataCart = useCallback(() => {
     const data = localStorage.getItem("cart");
     if (data !== null) {
@@ -29,8 +41,6 @@ export const MainCart: React.FC = () => {
         getCartProducts(tmp)
           .then((res) => {
             if (res) {
-              console.log(res);
-
               setMainCart(res.data);
             }
           })
@@ -74,7 +84,6 @@ export const MainCart: React.FC = () => {
         const tmpProd = mainCart.find((k) => {
           return k.id === e.id;
         });
-
         const dataProdCart = dataCart?.find((t) => {
           return t.id === tmpProd?.id;
         });
@@ -83,9 +92,30 @@ export const MainCart: React.FC = () => {
           if (tmpProd?.discount !== null) {
             if (dataProdCart) {
               if (localData !== null) {
+                if (dataProdCart.amount >= 3) {
+                  setActivePop(true);
+                  setSaleProdName(tmpProd.name);
+                }
                 if (dataProdCart.amount > 3) {
-                  tmpPrice += e.amount * tmpProd.discount - tmpProd.price;
+                  if (activeSale !== null) {
+                    tmpPrice += e.amount * tmpProd.discount - tmpProd.discount;
+                    setDataSales((prev) => ({
+                      ...prev,
+                      manSale: true,
+                    }));
+                    setActiveSale(e.id);
+                  } else {
+                    tmpPrice += e.amount * tmpProd.discount;
+                  }
                 } else {
+                  if (activeSale === e.id) {
+                    setSaleProdName("");
+                    setActiveSale(null);
+                    setDataSales((prev) => ({
+                      ...prev,
+                      manSale: false,
+                    }));
+                  }
                   tmpPrice += e.amount * tmpProd.discount;
                 }
               } else {
@@ -95,9 +125,35 @@ export const MainCart: React.FC = () => {
           } else {
             if (dataProdCart) {
               if (localData) {
+                if (dataProdCart.amount >= 3) {
+                  setActivePop(true);
+                  setSaleProdName(tmpProd.name);
+                }
                 if (dataProdCart.amount > 3) {
-                  tmpPrice += e.amount * tmpProd.price - tmpProd.price;
+                  if (activeSale === null) {
+                    tmpPrice += e.amount * tmpProd.price - tmpProd.price;
+                    console.log(tmpPrice);
+                    setDataSales((prev) => ({
+                      ...prev,
+                      manSale: true,
+                    }));
+                    setActiveSale(e.id);
+                  } else {
+                    if (activeSale === e.id) {
+                      tmpPrice += e.amount * tmpProd.price - tmpProd.price;
+                    } else {
+                      tmpPrice += e.amount * tmpProd.price;
+                    }
+                  }
                 } else {
+                  if (activeSale === e.id) {
+                    setActiveSale(null);
+                    setSaleProdName("");
+                    setDataSales((prev) => ({
+                      ...prev,
+                      manSale: false,
+                    }));
+                  }
                   tmpPrice += e.amount * tmpProd.price;
                 }
               } else {
@@ -114,8 +170,26 @@ export const MainCart: React.FC = () => {
         if (tmpLocal) {
           let newSum = 0;
 
-          let tmpProcent = (tmpPrice * 10) / 100;
-          newSum = tmpPrice - tmpProcent;
+          if (tmpPrice > 1200) {
+            setDataSales((prev) => ({
+              ...prev,
+              secondProcent: true,
+            }));
+            let allAmount = 0;
+            dataCart?.map((e) => {
+              allAmount += e.amount;
+            });
+            let secontArefm = tmpPrice / allAmount;
+            let tmpProcent = (tmpPrice * 20) / 100;
+            newSum = Math.round(tmpPrice - tmpProcent - secontArefm);
+          } else {
+            setDataSales((prev) => ({
+              ...prev,
+              firstProcent: true,
+            }));
+            let tmpProcent = (tmpPrice * 10) / 100;
+            newSum = tmpPrice - tmpProcent;
+          }
 
           setFullPrices(newSum);
         } else {
@@ -123,7 +197,9 @@ export const MainCart: React.FC = () => {
         }
       }
     }
-  }, [dataCart, mainCart, setFullPrices, dataCarts]);
+  }, [dataCart, mainCart, setFullPrices, dataCarts, activeSale]);
+  console.log(activePop);
+
   return (
     <>
       <HeaderCart />
@@ -162,6 +238,11 @@ export const MainCart: React.FC = () => {
                 >
                   <span>Оформити замовлення</span>
                 </div>
+              </div>
+              <div className="sales-menage-wrapepr">
+                {dataSales.firstProcent ? <p>-10% активована</p> : ""}
+                {dataSales.secondProcent ? <p>-20% активована</p> : ""}
+                {dataSales.manSale ? <p>3+1 активована</p> : ""}
               </div>
             </div>
             {clearCart ? (
