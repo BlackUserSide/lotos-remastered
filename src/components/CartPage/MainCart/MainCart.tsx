@@ -8,10 +8,12 @@ import deleteICO from "../../../img/iconCart/delete-white.png";
 import { HeaderCart } from "../HeaderCart/HeaderCart";
 import { useHistory } from "react-router";
 import { getDataUser } from "../../api/user";
+import { PopUpSale } from "../../ui/PopUpSale/PopUpSale";
 interface ISalesManage {
   firstProcent: boolean;
   secondProcent: boolean;
   manSale: boolean;
+  lotusSale: boolean;
 }
 export const MainCart: React.FC = () => {
   const history = useHistory();
@@ -20,13 +22,15 @@ export const MainCart: React.FC = () => {
   const [activeSale, setActiveSale] = useState<number | null>(null);
   const { setFullPrices, fullPrice } = useContext(ContextOrder);
   const { dataCart, clearCart } = useContext(CartContext);
-  const [activePop, setActivePop] = useState<boolean>(false);
-  const [saleProdName, setSaleProdName] = useState<string>("");
+  //  const [activePop, setActivePop] = useState<boolean>(false);
+  //const [saleProdName, setSaleProdName] = useState<string>("");
   const [dataSales, setDataSales] = useState<ISalesManage>({
     firstProcent: false,
     secondProcent: false,
     manSale: false,
+    lotusSale: false,
   });
+  const [activePopSale, setActivePopSale] = useState<number>(0);
   const updateDataCart = useCallback(() => {
     const data = localStorage.getItem("cart");
     if (data !== null) {
@@ -93,12 +97,13 @@ export const MainCart: React.FC = () => {
             if (dataProdCart) {
               if (localData !== null) {
                 if (dataProdCart.amount >= 3) {
-                  setActivePop(true);
-                  setSaleProdName(tmpProd.name);
+                  //setActivePop(true);
+                  //setSaleProdName(tmpProd.name);
                 }
                 if (dataProdCart.amount > 3) {
                   if (activeSale !== null) {
-                    tmpPrice += e.amount * tmpProd.discount - tmpProd.discount;
+                    tmpPrice +=
+                      e.amount * tmpProd.discount - tmpProd.discount + 1;
                     setDataSales((prev) => ({
                       ...prev,
                       manSale: true,
@@ -109,7 +114,7 @@ export const MainCart: React.FC = () => {
                   }
                 } else {
                   if (activeSale === e.id) {
-                    setSaleProdName("");
+                    //setSaleProdName("");
                     setActiveSale(null);
                     setDataSales((prev) => ({
                       ...prev,
@@ -126,13 +131,13 @@ export const MainCart: React.FC = () => {
             if (dataProdCart) {
               if (localData) {
                 if (dataProdCart.amount >= 3) {
-                  setActivePop(true);
-                  setSaleProdName(tmpProd.name);
+                  //setActivePop(true);
+                  //setSaleProdName(tmpProd.name);
                 }
                 if (dataProdCart.amount > 3) {
                   if (activeSale === null) {
-                    tmpPrice += e.amount * tmpProd.price - tmpProd.price;
-                    console.log(tmpPrice);
+                    tmpPrice += e.amount * tmpProd.price - tmpProd.price + 1; //TODO Поставить возврат 1 гривну
+
                     setDataSales((prev) => ({
                       ...prev,
                       manSale: true,
@@ -140,7 +145,7 @@ export const MainCart: React.FC = () => {
                     setActiveSale(e.id);
                   } else {
                     if (activeSale === e.id) {
-                      tmpPrice += e.amount * tmpProd.price - tmpProd.price;
+                      tmpPrice += e.amount * tmpProd.price - tmpProd.price + 1;
                     } else {
                       tmpPrice += e.amount * tmpProd.price;
                     }
@@ -148,7 +153,7 @@ export const MainCart: React.FC = () => {
                 } else {
                   if (activeSale === e.id) {
                     setActiveSale(null);
-                    setSaleProdName("");
+                    //setSaleProdName("");
                     setDataSales((prev) => ({
                       ...prev,
                       manSale: false,
@@ -178,14 +183,21 @@ export const MainCart: React.FC = () => {
             let allAmount = 0;
             dataCart?.map((e) => {
               allAmount += e.amount;
+              return e;
             });
             let secontArefm = tmpPrice / allAmount;
             let tmpProcent = (tmpPrice * 20) / 100;
             newSum = Math.round(tmpPrice - tmpProcent - secontArefm);
+            setDataSales((prev) => ({
+              ...prev,
+              lotusSale: true,
+            }));
           } else {
             setDataSales((prev) => ({
               ...prev,
               firstProcent: true,
+              secondProcent: false,
+              lotusSale: false,
             }));
             let tmpProcent = (tmpPrice * 10) / 100;
             newSum = tmpPrice - tmpProcent;
@@ -198,7 +210,6 @@ export const MainCart: React.FC = () => {
       }
     }
   }, [dataCart, mainCart, setFullPrices, dataCarts, activeSale]);
-  console.log(activePop);
 
   return (
     <>
@@ -240,9 +251,32 @@ export const MainCart: React.FC = () => {
                 </div>
               </div>
               <div className="sales-menage-wrapepr">
-                {dataSales.firstProcent ? <p>-10% активована</p> : ""}
-                {dataSales.secondProcent ? <p>-20% активована</p> : ""}
-                {dataSales.manSale ? <p>3+1 активована</p> : ""}
+                {dataSales.firstProcent ? (
+                  dataSales.secondProcent ? (
+                    ""
+                  ) : (
+                    <p onClick={() => setActivePopSale(1)}>-10% активована</p>
+                  )
+                ) : (
+                  ""
+                )}
+                {dataSales.secondProcent ? (
+                  <p onClick={() => setActivePopSale(2)}>-20% активована</p>
+                ) : (
+                  ""
+                )}
+                {dataSales.manSale ? (
+                  <p onClick={() => setActivePopSale(3)}>3+1 активована</p>
+                ) : (
+                  ""
+                )}
+                {dataSales.lotusSale ? (
+                  <p onClick={() => setActivePopSale(4)}>
+                    Фірмова акція Lotus-Namaste
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             {clearCart ? (
@@ -256,11 +290,25 @@ export const MainCart: React.FC = () => {
             ) : (
               ""
             )}
+            <div
+              className="btn-back-to-shop"
+              onClick={() => history.push("/shop")}
+            >
+              <span>Повернутись до магазину</span>
+            </div>
           </>
         ) : (
           ""
         )}
       </div>
+      {activePopSale !== 0 ? (
+        <PopUpSale
+          contentSale={activePopSale}
+          setActivePopSale={setActivePopSale}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };
