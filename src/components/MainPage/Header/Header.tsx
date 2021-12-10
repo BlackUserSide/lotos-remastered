@@ -46,6 +46,7 @@ export const Header: React.FC = () => {
             <Link to="/">
               <img src={logo} alt="" />
             </Link>
+            <p>TestV1,2</p>
           </div>
           <nav className="main-nav-wrapper">
             <ul className="main-container-nav">
