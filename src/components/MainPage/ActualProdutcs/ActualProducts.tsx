@@ -24,7 +24,10 @@ export const ActualProducts: React.FC = () => {
                 оптимальній працездатності. Оптимізує дію антиангінальних,
                 антигіпертензивних та антиаритмічних препаратів.
               </p>
-              <div className="btn-main-collection light-btn">
+              <div
+                className="btn-main-collection light-btn"
+                onClick={() => history.push("/card-product/21")}
+              >
                 <span>Перейти до товару</span>
               </div>
             </div>
@@ -44,7 +47,7 @@ export const ActualProducts: React.FC = () => {
               </p>
               <div
                 className="btn-main-collection light-btn"
-                onClick={() => history.push("/card-product/3")}
+                onClick={() => history.push("/card-product/4")}
               >
                 <span>Перейти до товару</span>
               </div>
@@ -62,7 +65,7 @@ export const ActualProducts: React.FC = () => {
               </p>
               <div
                 className="btn-main-collection light-btn"
-                onClick={() => history.push("/card-product/4")}
+                onClick={() => history.push("/card-product/17")}
               >
                 <span>Перейти до товару</span>
               </div>
