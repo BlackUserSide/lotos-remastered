@@ -34,6 +34,11 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
   };
   const changeHandler = (amount: number) => {
     if (changeAmount) {
+      if (amount <= 1) {
+        changeAmount(content.id, 1);
+        updateDataCart();
+        return;
+      }
       changeAmount(content.id, amount);
       updateDataCart();
     }
