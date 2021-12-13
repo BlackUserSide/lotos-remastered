@@ -11,33 +11,19 @@ import { getDataUser } from "../../api/user";
 import { IDataProfile } from "./type";
 import { useHistory } from "react-router";
 import { ChangePass } from "../../ui/ChangePass/ChangePass";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
 export const ProfilePage: React.FC = () => {
   let history = useHistory();
-  const [dataUser, setDataUser] = useState<IDataProfile>({
-    firstName: "",
-    lastName: "",
-    surname: "",
-    phone: "",
-    email: "",
-  });
+  // const [dataUser, setDataUser] = useState<IDataProfile>({
+  //   firstName: "",
+  //   lastName: "",
+  //   surname: "",
+  //   phone: "",
+  //   email: "",
+  // });
+  const dataUser = useSelector((state: RootState) => state.cabinet.dataUser);
   const [activeChange, setActiveChange] = useState<boolean>(false);
-
-  useEffect(() => {
-    getDataUser()
-      .then((res) => {
-        if (res) {
-          switch (res.status) {
-            case 200:
-              setDataUser(res.data[0]);
-              break;
-            case 401:
-              localStorage.clear();
-              history.push("/login");
-          }
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [history]);
   const changeHandler = () => {
     if (activeChange) {
       setActiveChange(false);
@@ -45,6 +31,7 @@ export const ProfilePage: React.FC = () => {
     }
     setActiveChange(true);
   };
+
   return (
     <div className="profile-page">
       <div className="link-wrapper-navigation">
