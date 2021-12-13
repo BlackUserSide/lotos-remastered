@@ -12,7 +12,7 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
-//test
+
 render(
   <Provider store={store}>
     <Router>
