@@ -1,5 +1,5 @@
 import { IActionCabinet, IStateCabinet } from "./type";
-import { SAVE_USER_DATA } from "./actionConst";
+import { SAVE_USER_DATA, UPDATE_STRUCTURE_DATA } from "./actionConst";
 
 const initState: IStateCabinet = {
   dataUser: {
@@ -8,8 +8,10 @@ const initState: IStateCabinet = {
     surname: "",
     lastName: "",
     email: "",
+    id: 0,
   },
   dataStructure: [],
+  loader: false,
 };
 export const cabinetReducer = (
   state: IStateCabinet = initState,
@@ -17,7 +19,11 @@ export const cabinetReducer = (
 ): IStateCabinet => {
   switch (action.type) {
     case SAVE_USER_DATA:
-      return { ...state, dataUser: action.payload };
+      //eslint-disable-next-line
+      return <IStateCabinet>{ ...state, dataUser: action.payload };
+    case UPDATE_STRUCTURE_DATA:
+      //eslint-disable-next-line
+      return <IStateCabinet>{ ...state, dataStructure: action.payload };
     default:
       return state;
   }

@@ -12,6 +12,7 @@ type IProms = {
 export const CabinetPage: React.FC<IProms> = ({ routes }) => {
   let history = useHistory();
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
       let dataPath = history.location.pathname.split("/");

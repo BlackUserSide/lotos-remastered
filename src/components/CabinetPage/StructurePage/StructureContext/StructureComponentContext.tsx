@@ -36,7 +36,6 @@ export const StructureComponentContext: React.FC = ({ children }) => {
         });
     },
   };
-
   return (
     <>
       <StructureContext.Provider value={valContext}>

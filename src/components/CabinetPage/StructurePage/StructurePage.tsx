@@ -8,25 +8,36 @@ import React, {
 import { Link } from "react-router-dom";
 //import { getDataStructure } from "../../api/structure";
 import "./structurepage.sass";
-import { IDataUser, IMainDataStructure } from "./types";
-import { useHistory } from "react-router";
-import { getDataUser } from "../../api/user";
+import { IMainDataStructure } from "./types";
+//import { useHistory } from "react-router";
+
 //import { getDataStrForUser } from "../../function/getDataStrForUser";
 
 import { StructureContext } from "./StructureContext/StructureContext";
+//import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
+import { useSelector } from "react-redux";
+//import { updateDataStructure } from "../../../redux/Cabinet/action";
 
 export const StructurePage: React.FC = () => {
+  if (process.env.NODE_ENV !== "production") {
+    const { whyDidYouUpdate } = require("why-did-you-update");
+    whyDidYouUpdate(React);
+  }
   const ref = useRef<HTMLDivElement>(null);
+
   const { dataStructure, newDataStruct } = useContext(StructureContext);
-  let history = useHistory();
+  //let history = useHistory();
   const [dataStruct, setDataStruct] = useState<Array<IMainDataStructure>>([]);
-  const [dataUser, setDataUser] = useState<IDataUser>({
-    firstName: "",
-    lastName: "",
-    surname: "",
-    id: 0,
-  });
+  //REDUX----------------
+  const dataUser = useSelector((state: RootState) => state.cabinet.dataUser);
+  //const dispatch = useDispatch();
+  const dataStructureTest = useSelector(
+    (state: RootState) => state.cabinet.dataStructure
+  );
+  //REDUX----------------
   const [activeId, setActiveId] = useState<number[]>([]);
+
   const updateWrapper = useCallback(() => {
     if (dataStructure) {
       if (dataStructure.length > 0) {
@@ -34,26 +45,29 @@ export const StructurePage: React.FC = () => {
       }
     }
   }, [dataStructure]);
+  // useEffect(() => {
+  //   dispatch(updateDataStructure(dataStructureTest));
+  // }, [dispatch]);
+  console.log(dataStructureTest);
   useEffect(() => {
     updateWrapper();
   }, [updateWrapper]);
-  useEffect(() => {
-    getDataUser()
-      .then((res) => {
-        if (res) {
-          switch (res.status) {
-            case 200:
-              setDataUser(res.data[0]);
-              break;
-            case 422:
-              history.push("/login");
-              break;
-          }
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [history]);
-
+  // useEffect(() => {
+  //   getDataUser()
+  //     .then((res) => {
+  //       if (res) {
+  //         switch (res.status) {
+  //           case 200:
+  //             setDataUser(res.data[0]);
+  //             break;
+  //           case 422:
+  //             history.push("/login");
+  //             break;
+  //         }
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [history]);
   const getHandlerStructure: any = (id: number, idLine: number) => {
     if (activeId.length === 0) {
       let newActive: number[] = [];
@@ -126,7 +140,6 @@ export const StructurePage: React.FC = () => {
               </div>
               <div className="info-wrapper-item">
                 <p>ВО: Lt</p>
-                <p></p>
               </div>
             </div>
           </div>
@@ -184,6 +197,7 @@ export const StructurePage: React.FC = () => {
           ) : (
             ""
           )}
+
           <div ref={ref}></div>
         </div>
       </div>

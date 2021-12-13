@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./profilepage.sass";
 import image1 from "../../../img/iconCabinet/iconProfile/1.png";
@@ -7,14 +7,14 @@ import image3 from "../../../img/iconCabinet/iconProfile/3.png";
 import image4 from "../../../img/iconCabinet/iconProfile/4.png";
 import image5 from "../../../img/iconCabinet/iconProfile/5.png";
 import editIcon from "../../../img/iconCabinet/iconProfile/edit.png";
-import { getDataUser } from "../../api/user";
-import { IDataProfile } from "./type";
-import { useHistory } from "react-router";
+// import { getDataUser } from "../../api/user";
+// import { IDataProfile } from "./type";
+// import { useHistory } from "react-router";
 import { ChangePass } from "../../ui/ChangePass/ChangePass";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/rootReducer";
 export const ProfilePage: React.FC = () => {
-  let history = useHistory();
+  //let history = useHistory();
   // const [dataUser, setDataUser] = useState<IDataProfile>({
   //   firstName: "",
   //   lastName: "",

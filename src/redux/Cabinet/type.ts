@@ -1,8 +1,9 @@
-import { IDataStructure } from "../../components/CabinetPage/StructurePage/types";
+import { IMainDataStructure } from "../../components/CabinetPage/StructurePage/types";
 
 export interface IStateCabinet {
   dataUser: IDataUserRedux;
-  dataStructure: IDataStructure[];
+  dataStructure: IMainDataStructure[];
+  loader: boolean;
 }
 
 export interface IDataUserRedux {
@@ -11,8 +12,9 @@ export interface IDataUserRedux {
   surname: string;
   phone: string;
   email: string;
+  id: number;
 }
 export interface IActionCabinet {
   type: string;
-  payload: IDataUserRedux;
+  payload: IDataUserRedux | IMainDataStructure[];
 }
