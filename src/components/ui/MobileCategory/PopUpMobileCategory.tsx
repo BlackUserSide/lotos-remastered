@@ -19,6 +19,7 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
   const [dataSubCategory, setDataSubCategory] = useState<ISubCategory[]>([]);
   const { catergoryFilter, clearFilterCategory, subCategoryFilter } =
     useContext(ShopContext);
+  const [activeSub, setActiveSub] = useState<number>(0);
   const updateCategory = useCallback(() => {
     console.log(1);
 
@@ -68,9 +69,11 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
   };
   const changeSubCategory = (id: number) => {
     if (subCategoryFilter) {
+      setActiveSub(id);
       subCategoryFilter(id);
     }
   };
+  console.log(activeSub);
 
   return (
     <div className="pop-up-mobile-category">
@@ -123,7 +126,9 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
               ))
             : dataCategory.map((e, i) => (
                 <div
-                  className="list-item-category"
+                  className={`list-item-category ${
+                    activeSub === e.id ? "active-sub-wrapper" : ""
+                  }`}
                   onClick={() => {
                     changeActiveCategory(e.id);
                   }}
