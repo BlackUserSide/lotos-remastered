@@ -10,13 +10,17 @@ import { useHistory } from "react-router";
 import "./header.sass";
 import "../../ui/hamburgers-master/dist/hamburgers.min.css";
 import { CartContext } from "../../CartContext/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
+import { changeActiveLink } from "../../../redux/header/actions";
 export const Header: React.FC = () => {
   const history = useHistory();
   const pushHandler = (link: string) => {
     history.push(link);
   };
+
   const [activeMobile, setActiveMobile] = useState<boolean>(false);
-  const [activeLink, setActiveLink] = useState<string>("");
+  // const [activeLink, setActiveLink] = useState<string>("");
   const changeActive = () => {
     if (activeMobile) {
       setActiveMobile(false);
@@ -24,8 +28,9 @@ export const Header: React.FC = () => {
     }
     setActiveMobile(true);
   };
-
-  const [countCartHeader, setCountCartHeader] = useState<number>();
+  const activeLink = useSelector((state: RootState) => state.header.activeLink);
+  const dispatch = useDispatch();
+  const [countCartHeader, setCountCartHeader] = useState<number>(); //Count-cart Func
   const { countCart } = useContext(CartContext);
   useEffect(() => {
     if (countCart !== undefined) {
@@ -35,9 +40,9 @@ export const Header: React.FC = () => {
   useEffect(() => {
     let parseLink = history.location.pathname.split("/");
     let test: string = parseLink[1];
-    setActiveLink(test);
-    console.log(test);
-  }, [history]);
+    dispatch(changeActiveLink(test));
+    //setActiveLink(test);
+  }, [history, dispatch]);
   return (
     <>
       <header className="main-header-wrapper">

@@ -4,6 +4,7 @@ import deleteICO from "../../../img/iconCart/delete.png";
 import left from "../../../img/prodIcon/left.png";
 import right from "../../../img/prodIcon/right.png";
 import { CartContext, TDataCart } from "../../CartContext/CartContext";
+import { useHistory } from "react-router-dom";
 type TProps = {
   content: IOrderCartMain;
   updateDataCart: any;
@@ -11,6 +12,7 @@ type TProps = {
 };
 
 export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
+  const history = useHistory();
   const { deleteItem, changeAmount, dataCart } = useContext(CartContext);
   const [dataCartIn, setDataCartIn] = useState<TDataCart>({
     id: 0,
@@ -34,6 +36,11 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
   };
   const changeHandler = (amount: number) => {
     if (changeAmount) {
+      if (amount <= 1) {
+        changeAmount(content.id, 1);
+        updateDataCart();
+        return;
+      }
       changeAmount(content.id, amount);
       updateDataCart();
     }
@@ -45,7 +52,10 @@ export const ItemCartMain: React.FC<TProps> = ({ content, updateDataCart }) => {
           <div className="image-wrapper">
             <img src={`http://91.228.155.147/img/${content.src}`} alt="" />
           </div>
-          <div className="name-wrapper">
+          <div
+            className="name-wrapper"
+            onClick={() => history.push(`/card-product/${content.id}`)}
+          >
             <p>{content.name}</p>
             <span>{content.id}</span>
           </div>

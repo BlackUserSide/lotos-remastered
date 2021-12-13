@@ -27,6 +27,7 @@ export const CartComponentContext: React.FC = ({ children }) => {
         updateDataCart();
       }
     },
+
     deleteItem: (id: number) => {
       const newArr = dataCart.filter((e) => e.id !== id);
       localStorage.removeItem("cart");
