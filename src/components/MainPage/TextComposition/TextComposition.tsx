@@ -6,7 +6,7 @@ export const TextComposition: React.FC = () => {
   return (
     <div className="text-composition-last">
       <h2 className="h2">“ Ты и я, семья, друзья - все находят для себя! ”</h2>
-      <p>— Сергій</p>
+      <p>— Сергій, засновник</p>
       <div className="btn-btn-wrapper">
         <span onClick={() => history.push("/login")}>Приєднатись</span>
       </div>
