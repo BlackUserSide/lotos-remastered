@@ -12,6 +12,7 @@ const initState: IStateCabinet = {
   },
   dataStructure: [],
   loader: false,
+  auth: true,
 };
 export const cabinetReducer = (
   state: IStateCabinet = initState,

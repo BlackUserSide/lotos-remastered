@@ -35,7 +35,6 @@ export const getDataCart = () => {
     }
   };
 };
-
 export const addToCart = (id: number, amount: number) => {
   return async (dispatch: any) => {
     const dataCartLocal = localStorage.getItem("cart");

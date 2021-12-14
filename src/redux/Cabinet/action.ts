@@ -23,7 +23,6 @@ export const updateDataStructure = (dataStructure: IMainDataStructure[]) => {
         return res;
       }
     });
-
     dispatch({ type: UPDATE_STRUCTURE_DATA, payload: data });
   };
 };

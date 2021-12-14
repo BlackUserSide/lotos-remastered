@@ -4,6 +4,7 @@ export interface IStateCabinet {
   dataUser: IDataUserRedux;
   dataStructure: IMainDataStructure[];
   loader: boolean;
+  auth: boolean;
 }
 
 export interface IDataUserRedux {
