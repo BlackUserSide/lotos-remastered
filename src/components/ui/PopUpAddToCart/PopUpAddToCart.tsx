@@ -18,11 +18,10 @@ export const PopUpAddToCart: React.FC<TProps> = ({
     <div className="pop-up-add-to-cart">
       <div className="bg-lock"></div>
       <div className="popup-wrapper-add-to-cart">
-        <h3 className="h3">
-          Доданий до кошика <br /> {content.name}{" "}
-        </h3>
+        <h2 className="h2">Доданий до кошика</h2>
+        <h3 className="h3">{content.name} </h3>
         <p>
-          В кількості {amount} шт. на загальну суму:{" "}
+          В кількості {amount} шт. на суму:{" "}
           {content.discount !== null
             ? content.discount * amount
             : content.price * amount}{" "}
