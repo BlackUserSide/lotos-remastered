@@ -153,10 +153,13 @@ export const Header: React.FC = () => {
                 }}
                 alt=""
               />
-              <span>{fullPrice ? `${fullPrice} грн` : ""}</span>
+
               <div className="hidden-wrapper-count">
                 <span>{countCartHeader}</span>
               </div>
+            </div>
+            <div className="price-cart-wrapper">
+              <span>{fullPrice ? `${fullPrice} грн` : ""}</span>
             </div>
           </div>
         </div>
