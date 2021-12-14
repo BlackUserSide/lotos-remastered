@@ -231,6 +231,10 @@ export const MainCart: React.FC = () => {
                   <p>Сума до сплати:</p>
                   <span>{fullPrice ? fullPrice : ""} грн</span>
                 </div>
+                {/* <div className="price-wrapper">
+                  <p>Сума до знижки:</p>
+                  <span>{fullPrice ? fullPrice : ""} грн</span>
+                </div> */}
                 <div
                   className="btn-wrapper-con-price"
                   onClick={() => {
