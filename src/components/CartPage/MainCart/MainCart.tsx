@@ -169,29 +169,19 @@ export const MainCart: React.FC = () => {
         }
         return e;
       });
-
       if (setFullPrices) {
         const tmpLocal = localStorage.getItem("token");
         if (tmpLocal) {
           let newSum = 0;
 
-          if (tmpPrice > 1200) {
+          if (tmpPrice - (tmpPrice * 20) / 100 >= 1200) {
             setDataSales((prev) => ({
               ...prev,
               secondProcent: true,
             }));
-            let allAmount = 0;
-            dataCart?.map((e) => {
-              allAmount += e.amount;
-              return e;
-            });
-            let secontArefm = tmpPrice / allAmount;
+
             let tmpProcent = (tmpPrice * 20) / 100;
-            newSum = Math.round(tmpPrice - tmpProcent - secontArefm);
-            setDataSales((prev) => ({
-              ...prev,
-              lotusSale: true,
-            }));
+            newSum = Math.round(tmpPrice - tmpProcent);
           } else {
             setDataSales((prev) => ({
               ...prev,

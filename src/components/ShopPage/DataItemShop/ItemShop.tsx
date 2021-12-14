@@ -105,14 +105,6 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
               <img src={cart} alt="" /> У кошик
             </span>
           </div>
-          {localStorage.getItem("token") !== null ? (
-            <div className="btn-bay-on-click">
-              <span>Купити в 1 клік </span>
-            </div>
-          ) : (
-            ""
-          )}
-
           <div className="list-info-prod">
             <div className="bonus-ico-wrapper">
               <img src={bonus} alt="" />
