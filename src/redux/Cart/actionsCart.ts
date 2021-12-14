@@ -1,3 +1,4 @@
+import { getCartProducts } from "./../../components/api/shop";
 import { GET_DATA_CART, GET_GOUNT_CART } from "./actionsConst";
 import { TDataCart } from "./../../components/CartContext/CartContext";
 export const getCountCart = (count: number) => {
@@ -7,15 +8,23 @@ export const getCountCart = (count: number) => {
   };
 };
 export const getDataCart = () => {
-  return (dispatch: any) => {
+  return async (dispatch: any) => {
     const data = localStorage.getItem("cart");
     if (data !== null) {
       const obj: TDataCart[] = JSON.parse(data);
+      const arrId = obj.map((e) => {
+        return e.id;
+      });
+      const response = await getCartProducts(arrId).then((res) => {
+        if (res) {
+          return res.data;
+        }
+      });
       const count = obj.length;
       dispatch(getCountCart(count));
       dispatch({
         type: GET_DATA_CART,
-        payload: obj,
+        payload: response,
       });
     } else {
       dispatch(getCountCart(0));
