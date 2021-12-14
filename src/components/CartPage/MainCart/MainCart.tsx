@@ -173,7 +173,8 @@ export const MainCart: React.FC = () => {
         const tmpLocal = localStorage.getItem("token");
         if (tmpLocal) {
           let newSum = 0;
-          if (tmpPrice >= 1200) {
+
+          if (tmpPrice - (tmpPrice * 20) / 100 >= 1200) {
             setDataSales((prev) => ({
               ...prev,
               secondProcent: true,
