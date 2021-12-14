@@ -9,12 +9,15 @@ import discountIco from "../../../img/prodIcon/discount.png";
 import { CartContext } from "../../CartContext/CartContext";
 import { useHistory } from "react-router";
 import { PopUpAddToCart } from "../../ui/PopUpAddToCart/PopUpAddToCart";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/Cart/actionsCart";
 type TProps = {
   content: IDataProd;
 };
 export const ItemShop: React.FC<TProps> = ({ content }) => {
   const history = useHistory();
   const [amount, setAmount] = useState<number>(1);
+  const dispathc = useDispatch();
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const changeHandler = (val: number) => {
     if (val <= 0) {
@@ -28,6 +31,7 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
     if (addCart) {
       setShowPopUp(true);
       addCart(content.id, amount);
+      dispathc(addToCart(content.id, amount));
       return;
     }
   };
