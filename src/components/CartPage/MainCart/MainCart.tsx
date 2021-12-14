@@ -169,7 +169,6 @@ export const MainCart: React.FC = () => {
         }
         return e;
       });
-
       if (setFullPrices) {
         const tmpLocal = localStorage.getItem("token");
         if (tmpLocal) {
