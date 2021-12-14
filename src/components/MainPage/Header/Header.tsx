@@ -192,7 +192,7 @@ export const Header: React.FC = () => {
                   className="btn-main-container"
                   onClick={() => history.push("/login")}
                 >
-                  <span>Авторизуватись</span>
+                  <span>Вхід до Кабінет</span>
                 </div>
               </div>
             </ul>
