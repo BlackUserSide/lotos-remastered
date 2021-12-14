@@ -6,6 +6,7 @@ import { Header } from "../MainPage/Header/Header";
 import { MainCabinetLink } from "./HomeCabinet/MainCabinetLink/MainCabinetLink";
 import { useDispatch } from "react-redux";
 import { saveUserData } from "../../redux/Cabinet/action";
+import "./cabinet.sass";
 type IProms = {
   routes: any;
 };

@@ -72,13 +72,13 @@ export const AuthPage: React.FC = () => {
           >
             <div className="top-line">
               <h1 className="h1">Авторизація</h1>
-              <p>Введіть логін та пароль, щоб увійти в особистий кабінет</p>
+              <p>Введіть E-mail та пароль, щоб увійти в особистий кабінет</p>
             </div>
             <div className="input-wrapper">
               <input
                 type="text"
                 name="login"
-                placeholder="Логін"
+                placeholder="Email"
                 value={dataLogin.login}
                 required
                 onChange={changeHandler}
