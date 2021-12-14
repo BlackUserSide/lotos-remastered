@@ -284,7 +284,7 @@ export const MainCart: React.FC = () => {
               className="btn-back-to-shop"
               onClick={() => history.push("/shop")}
             >
-              <span>Повернутись до магазину</span>
+              <span>Продовжити покупки</span>
             </div>
           </>
         ) : (
