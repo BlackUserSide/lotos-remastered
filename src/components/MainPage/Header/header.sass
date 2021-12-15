@@ -80,8 +80,14 @@
                         display: inline-block
 .mobile-header
     max-width: 100%
-    position: relative
+    position: fixed
     overflow: hidden
+    z-index: 999
+    width: 100%
+    top: 0
+    left: 0
+    background-color: #fff
+    height: 70px
     .container-wrapper-mobile-header
         display: flex
         justify-content: space-between
@@ -93,6 +99,7 @@
 
         .btn-wrapper-container
             display: flex
+            width: 30%
             .btn-header
                 width: 28px
                 height: 28px
@@ -105,6 +112,9 @@
                 &:nth-child(1)
                     margin-right: 15px
             .cart-link
+                display: flex
+                align-items: center
+
                 .hidden-wrapper-count
                     position: absolute
                     top: -5px
@@ -154,7 +164,7 @@
                 justify-content: center
                 .btn-main-container
                     margin: 0 15px
-                    background: #fff
+                    background: #1FBB83
                     display: flex
                     align-items: center
                     justify-content: center
@@ -163,11 +173,12 @@
                     height: 42px
                     border-radius: 6px
                     cursor: pointer
+
                     span
                         font-size: 12px
                         line-height: 14px
                         text-align: center
-                        color: #4F4F4F
+                        color: #fff
     .active-mobile-nav
         animation: fadeOn .4s ease-in-out forwards
 

@@ -185,12 +185,12 @@ export const MainCart: React.FC = () => {
           } else {
             setDataSales((prev) => ({
               ...prev,
-              firstProcent: true,
+              firstProcent: false,
               secondProcent: false,
               lotusSale: false,
             }));
-            let tmpProcent = (tmpPrice * 10) / 100;
-            newSum = tmpPrice - tmpProcent;
+
+            newSum = tmpPrice;
           }
 
           setFullPrices(newSum);
@@ -231,6 +231,10 @@ export const MainCart: React.FC = () => {
                   <p>Сума до сплати:</p>
                   <span>{fullPrice ? fullPrice : ""} грн</span>
                 </div>
+                {/* <div className="price-wrapper">
+                  <p>Сума до знижки:</p>
+                  <span>{fullPrice ? fullPrice : ""} грн</span>
+                </div> */}
                 <div
                   className="btn-wrapper-con-price"
                   onClick={() => {
@@ -284,7 +288,7 @@ export const MainCart: React.FC = () => {
               className="btn-back-to-shop"
               onClick={() => history.push("/shop")}
             >
-              <span>Повернутись до магазину</span>
+              <span>Продовжити покупки</span>
             </div>
           </>
         ) : (

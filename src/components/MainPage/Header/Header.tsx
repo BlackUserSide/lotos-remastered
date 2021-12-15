@@ -13,6 +13,7 @@ import { CartContext } from "../../CartContext/CartContext";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/rootReducer";
 import { changeActiveLink } from "../../../redux/header/actions";
+import { ContextOrder } from "../../CartPage/ContextOrder/ContextOrder";
 export const Header: React.FC = () => {
   const history = useHistory();
   const pushHandler = (link: string) => {
@@ -32,6 +33,7 @@ export const Header: React.FC = () => {
   const dispatch = useDispatch();
   const [countCartHeader, setCountCartHeader] = useState<number>(); //Count-cart Func
   const { countCart } = useContext(CartContext);
+  const { fullPrice } = useContext(ContextOrder);
   useEffect(() => {
     if (countCart !== undefined) {
       setCountCartHeader(countCart);
@@ -143,9 +145,6 @@ export const Header: React.FC = () => {
             <img src={logo} alt="" />
           </div>
           <div className="btn-wrapper-container">
-            <div className="btn-header search-link">
-              <img src={search} alt="" />
-            </div>
             <div className="btn-header cart-link">
               <img
                 src={cart}
@@ -154,9 +153,13 @@ export const Header: React.FC = () => {
                 }}
                 alt=""
               />
+
               <div className="hidden-wrapper-count">
                 <span>{countCartHeader}</span>
               </div>
+            </div>
+            <div className="price-cart-wrapper">
+              <span>{fullPrice ? `${fullPrice} грн` : ""}</span>
             </div>
           </div>
         </div>
@@ -192,7 +195,7 @@ export const Header: React.FC = () => {
                   className="btn-main-container"
                   onClick={() => history.push("/login")}
                 >
-                  <span>Авторизуватись</span>
+                  <span>Мій кабінет</span>
                 </div>
               </div>
             </ul>
