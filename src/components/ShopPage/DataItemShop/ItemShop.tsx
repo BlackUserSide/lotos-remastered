@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { IDataProd } from "../type";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import left from "../../../img/prodIcon/left.png";
 import right from "../../../img/prodIcon/right.png";
 import cart from "../../../img/prodIcon/cart.png";
 import bonus from "../../../img/prodIcon/bonus.png";
 import discountIco from "../../../img/prodIcon/discount.png";
-import { CartContext } from "../../CartContext/CartContext";
 import { useHistory } from "react-router";
 import { PopUpAddToCart } from "../../ui/PopUpAddToCart/PopUpAddToCart";
 import { useDispatch } from "react-redux";
@@ -26,14 +26,11 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
     }
     setAmount(val);
   };
-  const { addCart } = useContext(CartContext);
+
   const addToCartHandler = () => {
-    if (addCart) {
-      setShowPopUp(true);
-      addCart(content.id, amount);
-      dispathc(addToCart(content.id, amount));
-      return;
-    }
+    setShowPopUp(true);
+    dispathc(addToCart(content.id, amount));
+    return;
   };
 
   return (
@@ -46,7 +43,11 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
           }}
         >
           <div className="image-wrapper">
-            <img src={`http://91.228.155.147/img/${content.src}`} alt="" />
+            <LazyLoadImage
+              src={`http://91.228.155.147/img/${content.src}`}
+              effect="blur"
+              alt=""
+            />
           </div>
           <div className="text-composition">
             <h3 className="h3">{content.name}</h3>

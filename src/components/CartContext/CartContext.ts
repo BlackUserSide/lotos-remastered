@@ -11,6 +11,7 @@ export interface ICartContext {
 export type TDataCart = {
   id: number;
   amount: number;
+  sale: boolean;
 };
 
 export const CartContext = createContext<Partial<ICartContext>>({});

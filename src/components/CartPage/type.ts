@@ -5,6 +5,7 @@ export interface IOrderCartMain {
   price: number;
   src: string;
 }
+
 export interface IOrderDeliverty {
   [key: string]: string | number;
   deliveryMethod: number;

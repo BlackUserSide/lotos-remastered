@@ -1,5 +1,10 @@
+import { IActionCabinet } from "./type";
 import { getDataUser } from "../../components/api/user";
-import { SAVE_USER_DATA, UPDATE_STRUCTURE_DATA } from "./actionConst";
+import {
+  SAVE_USER_DATA,
+  SET_AUTH_USER,
+  UPDATE_STRUCTURE_DATA,
+} from "./actionConst";
 import { IMainDataStructure } from "../../components/CabinetPage/StructurePage/types";
 import { getDataStrForUser } from "../../components/function/getDataStrForUser";
 
@@ -8,13 +13,29 @@ export const saveUserData = () => {
     try {
       const data = await getDataUser().then((res) => {
         if (res) {
-          return res.data;
+          switch (res.status) {
+            case 200:
+              dispatch(setAuthUser(true));
+              return res.data;
+            case 401:
+              dispatch(setAuthUser(false));
+              break;
+            default:
+              dispatch(setAuthUser(false));
+              break;
+          }
         }
       });
 
       dispatch({ type: SAVE_USER_DATA, payload: data[0] });
     } catch (e) {}
   };
+};
+export const setAuthUser = (auth: boolean) => {
+  return {
+    type: SET_AUTH_USER,
+    payload: auth,
+  } as IActionCabinet;
 };
 export const updateDataStructure = (dataStructure: IMainDataStructure[]) => {
   return async (dispatch: any) => {

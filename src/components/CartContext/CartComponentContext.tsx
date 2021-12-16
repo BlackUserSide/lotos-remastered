@@ -57,13 +57,13 @@ export const CartComponentContext: React.FC = ({ children }) => {
       } else {
         if (dataCart.length > 0) {
           let newArr = dataCart;
-          newArr.push({ id: id, amount: amount });
+          newArr.push({ id: id, amount: amount, sale: false });
           localStorage.removeItem("cart");
           localStorage.setItem("cart", JSON.stringify(newArr));
           setDataCart(newArr);
         } else {
           let newCart: TDataCart[] = [];
-          newCart.push({ id: id, amount: amount });
+          newCart.push({ id: id, amount: amount, sale: false });
           localStorage.removeItem("cart");
           localStorage.setItem("cart", JSON.stringify(newCart));
           setDataCart(newCart);

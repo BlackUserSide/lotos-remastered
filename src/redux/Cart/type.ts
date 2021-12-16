@@ -1,10 +1,11 @@
-import { TDataCart } from "./../../components/CartContext/CartContext";
+import { IOrderCartMain } from "./../../components/CartPage/type";
 export interface IStateCart {
-  dataCart: TDataCart[];
+  dataCart: IOrderCartMain[];
   countCart: number;
+  fullPrice: number;
 }
 
 export interface IActionCart {
   type: string;
-  payload: TDataCart[] | number;
+  payload: IOrderCartMain[] | number;
 }

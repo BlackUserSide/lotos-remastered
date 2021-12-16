@@ -17,5 +17,5 @@ export interface IDataUserRedux {
 }
 export interface IActionCabinet {
   type: string;
-  payload: IDataUserRedux | IMainDataStructure[];
+  payload: IDataUserRedux | IMainDataStructure[] | boolean;
 }
