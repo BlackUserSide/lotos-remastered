@@ -1,5 +1,11 @@
+import { IActionCart } from "./type";
+import { IOrderCartMain } from "./../../components/CartPage/type";
 import { getCartProducts } from "./../../components/api/shop";
-import { GET_DATA_CART, GET_GOUNT_CART } from "./actionsConst";
+import {
+  GET_DATA_CART,
+  GET_GOUNT_CART,
+  SET_FULL_PRICE_CART,
+} from "./actionsConst";
 import { TDataCart } from "./../../components/CartContext/CartContext";
 export const getCountCart = (count: number) => {
   return {
@@ -15,13 +21,16 @@ export const getDataCart = () => {
       const arrId = obj.map((e) => {
         return e.id;
       });
-      const response = await getCartProducts(arrId).then((res) => {
-        if (res) {
-          return res.data;
+      const response: IOrderCartMain[] = await getCartProducts(arrId).then(
+        (res) => {
+          if (res) {
+            return res.data;
+          }
         }
-      });
+      );
       const count = obj.length;
       dispatch(getCountCart(count));
+      dispatch(getFullPrice(response));
       dispatch({
         type: GET_DATA_CART,
         payload: response,
@@ -40,9 +49,7 @@ export const addToCart = (id: number, amount: number) => {
     const dataCartLocal = localStorage.getItem("cart");
     if (dataCartLocal !== null) {
       const data: TDataCart[] = JSON.parse(dataCartLocal);
-      console.log(data, "test-data");
       let findElement: TDataCart | undefined = data.find((e) => e.id === id);
-
       if (findElement) {
         findElement = { ...findElement, amount: findElement.amount + amount };
         //data.push(findElement);
@@ -51,12 +58,12 @@ export const addToCart = (id: number, amount: number) => {
         localStorage.setItem("cart", JSON.stringify(newData));
         dispatch(getDataCart());
       } else {
-        data.push({ id: id, amount: amount });
+        data.push({ id: id, amount: amount, sale: false });
         localStorage.setItem("cart", JSON.stringify(data));
         dispatch(getDataCart());
       }
     } else {
-      let data = [{ id: id, amount: amount }];
+      let data: TDataCart[] = [{ id: id, amount: amount, sale: false }];
       localStorage.setItem("cart", JSON.stringify(data));
       dispatch(getDataCart());
     }
@@ -66,11 +73,65 @@ export const addToCart = (id: number, amount: number) => {
 export const deleteCartProduct = (id: number) => {
   return (dispathc: any) => {
     const data = localStorage.getItem("cart");
-    if (data) {
+    if (data !== null) {
       const json: TDataCart[] = JSON.parse(data);
       const newData = json.filter((e) => e.id !== id);
       localStorage.setItem("cart", JSON.stringify(newData));
-      dispathc(getDataCart);
+      dispathc(getDataCart());
     }
   };
+};
+export const clearCart = () => {
+  return (dispatch: any) => {
+    localStorage.removeItem("cart");
+    dispatch(getDataCart());
+  };
+};
+export const changeAmounCart = (id: number, amount: number) => {
+  return (dispatch: any) => {
+    const data: string | null = localStorage.getItem("cart");
+    if (data) {
+      const parseData: TDataCart[] = JSON.parse(data);
+      const findElemtn = parseData.find((e) => e.id === id);
+      let newCartItem: TDataCart | null = null;
+      if (findElemtn) {
+        newCartItem = {
+          id: findElemtn.id,
+          amount: amount,
+          sale: false,
+        };
+      }
+      const newData = parseData.filter((e) => e.id !== id);
+      if (newCartItem !== null) {
+        newData.push(newCartItem);
+        localStorage.setItem("cart", JSON.stringify(newData));
+        dispatch(getDataCart());
+      }
+    }
+  };
+};
+const getFullPrice = (dataCart: IOrderCartMain[]) => {
+  const data = localStorage.getItem("cart");
+  if (data !== null) {
+    const parseData: TDataCart[] = JSON.parse(data);
+    let tmpPrice = 0;
+    dataCart.map((e) => {
+      parseData.map((t) => {
+        if (t.id === e.id) {
+          if (e.discount !== null) {
+            tmpPrice += e.discount * t.amount;
+          } else {
+            tmpPrice += e.price * t.amount;
+          }
+          return t;
+        }
+      });
+      return e;
+    });
+
+    return {
+      type: SET_FULL_PRICE_CART,
+      payload: tmpPrice,
+    } as IActionCart;
+  }
 };
