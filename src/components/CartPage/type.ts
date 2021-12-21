@@ -1,5 +1,5 @@
 export interface IOrderCartMain {
-  discount: number;
+  discount: number | null;
   id: number;
   name: string;
   price: number;

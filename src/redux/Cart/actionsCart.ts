@@ -1,12 +1,14 @@
-import { IActionCart } from "./type";
 import { IOrderCartMain } from "./../../components/CartPage/type";
 import { getCartProducts } from "./../../components/api/shop";
 import {
+  ADD_SALE_ITEM,
   GET_DATA_CART,
   GET_GOUNT_CART,
   SET_FULL_PRICE_CART,
+  SHOW_POP_SALE,
 } from "./actionsConst";
-import { TDataCart } from "./../../components/CartContext/CartContext";
+import { TDataCart } from "../../components/CartPage/ContextOrder/ContextOrder";
+
 export const getCountCart = (count: number) => {
   return {
     type: GET_GOUNT_CART,
@@ -111,27 +113,93 @@ export const changeAmounCart = (id: number, amount: number) => {
   };
 };
 const getFullPrice = (dataCart: IOrderCartMain[]) => {
-  const data = localStorage.getItem("cart");
-  if (data !== null) {
-    const parseData: TDataCart[] = JSON.parse(data);
-    let tmpPrice = 0;
-    dataCart.map((e) => {
-      parseData.map((t) => {
-        if (t.id === e.id) {
-          if (e.discount !== null) {
-            tmpPrice += e.discount * t.amount;
-          } else {
-            tmpPrice += e.price * t.amount;
+  return (dispatch: any, getState: any) => {
+    const { cabinet } = getState();
+
+    const data = localStorage.getItem("cart");
+    if (data !== null) {
+      const parseData: TDataCart[] = JSON.parse(data);
+      let tmpPrice = 0;
+      dataCart.map((e) => {
+        parseData.map((t) => {
+          if (t.id === e.id) {
+            if (e.discount !== null) {
+              tmpPrice += e.discount * t.amount;
+            } else {
+              tmpPrice += e.price * t.amount;
+            }
+            return t;
           }
           return t;
-        }
+        });
+        return e;
       });
-      return e;
+      if (cabinet.auth) {
+        //TODO Доделать условие при совершении покупки
+        if (tmpPrice >= 1500) {
+          tmpPrice = tmpPrice - (tmpPrice * 20) / 100;
+        } else {
+          tmpPrice = tmpPrice - (tmpPrice * 10) / 100;
+        }
+      }
+      dispatch({ type: SET_FULL_PRICE_CART, payload: tmpPrice });
+    }
+  };
+};
+const showPopSale = () => {
+  return (dispatch: any, getState: any) => {
+    const { cart } = getState;
+    if (cart.popUpSale === true) {
+      dispatch({ type: SHOW_POP_SALE, payload: false });
+    } else {
+      dispatch({ type: SHOW_POP_SALE, payload: true });
+    }
+  };
+};
+const setItemSale = () => {
+  return (dispatch: any, getState: any) => {
+    const { cart } = getState();
+    const filterItemSale: IOrderCartMain[] = [];
+    const dataLocal = localStorage.getItem("cart");
+    if (dataLocal !== null) {
+      const parseData: TDataCart[] = JSON.parse(dataLocal);
+      parseData.map((e) => {
+        if (e.sale === true) {
+          cart.dataCart.map((t: IOrderCartMain) => {
+            if (t.id === e.id) {
+              const newObj: IOrderCartMain = {
+                discount: null,
+                id: t.id,
+                name: t.name,
+                price: 1,
+                src: t.src,
+              };
+              filterItemSale.push(newObj);
+            }
+            return t;
+          });
+        }
+        return e;
+      });
+    }
+    dispatch({
+      type: ADD_SALE_ITEM,
+      payload: filterItemSale,
     });
-
-    return {
-      type: SET_FULL_PRICE_CART,
-      payload: tmpPrice,
-    } as IActionCart;
-  }
+  };
+};
+const addSaleGift = (id: number) => {
+  return (dispatch: any) => {
+    const getData = localStorage.getItem("cart");
+    if (getData !== null) {
+      const parseData: TDataCart[] = JSON.parse(getData);
+      const findElement = parseData.find((e) => e.id === id);
+      if (findElement) {
+        const newData = { id: id, amount: findElement.amount, sale: true };
+        parseData.push(newData);
+        localStorage.setItem("cart", JSON.stringify(parseData));
+        dispatch(getDataCart());
+      }
+    }
+  };
 };

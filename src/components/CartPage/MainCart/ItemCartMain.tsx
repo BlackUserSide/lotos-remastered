@@ -3,13 +3,14 @@ import { IOrderCartMain } from "../type";
 import deleteICO from "../../../img/iconCart/delete.png";
 import left from "../../../img/prodIcon/left.png";
 import right from "../../../img/prodIcon/right.png";
-import { TDataCart } from "../../CartContext/CartContext";
+
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   changeAmounCart,
   deleteCartProduct,
 } from "../../../redux/Cart/actionsCart";
+import { TDataCart } from "../ContextOrder/ContextOrder";
 
 type TProps = {
   content: IOrderCartMain;
@@ -24,6 +25,7 @@ export const ItemCartMain: React.FC<TProps> = ({ content }) => {
     amount: 0,
     sale: false,
   });
+  const [sale, setSale] = useState<boolean>(false);
   const dispatch = useDispatch();
   const updateCart = useCallback(() => {
     const data = localStorage.getItem("cart");
@@ -31,10 +33,15 @@ export const ItemCartMain: React.FC<TProps> = ({ content }) => {
       let parse: TDataCart[] = JSON.parse(data);
       let findElement = parse.find((e) => e.id === content.id);
       if (findElement) {
+        if (findElement.sale === true) {
+          setSale(true);
+        }
         setDataCartIn(findElement);
       }
     }
   }, [content.id]);
+  console.log(sale);
+
   useEffect(() => {
     updateCart();
   }, [updateCart]);
