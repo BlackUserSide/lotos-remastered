@@ -4,6 +4,9 @@ export interface IOrderCartMain {
   name: string;
   price: number;
   src: string;
+  amount: number;
+  sale: boolean;
+  prodSale: boolean;
 }
 
 export interface IOrderDeliverty {

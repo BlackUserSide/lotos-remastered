@@ -6,6 +6,8 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/rootReducer";
 import { clearCart } from "../../../redux/Cart/actionsCart";
+import { Prealoder } from "../../ui/Preloader/Preloader";
+import { PopUpAddSaleProducts } from "../../ui/PopUpAddSaleProducts/PopUpAddSaleProducts";
 // interface ISalesManage {
 //   firstProcent: boolean;
 //   secondProcent: boolean;
@@ -14,53 +16,62 @@ import { clearCart } from "../../../redux/Cart/actionsCart";
 // }
 export const MainCart: React.FC = () => {
   const history = useHistory();
+
   const dataCart = useSelector((state: RootState) => state.cart.dataCart);
   const dispatch = useDispatch();
   const fullPrice = useSelector((state: RootState) => state.cart.fullPrice);
+  const loader = useSelector((state: RootState) => state.cart.loader);
+  const popUp = useSelector((state: RootState) => state.cart.popUpSale);
+  const disable = useSelector((state: RootState) => state.cart.disableAddSale);
+
   return (
     <>
       <HeaderCart />
       <div className="main-cart-wrapper">
-        <div className="container-cart-wrapper">
-          {dataCart.length >= 1 ? (
-            dataCart.map((e, i) => (
-              <ItemCartMain
-                content={e}
-                key={i}
-                dataCart={dataCart.find((k) => {
-                  return k.id === e.id;
-                })}
-              />
-            ))
-          ) : (
-            <>
-              <h1 className="h1">Немає товару в кошику</h1>
-            </>
-          )}
-        </div>
-        {dataCart.length >= 1 ? (
+        {loader ? (
+          <Prealoder />
+        ) : (
           <>
-            <div className="cart-price-wrapper">
-              <div className="container-price-wrapper">
-                <div className="price-wrapper">
-                  <p>Сума до сплати:</p>
-                  <span>{fullPrice} грн</span>
-                </div>
-                {/* <div className="price-wrapper">
+            <div className="container-cart-wrapper">
+              {dataCart.length >= 1 ? (
+                dataCart.map((e, i) => (
+                  <ItemCartMain
+                    content={e}
+                    key={i}
+                    dataCart={dataCart.find((k) => {
+                      return k.id === e.id;
+                    })}
+                  />
+                ))
+              ) : (
+                <>
+                  <h1 className="h1">Немає товару в кошику</h1>
+                </>
+              )}
+            </div>
+            {dataCart.length >= 1 ? (
+              <>
+                <div className="cart-price-wrapper">
+                  <div className="container-price-wrapper">
+                    <div className="price-wrapper">
+                      <p>Сума до сплати:</p>
+                      <span>{fullPrice} грн</span>
+                    </div>
+                    {/* <div className="price-wrapper">
                   <p>Сума до знижки:</p>
                   <span>{fullPrice ? fullPrice : ""} грн</span>
                 </div> */}
-                <div
-                  className="btn-wrapper-con-price"
-                  onClick={() => {
-                    history.push("/cart/delivery");
-                  }}
-                >
-                  <span>Оформити замовлення</span>
-                </div>
-              </div>
-              <div className="sales-menage-wrapepr">
-                {/* {dataSales.firstProcent ? (
+                    <div
+                      className="btn-wrapper-con-price"
+                      onClick={() => {
+                        history.push("/cart/delivery");
+                      }}
+                    >
+                      <span>Оформити замовлення</span>
+                    </div>
+                  </div>
+                  <div className="sales-menage-wrapepr">
+                    {/* {dataSales.firstProcent ? (
                   dataSales.secondProcent ? (
                     ""
                   ) : (
@@ -86,26 +97,27 @@ export const MainCart: React.FC = () => {
                 ) : (
                   ""
                 )} */}
-              </div>
-            </div>
+                  </div>
+                </div>
+                <div
+                  className="btn-clear-delete-wrapper"
+                  onClick={() => dispatch(clearCart())}
+                >
+                  <img src={deleteICO} alt="" />
+                  <span>Очистити кошик</span>
+                </div>
 
-            <div
-              className="btn-clear-delete-wrapper"
-              onClick={() => dispatch(clearCart())}
-            >
-              <img src={deleteICO} alt="" />
-              <span>Очистити кошик</span>
-            </div>
-
-            <div
-              className="btn-back-to-shop"
-              onClick={() => history.push("/shop")}
-            >
-              <span>Продовжити покупки</span>
-            </div>
+                <div
+                  className="btn-back-to-shop"
+                  onClick={() => history.push("/shop")}
+                >
+                  <span>Продовжити покупки</span>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </>
-        ) : (
-          ""
         )}
       </div>
       {/* {activePopSale !== 0 ? (
@@ -116,6 +128,7 @@ export const MainCart: React.FC = () => {
       ) : (
         ""
       )} */}
+      {!disable ? popUp ? <PopUpAddSaleProducts /> : "" : ""}
     </>
   );
 };

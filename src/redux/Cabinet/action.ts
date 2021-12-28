@@ -1,8 +1,9 @@
-import { IActionCabinet } from "./type";
+import { IActionCabinet, TCounterUserLine } from "./type";
 import { getDataUser } from "../../components/api/user";
 import {
   SAVE_USER_DATA,
   SET_AUTH_USER,
+  SET_COUNTER_LINE,
   UPDATE_STRUCTURE_DATA,
 } from "./actionConst";
 import { IMainDataStructure } from "../../components/CabinetPage/StructurePage/types";
@@ -13,6 +14,7 @@ export const saveUserData = () => {
     try {
       const data = await getDataUser().then((res) => {
         if (res) {
+          console.log(res, "dataUSer");
           switch (res.status) {
             case 200:
               dispatch(setAuthUser(true));
@@ -26,7 +28,9 @@ export const saveUserData = () => {
           }
         }
       });
+      console.log(1);
 
+      //dispatch(getCounterStructure());
       dispatch({ type: SAVE_USER_DATA, payload: data[0] });
     } catch (e) {}
   };
@@ -45,5 +49,16 @@ export const updateDataStructure = (dataStructure: IMainDataStructure[]) => {
       }
     });
     dispatch({ type: UPDATE_STRUCTURE_DATA, payload: data });
+  };
+};
+export const getCounterStructure = () => {
+  return async (dispatch: any) => {
+    const response = await fetch("http://91.228.155.147:8036/api/counter/1");
+    const json = await response.json();
+    const newArray: TCounterUserLine = {
+      line: json[0],
+      allSumLine: json[1],
+    };
+    dispatch({ type: SET_COUNTER_LINE, payload: newArray });
   };
 };

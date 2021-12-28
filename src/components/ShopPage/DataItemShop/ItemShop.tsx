@@ -8,9 +8,10 @@ import cart from "../../../img/prodIcon/cart.png";
 import bonus from "../../../img/prodIcon/bonus.png";
 import discountIco from "../../../img/prodIcon/discount.png";
 import { useHistory } from "react-router";
-import { PopUpAddToCart } from "../../ui/PopUpAddToCart/PopUpAddToCart";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/Cart/actionsCart";
+import { PopUpAddToCart } from "../../ui/PopUpAddToCart/PopUpAddToCart";
+
 type TProps = {
   content: IDataProd;
 };
