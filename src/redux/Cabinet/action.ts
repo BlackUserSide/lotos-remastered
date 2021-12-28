@@ -1,3 +1,4 @@
+import { RootState } from "./../rootReducer";
 import { IActionCabinet, TCounterUserLine } from "./type";
 import { getDataUser } from "../../components/api/user";
 import {
@@ -51,13 +52,18 @@ export const updateDataStructure = (dataStructure: IMainDataStructure[]) => {
   };
 };
 export const getCounterStructure = () => {
-  return async (dispatch: any) => {
-    const response = await fetch("http://91.228.155.147:8036/api/counter/1");
+  return async (dispatch: any, getState: any) => {
+    const { cabinet } = getState() as RootState;
+    const response = await fetch(
+      `http://91.228.155.147:8036/api/counter/${cabinet.dataUser.id}`
+    );
     const json = await response.json();
     const newArray: TCounterUserLine = {
       line: json[0],
       allSumLine: json[1],
     };
+    console.log(newArray);
+
     dispatch({ type: SET_COUNTER_LINE, payload: newArray });
   };
 };
