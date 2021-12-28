@@ -8,6 +8,9 @@ import { RootState } from "../../../redux/rootReducer";
 import { clearCart } from "../../../redux/Cart/actionsCart";
 import { Prealoder } from "../../ui/Preloader/Preloader";
 import { PopUpAddSaleProducts } from "../../ui/PopUpAddSaleProducts/PopUpAddSaleProducts";
+import { ItemCartGift } from "./ItemCartGift";
+import { PopProdSale } from "../../ui/PopProdSale/PopProdSale";
+import { ItemCartProdSaleMain } from "./ItemCartProdSaleMain";
 // interface ISalesManage {
 //   firstProcent: boolean;
 //   secondProcent: boolean;
@@ -16,14 +19,19 @@ import { PopUpAddSaleProducts } from "../../ui/PopUpAddSaleProducts/PopUpAddSale
 // }
 export const MainCart: React.FC = () => {
   const history = useHistory();
-
   const dataCart = useSelector((state: RootState) => state.cart.dataCart);
   const dispatch = useDispatch();
   const fullPrice = useSelector((state: RootState) => state.cart.fullPrice);
   const loader = useSelector((state: RootState) => state.cart.loader);
   const popUp = useSelector((state: RootState) => state.cart.popUpSale);
-  const disable = useSelector((state: RootState) => state.cart.disableAddSale);
+  const disable = useSelector((state: RootState) => state.cart.disablePopSale);
+  const giftData = useSelector((state: RootState) => state.cart.saleItemGift);
+  const popPropSale = useSelector((state: RootState) => state.cart.prodPopSale);
+  const disableProd = useSelector(
+    (state: RootState) => state.cart.disablePopProdSale
+  );
 
+  const prodSale = useSelector((state: RootState) => state.cart.prodSale);
   return (
     <>
       <HeaderCart />
@@ -34,15 +42,23 @@ export const MainCart: React.FC = () => {
           <>
             <div className="container-cart-wrapper">
               {dataCart.length >= 1 ? (
-                dataCart.map((e, i) => (
-                  <ItemCartMain
-                    content={e}
-                    key={i}
-                    dataCart={dataCart.find((k) => {
-                      return k.id === e.id;
-                    })}
-                  />
-                ))
+                <>
+                  {dataCart.map((e, i) => (
+                    <ItemCartMain
+                      content={e}
+                      key={i}
+                      dataCart={dataCart.find((k) => {
+                        return k.id === e.id;
+                      })}
+                    />
+                  ))}
+                  {giftData.map((e, i) => (
+                    <ItemCartGift content={e} key={i} />
+                  ))}
+                  {prodSale.map((e, i) => (
+                    <ItemCartProdSaleMain content={e} key={i} />
+                  ))}
+                </>
               ) : (
                 <>
                   <h1 className="h1">Немає товару в кошику</h1>
@@ -128,7 +144,8 @@ export const MainCart: React.FC = () => {
       ) : (
         ""
       )} */}
-      {!disable ? popUp ? <PopUpAddSaleProducts /> : "" : ""}
+      {disable ? "" : popUp ? <PopUpAddSaleProducts /> : ""}
+      {disableProd ? "" : popPropSale ? <PopProdSale /> : ""}
     </>
   );
 };

@@ -20,6 +20,7 @@ export const saveUserData = () => {
               dispatch(setAuthUser(true));
               return res.data;
             case 401:
+              localStorage.removeItem("token");
               dispatch(setAuthUser(false));
               break;
             default:
@@ -28,8 +29,6 @@ export const saveUserData = () => {
           }
         }
       });
-      console.log(1);
-
       //dispatch(getCounterStructure());
       dispatch({ type: SAVE_USER_DATA, payload: data[0] });
     } catch (e) {}

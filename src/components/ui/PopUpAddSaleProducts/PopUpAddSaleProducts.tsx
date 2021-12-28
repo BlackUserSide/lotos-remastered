@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { disablePopSale, showPopSale } from "../../../redux/Cart/actionsCart";
+import {
+  disablePopSale,
+  saveSaleItem,
+  showPopSale,
+} from "../../../redux/Cart/actionsCart";
 import { RootState } from "../../../redux/rootReducer";
 
 import "./popupaddsaleprod.sass";
@@ -13,7 +17,7 @@ export const PopUpAddSaleProducts: React.FC = () => {
   };
   const saveWrapper = () => {
     if (activeSale !== null) {
-      //dispatch(saveSaleItem(activeSale));
+      dispatch(saveSaleItem(activeSale));
     }
   };
   return (
@@ -29,7 +33,7 @@ export const PopUpAddSaleProducts: React.FC = () => {
           {dataSale.map((e, i) => (
             <div
               className={`item-sale-pop ${
-                activeSale !== 0 ? "active-item-sale-pop" : ""
+                activeSale === e.id ? "active-item-sale-pop" : ""
               }`}
               onClick={() => clickHandler(e.id)}
               key={i}
@@ -51,7 +55,7 @@ export const PopUpAddSaleProducts: React.FC = () => {
             className="btn-close-sale-pop"
             onClick={() => {
               dispatch(disablePopSale(true));
-              dispatch(showPopSale());
+              dispatch(showPopSale(false));
             }}
           >
             <span>Скасувати</span>

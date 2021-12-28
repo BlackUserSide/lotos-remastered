@@ -4,7 +4,7 @@ const url = "http://91.228.155.147:8035/api";
 
 const instance = axios.create({
   baseURL: url,
-  timeout: 1000,
+  timeout: 8000,
   headers: {},
 });
 export const request = (params: any, allowStatus: number[] = [200]) =>

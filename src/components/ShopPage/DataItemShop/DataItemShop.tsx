@@ -4,7 +4,6 @@ import { ItemShop } from "./ItemShop";
 
 export const DataItemShop: React.FC = () => {
   const { dataFilter } = useContext(ShopContext);
-
   return (
     <div className="data-item-shop">
       <div className="container-item">

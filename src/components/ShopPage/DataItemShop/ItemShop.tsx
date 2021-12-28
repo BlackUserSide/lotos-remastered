@@ -8,9 +8,10 @@ import cart from "../../../img/prodIcon/cart.png";
 import bonus from "../../../img/prodIcon/bonus.png";
 import discountIco from "../../../img/prodIcon/discount.png";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/Cart/actionsCart";
+import { useDispatch, useSelector } from "react-redux";
+import { addSaleProdItem, addToCart } from "../../../redux/Cart/actionsCart";
 import { PopUpAddToCart } from "../../ui/PopUpAddToCart/PopUpAddToCart";
+import { RootState } from "../../../redux/rootReducer";
 
 type TProps = {
   content: IDataProd;
@@ -19,6 +20,8 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
   const history = useHistory();
   const [amount, setAmount] = useState<number>(1);
   const dispathc = useDispatch();
+  const prodSale = useSelector((state: RootState) => state.cart.prodSaleSum);
+  const activeProd = useSelector((state: RootState) => state.cart.activeSale);
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const changeHandler = (val: number) => {
     if (val <= 0) {
@@ -30,6 +33,10 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
 
   const addToCartHandler = () => {
     setShowPopUp(true);
+    if (prodSale && !activeProd) {
+      dispathc(addSaleProdItem(content.id));
+      return;
+    }
     dispathc(addToCart(content.id, amount));
     return;
   };
@@ -60,12 +67,22 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
                     {content.price * amount} грн
                   </span>
                   <span className="discount-price">
+                    {prodSale !== 0 && !activeProd
+                      ? prodSale >= content.discount
+                        ? 1
+                        : content.discount * amount - prodSale
+                      : content.discount * amount}
                     {content.discount * amount} грн
                   </span>
                 </>
               ) : (
                 <span className="full-price-wrapper-not-discount">
-                  {content.price * amount} грн{" "}
+                  {prodSale !== 0 && !activeProd
+                    ? prodSale >= content.price
+                      ? 1
+                      : content.price * amount - prodSale
+                    : content.price * amount}
+                  {} грн
                 </span>
               )}
             </div>
@@ -83,23 +100,29 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
           </div>
         </div>
         <div className="amount-wrapper">
-          <img
-            src={left}
-            onClick={() => {
-              changeHandler(amount - 1);
-            }}
-            className="left-ico"
-            alt=""
-          />
-          <input type="text" value={amount} disabled={true} />
-          <img
-            src={right}
-            onClick={() => {
-              changeHandler(amount + 1);
-            }}
-            className="right-ico"
-            alt=""
-          />
+          {activeProd || prodSale === 0 ? (
+            <>
+              <img
+                src={left}
+                onClick={() => {
+                  changeHandler(amount - 1);
+                }}
+                className="left-ico"
+                alt=""
+              />
+              <input type="text" value={amount} disabled={true} />
+              <img
+                src={right}
+                onClick={() => {
+                  changeHandler(amount + 1);
+                }}
+                className="right-ico"
+                alt=""
+              />
+            </>
+          ) : (
+            ""
+          )}
         </div>
         <div className="btn-wrapper-item-product">
           <div className="btn-add-to-cart" onClick={addToCartHandler}>

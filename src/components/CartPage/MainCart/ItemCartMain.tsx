@@ -5,12 +5,13 @@ import left from "../../../img/prodIcon/left.png";
 import right from "../../../img/prodIcon/right.png";
 
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   changeAmounCart,
   deleteCartProduct,
 } from "../../../redux/Cart/actionsCart";
 import { TDataCart } from "../ContextOrder/ContextOrder";
+import { RootState } from "../../../redux/rootReducer";
 
 type TProps = {
   content: IOrderCartMain;
@@ -24,25 +25,25 @@ export const ItemCartMain: React.FC<TProps> = ({ content }) => {
     id: 0,
     amount: 0,
     sale: false,
-    idProduct: 0,
     prodSale: false,
   });
-  const [sale, setSale] = useState<boolean>(false);
+
   const dispatch = useDispatch();
   const updateCart = useCallback(() => {
     const data = localStorage.getItem("cart");
     if (data !== null) {
       let parse: TDataCart[] = JSON.parse(data);
-      let findElement = parse.find((e) => e.idProduct === content.id);
-      if (findElement) {
-        if (findElement.sale === true) {
-          setSale(true);
+      let findElement = parse.find((e) => {
+        if (e.id === content.id && !e.sale) {
+          return e;
         }
+        return undefined;
+      });
+      if (findElement) {
         setDataCartIn(findElement);
       }
     }
   }, [content.id]);
-  console.log(sale);
 
   useEffect(() => {
     updateCart();
@@ -56,8 +57,7 @@ export const ItemCartMain: React.FC<TProps> = ({ content }) => {
     dispatch(changeAmounCart(content.id, amount));
     updateCart();
   };
-  console.log(content);
-
+  const actionSale = useSelector((state: RootState) => state.cart.actionSale);
   return (
     <div className="main-cart-item">
       <div className="container-item-wrapper">
@@ -69,23 +69,37 @@ export const ItemCartMain: React.FC<TProps> = ({ content }) => {
           onClick={() => history.push(`/card-product/${content.id}`)}
         >
           <p>{content.name}</p>
-          <span>{content.id}</span>
+          {actionSale.secondProcent || actionSale.tensProcent ? (
+            <span className="full-price-wrapper-header">
+              {content.price} грн
+            </span>
+          ) : (
+            ""
+          )}
+          <span className="sale-price-wrapper-header">
+            {actionSale.tensProcent
+              ? content.price - (content.price * 10) / 100
+              : actionSale.secondProcent
+              ? content.price - (content.price * 20) / 100
+              : content.price}{" "}
+            грн
+          </span>
         </div>
         <div className="amount-wrapper-basic">
           <img
             src={left}
             onClick={() => {
-              changeHandler(content.amount - 1);
+              changeHandler(dataCartIn.amount - 1);
             }}
             className="left-ico"
             alt=""
           />
-          <input type="text" value={content.amount} disabled={true} />
+          <input type="text" value={dataCartIn.amount} disabled={true} />
 
           <img
             src={right}
             onClick={() => {
-              changeHandler(content.amount + 1);
+              changeHandler(dataCartIn.amount + 1);
             }}
             className="right-ico"
             alt=""
@@ -95,15 +109,43 @@ export const ItemCartMain: React.FC<TProps> = ({ content }) => {
           {content.discount !== null ? (
             <div className="discount-wrapper-price">
               <div className="full-price-wrapper-discount">
-                <p>{content.price * content.amount} грн</p>
+                <p>
+                  {actionSale.tensProcent
+                    ? content.price * dataCartIn.amount -
+                      (content.price * dataCartIn.amount * 10) / 100
+                    : actionSale.secondProcent
+                    ? content.price * dataCartIn.amount -
+                      (content.price * dataCartIn.amount * 20) / 100
+                    : content.price * dataCartIn.amount}{" "}
+                  грн
+                </p>
               </div>
               <div className="discount-price-wrapper">
-                <p>{content.discount * content.amount} грн</p>
+                <p>{content.discount * dataCartIn.amount} грн</p>
+                <p>
+                  {actionSale.tensProcent
+                    ? content.discount * dataCartIn.amount -
+                      (content.discount * dataCartIn.amount * 10) / 100
+                    : actionSale.secondProcent
+                    ? content.discount * dataCartIn.amount -
+                      (content.discount * dataCartIn.amount * 20) / 100
+                    : content.discount * dataCartIn.amount}{" "}
+                  грн
+                </p>
               </div>
             </div>
           ) : (
             <div className="full-price-wrapper">
-              <p>{content.price * content.amount} грн</p>
+              <p>
+                {actionSale.tensProcent
+                  ? content.price * dataCartIn.amount -
+                    (content.price * dataCartIn.amount * 10) / 100
+                  : actionSale.secondProcent
+                  ? content.price * dataCartIn.amount -
+                    (content.price * dataCartIn.amount * 20) / 100
+                  : content.price * dataCartIn.amount}{" "}
+                грн
+              </p>
             </div>
           )}
         </div>
