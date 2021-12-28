@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "./businmesspage.sass";
 import image1 from "../../../img/iconCabinet/iconBusiness/1/1.png";
 import image2 from "../../../img/iconCabinet/iconBusiness/1/2.png";
-import image3 from "../../../img/iconCabinet/iconBusiness/1/3.png";
-import image4 from "../../../img/iconCabinet/iconBusiness/1/4.png";
+// import image3 from "../../../img/iconCabinet/iconBusiness/1/3.png";
+// import image4 from "../../../img/iconCabinet/iconBusiness/1/4.png";
 import image5 from "../../../img/iconCabinet/iconBusiness/1/5.png";
 import image6 from "../../../img/iconCabinet/iconBusiness/1/6.png";
 import image7 from "../../../img/iconCabinet/iconBusiness/1/7.png";
@@ -15,10 +15,18 @@ import image11 from "../../../img/iconCabinet/iconBusiness/1/11.png";
 import image12 from "../../../img/iconCabinet/iconBusiness/1/12.png";
 import image13 from "../../../img/iconCabinet/iconBusiness/1/13.png";
 import image14 from "../../../img/iconCabinet/iconBusiness/1/14.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCounterStructure } from "../../../redux/Cabinet/action";
+import { RootState } from "../../../redux/rootReducer";
+import { Prealoder } from "../../ui/Preloader/Preloader";
 export const BusinessPage: React.FC = () => {
   const dispatch = useDispatch();
+  const dataCounter = useSelector(
+    (state: RootState) => state.cabinet.dataCounter
+  );
+  const loaderCounter = useSelector(
+    (state: RootState) => state.cabinet.loaderCounter
+  );
   return (
     <div className="business-page-wrapper">
       <div className="link-wrapper-navigation">
@@ -47,24 +55,32 @@ export const BusinessPage: React.FC = () => {
             <div className="top-line-wrapper">
               <p>Обсяг обороту та гілки у структурі</p>
             </div>
-            <div className="list-wrapper-business">
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image1} alt="" />
+            {loaderCounter ? (
+              <Prealoder />
+            ) : (
+              <div className="list-wrapper-business">
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image1} alt="" />
+                  </div>
+                  <p>
+                    ОС:{" "}
+                    <span>
+                      {dataCounter.allSumLine !== null
+                        ? dataCounter.allSumLine
+                        : "Не розраховано"}
+                    </span>
+                  </p>
                 </div>
-                <p>
-                  ОС: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image2} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image2} alt="" />
+                  </div>
+                  <p>
+                    Загальна кількість гілок: <span>12</span>
+                  </p>
                 </div>
-                <p>
-                  Загальна кількість гілок: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
+                {/* <div className="item-list-business">
                 <div className="image-wrapper">
                   <img src={image3} alt="" />
                 </div>
@@ -79,109 +95,132 @@ export const BusinessPage: React.FC = () => {
                 <p>
                   Гілки з обсягом {"<"} 40 000: <span>Не розраховано</span>
                 </p>
+              </div> */}
               </div>
-            </div>
+            )}
           </div>
           <div className="item-wrapper-business">
             <div className="top-line-wrapper">
               <p>Нараховані бонуси</p>
             </div>
-            <div className="list-wrapper-business">
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image5} alt="" />
+            {loaderCounter ? (
+              <Prealoder />
+            ) : (
+              <div className="list-wrapper-business">
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image5} alt="" />
+                  </div>
+                  <p>
+                    Загальна кількість бонусів: <span>Не розраховано</span>
+                  </p>
                 </div>
-                <p>
-                  Загальна кількість бонусів: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image6} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image6} alt="" />
+                  </div>
+                  <p>
+                    Бонуси по програмі виплат: <span>Не розраховано</span>
+                  </p>
                 </div>
-                <p>
-                  Бонуси по програмі виплат: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image7} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image7} alt="" />
+                  </div>
+                  <p>
+                    Бонуси за закриті гілки: <span>Не розраховано</span>
+                  </p>
                 </div>
-                <p>
-                  Бонуси за закриті гілки: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image8} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image8} alt="" />
+                  </div>
+                  <p>
+                    Об’єм рекрутерської винагороди: <span>Не розраховано</span>
+                  </p>
                 </div>
-                <p>
-                  Об’єм рекрутерської винагороди: <span>Не розраховано</span>
-                </p>
               </div>
-            </div>
+            )}
           </div>
           <div className="item-wrapper-business">
             <div className="top-line-wrapper">
               <p>Кількість ліній у структурі</p>
             </div>
-            <div className="list-wrapper-business">
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image9} alt="" />
+            {loaderCounter ? (
+              <Prealoder />
+            ) : (
+              <div className="list-wrapper-business">
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image9} alt="" />
+                  </div>
+                  <p>
+                    Загальна кількість ліній: <span>12</span>
+                  </p>
                 </div>
-                <p>
-                  Загальна кількість ліній: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image10} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image10} alt="" />
+                  </div>
+                  <p>
+                    Ліній відкрито:{" "}
+                    <span>
+                      {dataCounter.line !== null
+                        ? dataCounter.line
+                        : "Не розраховано"}
+                    </span>
+                  </p>
                 </div>
-                <p>
-                  Ліній відкрито: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image11} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image11} alt="" />
+                  </div>
+                  <p>
+                    Доступно для нарахування бонусів:{" "}
+                    <span>
+                      {dataCounter.line !== null
+                        ? dataCounter.line
+                        : "Не розраховано"}
+                    </span>
+                  </p>
                 </div>
-                <p>
-                  Доступно для нарахування бонусів: <span>Не розраховано</span>
-                </p>
               </div>
-            </div>
+            )}
           </div>
           <div className="item-wrapper-business">
             <div className="top-line-wrapper">
               <p>Обсяг людей в структурі</p>
             </div>
-            <div className="list-wrapper-business">
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image12} alt="" />
+            {loaderCounter ? (
+              <Prealoder />
+            ) : (
+              <div className="list-wrapper-business">
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image12} alt="" />
+                  </div>
+                  <p>
+                    Людей в структурі: <span>Не розраховано</span>
+                  </p>
                 </div>
-                <p>
-                  Людей в структурі: <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image13} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image13} alt="" />
+                  </div>
+                  <p>
+                    Запрошено вами <span>Не розраховано</span>
+                  </p>
                 </div>
-                <p>
-                  Запрошено вами <span>Не розраховано</span>
-                </p>
-              </div>
-              <div className="item-list-business">
-                <div className="image-wrapper">
-                  <img src={image14} alt="" />
+                <div className="item-list-business">
+                  <div className="image-wrapper">
+                    <img src={image14} alt="" />
+                  </div>
+                  <p>
+                    Запрошено за попередній період: <span>Не розраховано</span>
+                  </p>
                 </div>
-                <p>
-                  Запрошено за попередній період: <span>Не розраховано</span>
-                </p>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

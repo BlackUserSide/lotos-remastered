@@ -5,6 +5,7 @@ import {
   SAVE_USER_DATA,
   SET_AUTH_USER,
   SET_COUNTER_LINE,
+  SET_LOUADER_COUNTER,
   UPDATE_STRUCTURE_DATA,
 } from "./actionConst";
 import { IMainDataStructure } from "../../components/CabinetPage/StructurePage/types";
@@ -54,10 +55,15 @@ export const updateDataStructure = (dataStructure: IMainDataStructure[]) => {
 export const getCounterStructure = () => {
   return async (dispatch: any, getState: any) => {
     const { cabinet } = getState() as RootState;
+    dispatch({ type: SET_LOUADER_COUNTER, payload: true });
     const response = await fetch(
       `http://91.228.155.147:8036/api/counter/${cabinet.dataUser.id}`
     );
     const json = await response.json();
+    setTimeout(
+      () => dispatch({ type: SET_LOUADER_COUNTER, payload: false }),
+      2500
+    );
     const newArray: TCounterUserLine = {
       line: json[0],
       allSumLine: json[1],

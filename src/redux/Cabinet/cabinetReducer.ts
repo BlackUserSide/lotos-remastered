@@ -20,8 +20,8 @@ const initState: IStateCabinet = {
   loaderCounter: false,
   auth: false,
   dataCounter: {
-    line: 0,
-    allSumLine: 0,
+    line: null,
+    allSumLine: null,
   },
 };
 export const cabinetReducer = (

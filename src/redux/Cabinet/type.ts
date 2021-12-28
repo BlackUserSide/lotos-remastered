@@ -8,8 +8,8 @@ export interface IStateCabinet {
   dataCounter: TCounterUserLine;
 }
 export type TCounterUserLine = {
-  line: number;
-  allSumLine: number;
+  line: number | null;
+  allSumLine: number | null;
 };
 export interface IDataUserRedux {
   firstName: string;
