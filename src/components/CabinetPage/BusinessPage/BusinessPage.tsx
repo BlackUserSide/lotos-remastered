@@ -15,7 +15,10 @@ import image11 from "../../../img/iconCabinet/iconBusiness/1/11.png";
 import image12 from "../../../img/iconCabinet/iconBusiness/1/12.png";
 import image13 from "../../../img/iconCabinet/iconBusiness/1/13.png";
 import image14 from "../../../img/iconCabinet/iconBusiness/1/14.png";
+import { useDispatch } from "react-redux";
+import { getCounterStructure } from "../../../redux/Cabinet/action";
 export const BusinessPage: React.FC = () => {
+  const dispatch = useDispatch();
   return (
     <div className="business-page-wrapper">
       <div className="link-wrapper-navigation">
@@ -31,7 +34,10 @@ export const BusinessPage: React.FC = () => {
       </div>
       <div className="top-line-wrapper-business">
         <h1 className="h1">Мій бізнес</h1>
-        <div className="btn-update-data-count">
+        <div
+          className="btn-update-data-count"
+          onClick={() => dispatch(getCounterStructure())}
+        >
           <span>Оновити</span>
         </div>
       </div>

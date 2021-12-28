@@ -3,6 +3,7 @@ import {
   SAVE_USER_DATA,
   SET_AUTH_USER,
   SET_COUNTER_LINE,
+  SET_LOUADER_COUNTER,
   UPDATE_STRUCTURE_DATA,
 } from "./actionConst";
 
@@ -16,7 +17,7 @@ const initState: IStateCabinet = {
     id: 0,
   },
   dataStructure: [],
-  loader: false,
+  loaderCounter: false,
   auth: false,
   dataCounter: {
     line: 0,
@@ -44,6 +45,8 @@ export const cabinetReducer = (
       return { ...state, auth: action.payload } as IStateCabinet;
     case SET_COUNTER_LINE:
       return { ...state, dataCounter: action.payload } as IStateCabinet;
+    case SET_LOUADER_COUNTER:
+      return { ...state, loaderCounter: action.payload } as IStateCabinet;
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import { IMainDataStructure } from "../../components/CabinetPage/StructurePage/t
 export interface IStateCabinet {
   dataUser: IDataUserRedux;
   dataStructure: IMainDataStructure[];
-  loader: boolean;
+  loaderCounter: boolean;
   auth: boolean;
   dataCounter: TCounterUserLine;
 }
