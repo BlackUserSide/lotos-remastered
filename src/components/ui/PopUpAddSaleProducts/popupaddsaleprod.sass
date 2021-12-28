@@ -1,0 +1,92 @@
+.pop-up-add-sale-wrapper
+    background: #fff
+    border-radius: 6px
+    width: 550px
+    z-index: 999
+    position: fixed
+    top: 50%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, -50%)
+    padding: 30px
+    .top-line-wrapper
+        display: flex
+        flex-direction: column
+        align-items: center
+        .h1
+            font-size: 22px
+            margin: 0
+        p
+            margin: 0
+            margin-bottom: 5px
+    .list-item-wrapper
+        display: flex
+        flex-direction: column
+        margin: 10px 0
+    .active-item-sale-pop
+        background: #1fbb83
+        color: #fff
+        transition: .3s ease
+    .item-sale-pop
+        display: flex
+        align-items: center
+        padding: 5px 10px
+        justify-content: space-between
+        border: 2px solid #1fbb83
+        border-radius: 6px
+        user-select: none
+        cursor: pointer
+        transition: all .3s ease
+        margin-bottom: 10px
+        &:hover
+            transform: scale(1.02)
+        .image-wrapper
+            width: 50px
+            height: 50px
+            border-radius: 6px
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+                border-radius: 6px
+        p
+            margin: 0
+            font-weight: bold
+    .btn-handler-wrapper
+        display: flex
+        justify-content: space-between
+        .btn-close-sale-pop
+            display: flex
+            width: 170px
+            height: 42px
+            background-color: #F4F7F9
+            border-radius: 6px
+            justify-content: center
+            align-items: center
+            cursor: pointer
+        .btn-save-wrapper
+            display: flex
+            width: 170px
+            height: 42px
+            background-color: #F4F7F9
+            border-radius: 6px
+            justify-content: center
+            align-items: center
+            cursor: pointer
+            color: #BDBDBD
+        .active-btn-save-wrapper
+            background: #1FBB83
+            color: #fff
+            transition: .3s ease
+
+@media screen and ( max-width: 620px )
+    .pop-up-add-sale-wrapper
+        width: 80%
+@media screen and ( max-width: 450px )
+    .pop-up-add-sale-wrapper
+        .btn-handler-wrapper
+            flex-direction: column
+            align-items: center
+            justify-content: center
+        .btn-save-wrapper
+            margin-top: 10px

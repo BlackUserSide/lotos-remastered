@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo_lotus.png";
-import search from "../../../img/iconHeader/search.png";
+//import search from "../../../img/iconHeader/search.png";
 import cart from "../../../img/iconHeader/cart.png";
 import user from "../../../img/iconHeader/user.png";
 import downup from "../../../img/down-up.png";
@@ -9,11 +9,9 @@ import uk from "../../../img/countries/uk.png";
 import { useHistory } from "react-router";
 import "./header.sass";
 import "../../ui/hamburgers-master/dist/hamburgers.min.css";
-import { CartContext } from "../../CartContext/CartContext";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/rootReducer";
 import { changeActiveLink } from "../../../redux/header/actions";
-import { ContextOrder } from "../../CartPage/ContextOrder/ContextOrder";
 export const Header: React.FC = () => {
   const history = useHistory();
   const pushHandler = (link: string) => {
@@ -31,14 +29,8 @@ export const Header: React.FC = () => {
   };
   const activeLink = useSelector((state: RootState) => state.header.activeLink);
   const dispatch = useDispatch();
-  const [countCartHeader, setCountCartHeader] = useState<number>(); //Count-cart Func
-  const { countCart } = useContext(CartContext);
-  const { fullPrice } = useContext(ContextOrder);
-  useEffect(() => {
-    if (countCart !== undefined) {
-      setCountCartHeader(countCart);
-    }
-  }, [countCart]);
+  const countCart = useSelector((state: RootState) => state.cart.countCart);
+  const fullPrice = useSelector((state: RootState) => state.cart.fullPrice);
   useEffect(() => {
     let parseLink = history.location.pathname.split("/");
     let test: string = parseLink[1];
@@ -97,12 +89,12 @@ export const Header: React.FC = () => {
                 <div
                   className="btn-header cart-link"
                   onClick={() => {
-                    pushHandler("/cart");
+                    pushHandler("/cart/main");
                   }}
                 >
                   <img src={cart} alt="" />
                   <div className="hidden-wrapper-count">
-                    <span>{countCartHeader}</span>
+                    <span>{countCart}</span>
                   </div>
                 </div>
               </li>
@@ -149,13 +141,13 @@ export const Header: React.FC = () => {
               <img
                 src={cart}
                 onClick={() => {
-                  pushHandler("/cart");
+                  pushHandler("/cart/main");
                 }}
                 alt=""
               />
 
               <div className="hidden-wrapper-count">
-                <span>{countCartHeader}</span>
+                <span>{countCart}</span>
               </div>
             </div>
             <div className="price-cart-wrapper">

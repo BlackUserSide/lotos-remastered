@@ -1,6 +1,10 @@
-import { TDataCart } from "./../../CartContext/CartContext";
 import { createContext } from "react";
-
+export type TDataCart = {
+  id: number;
+  amount: number;
+  sale: boolean;
+  prodSale: boolean;
+};
 export interface IDataOrder {
   dataOrder: TDataOrder;
   changeHandler: (newObjOrder: TDataOrder) => void;

@@ -9,6 +9,7 @@
         background: #fff
         padding: 30px
         border-radius: 6px
+        width: 30%
         .h2
             font-size: 22
             line-height: 140%
@@ -47,3 +48,16 @@
                 transition: .3s ease all
                 &:hover
                     background: rgba(#BDBDBD, .9)
+@media screen and ( max-width: 780px )
+    .pop-up-add-to-cart
+        .popup-wrapper-add-to-cart
+            width: 40%
+            .btn-collection-add
+                flex-direction: column
+                align-items: center
+                .btn-wrapper-stay-shop
+                    margin-top: 30px
+@media screen and ( max-width: 440px )
+    .pop-up-add-to-cart
+        .popup-wrapper-add-to-cart
+            width: 60%

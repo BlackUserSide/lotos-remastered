@@ -5,21 +5,23 @@ import mc from "../../../img/masterCard.png";
 import { paymentFunc } from "../../function/payment";
 import crypto from "crypto";
 import { ContextOrder } from "../ContextOrder/ContextOrder";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
 interface IPayment {
   data: string;
   signature: string;
 }
 export const PayMethod: React.FC = () => {
-  const { fullPrice } = useContext(ContextOrder);
+  //const { fullPrice } = useContext(ContextOrder);
   const [dataOrders, setDataOrders] = useState<IPayment>({
     data: "",
     signature: "",
   });
+  const fullPrice = useSelector((state: RootState) => state.cart.fullPrice);
   const { orderId } = useContext(ContextOrder);
+  console.log(orderId);
 
   useEffect(() => {
-    console.log(fullPrice, "full price in paymthod");
-
     if (fullPrice && orderId) {
       const data = paymentFunc(fullPrice, orderId);
       if (dataOrders.data === "") {
@@ -44,7 +46,6 @@ export const PayMethod: React.FC = () => {
       }
     }
   }, [fullPrice, orderId, dataOrders.data, dataOrders.signature]);
-  console.log(orderId);
 
   return (
     <>

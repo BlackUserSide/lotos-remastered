@@ -1,10 +1,11 @@
 export interface IOrderCartMain {
-  discount: number;
+  discount: number | null;
   id: number;
   name: string;
   price: number;
   src: string;
 }
+
 export interface IOrderDeliverty {
   [key: string]: string | number;
   deliveryMethod: number;

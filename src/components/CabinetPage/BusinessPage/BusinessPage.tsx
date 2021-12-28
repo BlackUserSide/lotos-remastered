@@ -31,6 +31,9 @@ export const BusinessPage: React.FC = () => {
       </div>
       <div className="top-line-wrapper-business">
         <h1 className="h1">Мій бізнес</h1>
+        <div className="btn-update-data-count">
+          <span>Оновити</span>
+        </div>
       </div>
       <div className="inform-business-wrapper">
         <div className="container-item-business">

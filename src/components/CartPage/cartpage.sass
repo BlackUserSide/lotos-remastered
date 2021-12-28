@@ -30,7 +30,16 @@
         padding-bottom: 20px
         padding-top: 20px
         border-bottom: 1px solid #0a0909
-
+        .sale-wrapper
+            background-color: #eb5757
+            color: #fff
+            width: 20%
+            display: flex
+            align-items: center
+            justify-content: center
+            height: 30px
+            margin-bottom: 10px
+            border-radius: 6px
         .container-item-wrapper
             display: flex
             align-items: center
@@ -54,10 +63,16 @@
                     margin-bottom: 10px
                     text-decoration: underline
                     cursor: pointer
-                span
-                    font-size: 14px
+                .full-price-wrapper-header
+                    font-size: 12px
                     line-height: 16px
                     color: #828282
+                    text-decoration: line-through
+                .sale-price-wrapper-header
+                    color: #4F4F4F
+                    font-size: 14px
+                    display: inline-block
+                    margin-left: 10px
             .amount-wrapper-basic
                 display: flex
                 align-items: center
@@ -412,4 +427,4 @@
             bottom: -22%
     .main-cart-wrapper
         .btn-back-to-shop
-            top: -5%
+            bottom: -45%
