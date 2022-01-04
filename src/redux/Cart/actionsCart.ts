@@ -186,6 +186,8 @@ export const clearCart = () => {
   return (dispatch: any) => {
     localStorage.removeItem("cart");
     dispatch({ type: CLEAR_CART, payload: "" });
+    dispatch({ type: SAVE_SALE_ITEM, payload: [] });
+    dispatch({ type: SET_SUM_PROD_SALE, payload: 0 });
   };
 };
 export const changeAmounCart = (id: number, amount: number) => {
@@ -235,9 +237,7 @@ const getFullPrice = () => {
 
         return e;
       });
-
       const notSalePrice = tmpPrice;
-
       if (cabinet.auth) {
         //TODO Доделать условие при совершении покупки
         if (notSalePrice >= 1500) {
@@ -246,7 +246,12 @@ const getFullPrice = () => {
             payload: { tensProcent: false, secondProcent: true },
           });
           tmpPrice = tmpPrice - (tmpPrice * 20) / 100;
-          dispatch(activeSale());
+          parseData.map((e) => {
+            if (e.amount > 3 && !e.prodSale && !e.sale) {
+              dispatch(activeSale());
+            }
+            return e;
+          });
           dispatch(setProdSum(notSalePrice));
           tmpPrice += cart.saleItemGift.length;
           cart.prodSale.map((e) => {
