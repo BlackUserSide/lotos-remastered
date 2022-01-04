@@ -70,9 +70,9 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
                     {prodSale !== 0 && !activeProd
                       ? prodSale >= content.discount
                         ? 1
-                        : (content.discount * amount - prodSale).toFixed(3)
-                      : (content.discount * amount).toFixed(3)}
-                    {(content.discount * amount).toFixed(3)} грн
+                        : (content.discount * amount - prodSale).toFixed(2)
+                      : (content.discount * amount).toFixed(2)}
+                    {(content.discount * amount).toFixed(2)} грн
                   </span>
                 </>
               ) : (
@@ -80,8 +80,8 @@ export const ItemShop: React.FC<TProps> = ({ content }) => {
                   {prodSale !== 0 && !activeProd
                     ? prodSale >= content.price
                       ? 1
-                      : (content.price * amount - prodSale).toFixed(3)
-                    : (content.price * amount).toFixed(3)}
+                      : (content.price * amount - prodSale).toFixed(2)
+                    : (content.price * amount).toFixed(2)}
                   {} грн
                 </span>
               )}
