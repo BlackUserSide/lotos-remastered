@@ -20,12 +20,7 @@ import { useSelector } from "react-redux";
 //import { updateDataStructure } from "../../../redux/Cabinet/action";
 
 export const StructurePage: React.FC = () => {
-  if (process.env.NODE_ENV !== "production") {
-    const { whyDidYouUpdate } = require("why-did-you-update");
-    whyDidYouUpdate(React);
-  }
   const ref = useRef<HTMLDivElement>(null);
-
   const { dataStructure, newDataStruct } = useContext(StructureContext);
   //let history = useHistory();
   const [dataStruct, setDataStruct] = useState<Array<IMainDataStructure>>([]);
@@ -37,7 +32,6 @@ export const StructurePage: React.FC = () => {
   );
   //REDUX----------------
   const [activeId, setActiveId] = useState<number[]>([]);
-
   const updateWrapper = useCallback(() => {
     if (dataStructure) {
       if (dataStructure.length > 0) {
@@ -79,8 +73,6 @@ export const StructurePage: React.FC = () => {
         if (!newActive[idLine]) {
           newActive.push(id);
         } else {
-          console.log(1332);
-
           newActive[idLine] = id;
         }
       }
@@ -91,7 +83,6 @@ export const StructurePage: React.FC = () => {
       newDataStruct(id, idLine);
     }
   };
-
   return (
     <div className="structure-page-wrapper">
       <div className="link-wrapper-navigation">

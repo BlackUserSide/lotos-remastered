@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import image1 from "../../../../img/iconCabinet/IconNavLink/1.png";
 import image2 from "../../../../img/iconCabinet/IconNavLink/2.png";
@@ -6,6 +7,7 @@ import image3 from "../../../../img/iconCabinet/IconNavLink/3.png";
 import image4 from "../../../../img/iconCabinet/IconNavLink/4.png";
 import image5 from "../../../../img/iconCabinet/IconNavLink/5.png";
 import right from "../../../../img/iconCabinet/IconNavLink/right.png";
+import { goDownPage } from "../../../../redux/Cabinet/action";
 import { getDataUser } from "../../../api/user";
 interface IDataUserNavLink {
   email: string;
@@ -44,6 +46,7 @@ export const MainCabinetLink: React.FC = () => {
     localStorage.removeItem("token");
     history.push("/");
   };
+  const dispatch = useDispatch();
   return (
     <div className="main-cabinet-nav-link">
       <div className="log-out-container">
@@ -56,6 +59,7 @@ export const MainCabinetLink: React.FC = () => {
           className="item-link-wrapper"
           onClick={() => {
             pushHistory("/cabinet/business");
+            dispatch(goDownPage());
           }}
         >
           <div className="top-line-link">
@@ -75,6 +79,7 @@ export const MainCabinetLink: React.FC = () => {
           className="item-link-wrapper"
           onClick={() => {
             pushHistory("/cabinet/structure");
+            dispatch(goDownPage());
           }}
         >
           <div className="top-line-link">
@@ -94,6 +99,7 @@ export const MainCabinetLink: React.FC = () => {
           className="item-link-wrapper"
           onClick={() => {
             pushHistory("/cabinet/bonus");
+            dispatch(goDownPage());
           }}
         >
           <div className="top-line-link">
@@ -139,6 +145,7 @@ export const MainCabinetLink: React.FC = () => {
           className="item-link-wrapper"
           onClick={() => {
             pushHistory("/cabinet/profile");
+            dispatch(goDownPage());
           }}
         >
           <div className="top-line-link">

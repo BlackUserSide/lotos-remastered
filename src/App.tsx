@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDataCart } from "./redux/Cart/actionsCart";
 import { saveUserData } from "./redux/Cabinet/action";
 import { RootState } from "./redux/rootReducer";
+import { getProductsWrapper } from "./redux/Shop/action";
 //import { FormCallBack } from "./components/ui/FormCallback/FormCallback";
 export const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ export const App: React.FC = () => {
   useEffect(() => {
     dispatch(getDataCart());
   }, [auth, dispatch]);
-
+  useEffect(() => {
+    dispatch(getProductsWrapper());
+  }, [dispatch]);
   return (
     <>
       <div className="main-app-wrapper">
