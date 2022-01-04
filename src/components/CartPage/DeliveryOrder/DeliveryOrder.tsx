@@ -6,11 +6,24 @@ import React, {
   useState,
 } from "react";
 import InputMask from "react-input-mask";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { RootState } from "../../../redux/rootReducer";
 import { submitOrder } from "../../api/order";
-import { ContextOrder, TDataOrder } from "../ContextOrder/ContextOrder";
+import {
+  ContextOrder,
+  TDataCart,
+  TDataOrder,
+} from "../ContextOrder/ContextOrder";
 import { HeaderCart } from "../HeaderCart/HeaderCart";
 import { IOrderDeliverty } from "../type";
+interface TestData {
+  id: string | number;
+  amount: string | number;
+  price: number | null | string;
+  sale: boolean | null;
+  saleProduct: boolean | null;
+}
 export const DeliveryOrder: React.FC = () => {
   const history = useHistory();
   const [activeItem, setActiveItem] = useState<number | null>(null);
@@ -24,7 +37,7 @@ export const DeliveryOrder: React.FC = () => {
     phone: "",
     email: "",
   });
-
+  const dataCart = useSelector((state: RootState) => state.cart.dataCart);
   const [activePost, setActivePost] = useState<boolean>(false);
   const submitHandler = useCallback(() => {
     if (dataOrder) {
@@ -100,13 +113,41 @@ export const DeliveryOrder: React.FC = () => {
   useEffect(() => {
     if (dataOrder) {
       if (orderId) {
+        const newDataProducts: TestData[] = [];
+        const localData = localStorage.getItem("cart");
+        if (localData) {
+          let parseData: TDataCart[] = JSON.parse(localData);
+          parseData.map((e) => {
+            let tmpObj = {
+              id: e.id,
+              amount: e.amount,
+              price: 0,
+              sale: e.sale,
+              saleProduct: e.prodSale,
+            };
+            dataCart.map((t) => {
+              if (t.id === e.id) {
+                if (t.discount !== null) {
+                  tmpObj = { ...tmpObj, price: t.discount };
+                } else {
+                  tmpObj = { ...tmpObj, price: t.price };
+                }
+              }
+              return t;
+            });
+            newDataProducts.push(tmpObj);
+            return e;
+          });
+        }
+        console.log(newDataProducts, "newDataProducts");
+
         const data = {
           typePost: dataOrder.deliveryMethod,
           fullName: `${dataOrder.surname} ${dataOrder.firstName} ${dataOrder.lastName}`,
           numberPost: dataOrder.numberPost,
           phone: dataOrder.phone,
           status: "",
-          productList: dataOrder.dataCart,
+          productList: newDataProducts,
           city: dataOrder.city,
           typePay: 1,
           orderId: orderId,
@@ -118,7 +159,7 @@ export const DeliveryOrder: React.FC = () => {
         history.push("/cart/payment");
       }
     }
-  }, [orderId, dataOrder, history]);
+  }, [orderId, dataOrder, history, dataCart]);
 
   const sendOrder = () => {
     if (dataOrder) {
