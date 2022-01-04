@@ -6,6 +6,7 @@ export interface IStateCabinet {
   loaderCounter: boolean;
   auth: boolean;
   dataCounter: TCounterUserLine;
+  goDown: boolean;
 }
 export type TCounterUserLine = {
   line: number | null;

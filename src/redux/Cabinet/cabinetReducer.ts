@@ -1,5 +1,6 @@
 import { IActionCabinet, IStateCabinet } from "./type";
 import {
+  GO_DOWN_PAGE,
   SAVE_USER_DATA,
   SET_AUTH_USER,
   SET_COUNTER_LINE,
@@ -23,6 +24,7 @@ const initState: IStateCabinet = {
     line: null,
     allSumLine: null,
   },
+  goDown: false,
 };
 export const cabinetReducer = (
   state: IStateCabinet = initState,
@@ -47,6 +49,8 @@ export const cabinetReducer = (
       return { ...state, dataCounter: action.payload } as IStateCabinet;
     case SET_LOUADER_COUNTER:
       return { ...state, loaderCounter: action.payload } as IStateCabinet;
+    case GO_DOWN_PAGE:
+      return { ...state, goDown: action.payload } as IStateCabinet;
     default:
       return state;
   }

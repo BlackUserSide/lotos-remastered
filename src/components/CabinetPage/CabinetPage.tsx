@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Switch, useHistory } from "react-router";
 import { RouteWithSubRoutes } from "../../routes/RouteWithSubRoutes";
 //import { Footer } from "../MainPage/Footer/Footer";
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { RootState } from "../../redux/rootReducer";
 import "./cabinet.sass";
+import { disableDownPage } from "../../redux/Cabinet/action";
 type IProms = {
   routes: any;
 };
@@ -26,6 +27,15 @@ export const CabinetPage: React.FC<IProms> = ({ routes }) => {
       history.push("/login");
     }
   }, [history, dispatch]);
+  const goDownPage = useSelector((state: RootState) => state.cabinet.goDown);
+
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (goDownPage) {
+      ref.current?.scrollIntoView({ behavior: "smooth" });
+    }
+    dispatch(disableDownPage());
+  }, [goDownPage, dispatch]);
   if (auth) {
     return (
       <>
@@ -33,6 +43,7 @@ export const CabinetPage: React.FC<IProms> = ({ routes }) => {
         {localStorage.getItem("token") !== null ? (
           <div className="cabinet-wrapper-main">
             <MainCabinetLink />
+            <div ref={ref}></div>
             <Switch>
               {routes
                 ? routes.map((route: any, i: any) => (
@@ -44,6 +55,7 @@ export const CabinetPage: React.FC<IProms> = ({ routes }) => {
         ) : (
           ""
         )}
+
         {/* <Footer /> */}
       </>
     );

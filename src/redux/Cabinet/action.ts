@@ -2,6 +2,7 @@ import { RootState } from "./../rootReducer";
 import { IActionCabinet, TCounterUserLine } from "./type";
 import { getDataUser } from "../../components/api/user";
 import {
+  GO_DOWN_PAGE,
   SAVE_USER_DATA,
   SET_AUTH_USER,
   SET_COUNTER_LINE,
@@ -72,4 +73,12 @@ export const getCounterStructure = () => {
 
     dispatch({ type: SET_COUNTER_LINE, payload: newArray });
   };
+};
+
+export const goDownPage = () => {
+  return { type: GO_DOWN_PAGE, payload: true };
+};
+
+export const disableDownPage = () => {
+  return { type: GO_DOWN_PAGE, payload: false };
 };
