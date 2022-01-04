@@ -36,6 +36,8 @@ export const OrderContextComponent: React.FC = ({ children }) => {
       const dataLocal = localStorage.getItem("cart");
       if (dataLocal !== null) {
         const parseData = JSON.parse(dataLocal);
+        console.log(parseData, "parseData");
+
         setDataUser((prev) => ({
           ...prev,
           dataCart: parseData,

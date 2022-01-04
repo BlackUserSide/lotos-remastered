@@ -91,6 +91,7 @@ export const DeliveryOrder: React.FC = () => {
       [name]: val,
     }));
   };
+
   const pushForPayMethod = () => {
     if (activePost) {
       sendOrder();

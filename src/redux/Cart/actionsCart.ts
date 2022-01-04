@@ -219,7 +219,6 @@ const getFullPrice = () => {
     if (data !== null) {
       const parseData: TDataCart[] = JSON.parse(data);
       let tmpPrice = 0;
-
       cart.dataCart.map((e) => {
         parseData.map((t) => {
           if (t.id === e.id && !t.sale && !t.prodSale) {
@@ -268,7 +267,7 @@ const getFullPrice = () => {
           tmpPrice = tmpPrice - (tmpPrice * 10) / 100;
         }
       }
-      dispatch({ type: SET_FULL_PRICE_CART, payload: tmpPrice });
+      dispatch({ type: SET_FULL_PRICE_CART, payload: +tmpPrice.toFixed(3) });
     }
   };
 };
