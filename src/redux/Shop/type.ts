@@ -9,8 +9,10 @@ export interface IStateShop {
   loaderProducts: boolean;
   category: ICategory[];
   subCategory: ISubCategory[];
+  activeCategory: number;
+  activeFilter: number;
 }
 export interface IActionShop {
   type: string;
-  payload: IDataProd[] | boolean | ICategory[] | ISubCategory[];
+  payload: IDataProd[] | boolean | ICategory[] | ISubCategory[] | number;
 }

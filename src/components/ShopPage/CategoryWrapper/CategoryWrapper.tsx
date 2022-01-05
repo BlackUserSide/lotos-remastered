@@ -1,35 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getCategory, getSubCategory } from "../../api/shop";
-
-import { ShopContext } from "../ShopContext/ShopContext";
-import { ICategory, ISubCategory } from "./type";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
+import {
+  categoryFilter,
+  clearFilterCategory,
+  getSubCategoryAction,
+  subCotegoryFilter,
+} from "../../../redux/Shop/action";
 
 export const CategoryWrapper: React.FC = () => {
-  const [dataCategory, setDataCategory] = useState<ICategory[]>([]);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
-  const [dataSubCategory, setDataSubCategory] = useState<ISubCategory[]>();
-  const { catergoryFilter, clearFilterCategory, subCategoryFilter } =
-    useContext(ShopContext);
-  useEffect(() => {
-    getCategory()
-      .then((res) => {
-        if (res) {
-          setDataCategory(res.data);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const [activeSubCategory, setActiveSubCategory] = useState<number | null>(
+    null
+  );
+  console.log(activeSubCategory);
+  const dataCategory = useSelector((state: RootState) => state.shop.category);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (activeCategory !== null) {
-      getSubCategory(activeCategory)
-        .then((res) => {
-          if (res) {
-            setDataSubCategory(res.data);
-          }
-        })
-        .catch((err) => console.log(err));
+      dispatch(categoryFilter(activeCategory));
+      dispatch(getSubCategoryAction(activeCategory));
     }
-  }, [activeCategory]);
+  }, [activeCategory, dispatch]);
+  const dataSubCategory = useSelector(
+    (state: RootState) => state.shop.subCategory
+  );
   const changeActiveCategory = (id: number) => {
     if (activeCategory === id) {
       setActiveCategory(null);
@@ -37,17 +32,9 @@ export const CategoryWrapper: React.FC = () => {
     }
     setActiveCategory(id);
   };
-  const changeCategory = (id: number) => {
-    if (catergoryFilter) {
-      if (activeCategory) {
-        catergoryFilter(activeCategory);
-      }
-    }
-  };
   const changeSubCategory = (id: number) => {
-    if (subCategoryFilter) {
-      subCategoryFilter(id);
-    }
+    setActiveSubCategory(id);
+    dispatch(subCotegoryFilter(id));
   };
   return (
     <div className="category-wrapper">
@@ -55,7 +42,10 @@ export const CategoryWrapper: React.FC = () => {
         <h4 className="h4">Категорії</h4>
       </div>
       <div className="list-wrapper-category">
-        <div className="item-list-wrapper" onClick={clearFilterCategory}>
+        <div
+          className="item-list-wrapper"
+          onClick={() => dispatch(clearFilterCategory())}
+        >
           <p>Всі</p>
         </div>
         {dataCategory.map((e, i) => (
@@ -63,7 +53,6 @@ export const CategoryWrapper: React.FC = () => {
             <p
               onClick={() => {
                 changeActiveCategory(e.id);
-                changeCategory(e.id);
               }}
             >
               {e.name}

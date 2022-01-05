@@ -38,7 +38,6 @@ export const ShopComponentContext: React.FC = ({ children }) => {
     },
     activeFilter: activeFilter,
   };
-  console.log(dataProduct);
 
   const updateWrapper = useCallback(() => {
     getAllProduct()

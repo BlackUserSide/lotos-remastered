@@ -1,50 +1,39 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { getCategory, getSubCategory } from "../../api/shop";
-import { ICategory, ISubCategory } from "../../ShopPage/CategoryWrapper/type";
+import React, { useContext, useEffect, useState } from "react";
+
 import { ShopContext } from "../../ShopPage/ShopContext/ShopContext";
 import closeIcon from "../../../img/close-icon.png";
 import backIcon from "../../../img/back-ico.png";
 import "./popupcategory.sass";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
+import {
+  clearFilterCategory,
+  clearSubCategory,
+  getSubCategoryAction,
+} from "../../../redux/Shop/action";
 type TProps = {
   setActiveMobileCat: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export const PopUpMobileCategory: React.FC<TProps> = ({
   setActiveMobileCat,
 }) => {
-  const [dataCategory, setDataCategory] = useState<ICategory[]>([]);
+  const dataCategory = useSelector((state: RootState) => state.shop.category);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const [activeSubCategory, setSubActiveCategory] = useState<number | null>(
     null
   );
-  const [dataSubCategory, setDataSubCategory] = useState<ISubCategory[]>([]);
-  const { catergoryFilter, clearFilterCategory, subCategoryFilter } =
-    useContext(ShopContext);
-  const [activeSub, setActiveSub] = useState<number>(0);
-  const updateCategory = useCallback(() => {
-    console.log(1);
 
-    getCategory()
-      .then((res) => {
-        if (res) {
-          setDataCategory(res.data);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  useEffect(() => {
-    updateCategory();
-  }, [updateCategory]);
+  const dataSubCategory = useSelector(
+    (state: RootState) => state.shop.subCategory
+  );
+  const { catergoryFilter, subCategoryFilter } = useContext(ShopContext);
+  const dispatch = useDispatch();
+  const [activeSub, setActiveSub] = useState<number>(0);
   useEffect(() => {
     if (activeCategory !== null) {
-      getSubCategory(activeCategory)
-        .then((res) => {
-          if (res) {
-            setDataSubCategory(res.data);
-          }
-        })
-        .catch((err) => console.log(err));
+      dispatch(getSubCategoryAction(activeCategory));
     }
-  }, [activeCategory]);
+  }, [activeCategory, dispatch]);
 
   const changeActiveCategory = (id: number) => {
     if (activeCategory === id) {
@@ -63,8 +52,7 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
   const backHandler = () => {
     if (activeCategory !== null) {
       setActiveCategory(null);
-      setDataSubCategory([]);
-      updateCategory();
+      dispatch(clearSubCategory());
     }
   };
   const changeSubCategory = (id: number) => {
@@ -73,8 +61,6 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
       subCategoryFilter(id);
     }
   };
-  console.log(activeSub);
-
   return (
     <div className="pop-up-mobile-category">
       <div className="bg-lock" onClick={() => setActiveMobileCat(false)}></div>
@@ -108,7 +94,7 @@ export const PopUpMobileCategory: React.FC<TProps> = ({
         <div className="list-mobile-category">
           <div
             className="list-item-category"
-            onClick={() => (clearFilterCategory ? clearFilterCategory() : "")}
+            onClick={() => dispatch(clearFilterCategory())}
           >
             <p>Все</p>
           </div>

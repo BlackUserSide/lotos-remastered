@@ -1,4 +1,6 @@
 import {
+  SET_ACTIVE_CATEGORY,
+  SET_ACTIVE_FILTER,
   SET_CATEGORY_WRAPPER,
   SET_FILTER_PRODUCTS,
   SET_ITEM_PRODUCTS,
@@ -12,6 +14,8 @@ const initState: IStateShop = {
   loaderProducts: false,
   category: [],
   subCategory: [],
+  activeCategory: 0,
+  activeFilter: 0,
 };
 export const shopReducer = (
   state: IStateShop = initState,
@@ -28,6 +32,10 @@ export const shopReducer = (
       return { ...state, category: action.payload } as IStateShop;
     case SET_SUB_CATEGORY_WRAPPER:
       return { ...state, subCategory: action.payload } as IStateShop;
+    case SET_ACTIVE_CATEGORY:
+      return { ...state, activeCategory: action.payload } as IStateShop;
+    case SET_ACTIVE_FILTER:
+      return { ...state, activeFilter: action.payload } as IStateShop;
     default:
       return state;
   }

@@ -8,7 +8,7 @@ import { ItemShop } from "./ItemShop";
 export const DataItemShop: React.FC = () => {
   //const { dataFilter } = useContext(ShopContext);
   const dataShop = useSelector((state: RootState) => state.shop.dataShop);
-  //const dataFilter = useSelector((state: RootState) => state.shop.dataFilter);
+  const dataFilter = useSelector((state: RootState) => state.shop.dataFilter);
   const loader = useSelector((state: RootState) => state.shop.loaderProducts);
   return (
     <div className="data-item-shop">
@@ -19,7 +19,11 @@ export const DataItemShop: React.FC = () => {
           </div>
         ) : (
           <>
-            {dataShop
+            {dataFilter.length > 0
+              ? dataFilter
+                ? dataFilter.map((e, i) => <ItemShop content={e} key={i} />)
+                : ""
+              : dataShop
               ? dataShop.map((e, i) => <ItemShop content={e} key={i} />)
               : ""}
           </>
