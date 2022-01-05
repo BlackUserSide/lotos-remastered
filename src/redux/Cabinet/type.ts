@@ -19,6 +19,10 @@ export interface IDataUserRedux {
   phone: string;
   email: string;
   id: number;
+  balance: number;
+  bonusBalance: number;
+  countMyPeople: number;
+  refBonus: number;
 }
 export interface IActionCabinet {
   type: string;

@@ -8,8 +8,11 @@ import image4 from "../../../img/iconCabinet/IconBonus/4.png";
 import image5 from "../../../img/iconCabinet/IconBonus/5.png";
 import image8 from "../../../img/iconCabinet/IconBonus/8.png";
 import image9 from "../../../img/iconCabinet/IconBonus/9.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
 
 export const BonusPage: React.FC = () => {
+  const dataUser = useSelector((state: RootState) => state.cabinet.dataUser);
   return (
     <div className="bonus-page-wrapper">
       <div className="link-wrapper-navigation">
@@ -38,7 +41,9 @@ export const BonusPage: React.FC = () => {
                   <img src={image1} alt="" />
                 </div>
                 <div className="text-wrapper">
-                  <p>Бонуси за попередній період: Не нараховано</p>
+                  <p>
+                    Бонуси за попередній період: {dataUser.bonusBalance} Lot
+                  </p>
                 </div>
               </div>
               <div className="list-wrapper-main">
@@ -46,7 +51,10 @@ export const BonusPage: React.FC = () => {
                   <img src={image2} alt="" />
                 </div>
                 <div className="text-wrapper">
-                  <p>Бонуси по програмі виплат: Не нараховано</p>
+                  <p>
+                    Бонуси по програмі виплат:{" "}
+                    {dataUser.bonusBalance - dataUser.refBonus} Lot
+                  </p>
                 </div>
               </div>
               <div className="list-wrapper-main">
@@ -54,7 +62,7 @@ export const BonusPage: React.FC = () => {
                   <img src={image3} alt="" />
                 </div>
                 <div className="text-wrapper">
-                  <p>Бонуси за закриті гілки: Не нараховано</p>
+                  <p>Бонуси за закриті гілки: 0 Lot</p>
                 </div>
               </div>
               <div className="list-wrapper-main">
@@ -62,7 +70,7 @@ export const BonusPage: React.FC = () => {
                   <img src={image4} alt="" />
                 </div>
                 <div className="text-wrapper">
-                  <p>Об’єм рекрутерської винагороди: Не нараховано</p>
+                  <p>Об’єм рекрутерської винагороди: {dataUser.refBonus} Lot</p>
                 </div>
               </div>
             </div>

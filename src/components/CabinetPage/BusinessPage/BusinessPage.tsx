@@ -27,6 +27,7 @@ export const BusinessPage: React.FC = () => {
   const loaderCounter = useSelector(
     (state: RootState) => state.cabinet.loaderCounter
   );
+  const dataUser = useSelector((state: RootState) => state.cabinet.dataUser);
   return (
     <div className="business-page-wrapper">
       <div className="link-wrapper-navigation">
@@ -112,7 +113,8 @@ export const BusinessPage: React.FC = () => {
                     <img src={image5} alt="" />
                   </div>
                   <p>
-                    Загальна кількість бонусів: <span>Не розраховано</span>
+                    Загальна кількість бонусів:{" "}
+                    <span>{dataUser.bonusBalance} Lot</span>
                   </p>
                 </div>
                 <div className="item-list-business">
@@ -120,7 +122,8 @@ export const BusinessPage: React.FC = () => {
                     <img src={image6} alt="" />
                   </div>
                   <p>
-                    Бонуси по програмі виплат: <span>Не розраховано</span>
+                    Бонуси по програмі виплат:{" "}
+                    <span>{dataUser.bonusBalance - dataUser.refBonus} Lot</span>
                   </p>
                 </div>
                 <div className="item-list-business">
@@ -128,7 +131,7 @@ export const BusinessPage: React.FC = () => {
                     <img src={image7} alt="" />
                   </div>
                   <p>
-                    Бонуси за закриті гілки: <span>Не розраховано</span>
+                    Бонуси за закриті гілки: <span>0 Lot</span>
                   </p>
                 </div>
                 <div className="item-list-business">
@@ -136,7 +139,8 @@ export const BusinessPage: React.FC = () => {
                     <img src={image8} alt="" />
                   </div>
                   <p>
-                    Об’єм рекрутерської винагороди: <span>Не розраховано</span>
+                    Об’єм рекрутерської винагороди:{" "}
+                    <span>{dataUser.refBonus} Lot</span>
                   </p>
                 </div>
               </div>
@@ -200,7 +204,7 @@ export const BusinessPage: React.FC = () => {
                     <img src={image12} alt="" />
                   </div>
                   <p>
-                    Людей в структурі: <span>Не розраховано</span>
+                    Людей в структурі: <span>{dataUser.countMyPeople}</span>
                   </p>
                 </div>
                 <div className="item-list-business">
@@ -216,7 +220,8 @@ export const BusinessPage: React.FC = () => {
                     <img src={image14} alt="" />
                   </div>
                   <p>
-                    Запрошено за попередній період: <span>Не розраховано</span>
+                    Запрошено за попередній період:{" "}
+                    <span>{dataUser.countMyPeople}</span>
                   </p>
                 </div>
               </div>

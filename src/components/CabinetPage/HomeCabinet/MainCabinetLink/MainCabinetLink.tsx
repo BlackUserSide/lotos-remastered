@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import image1 from "../../../../img/iconCabinet/IconNavLink/1.png";
 import image2 from "../../../../img/iconCabinet/IconNavLink/2.png";
@@ -8,36 +8,10 @@ import image4 from "../../../../img/iconCabinet/IconNavLink/4.png";
 import image5 from "../../../../img/iconCabinet/IconNavLink/5.png";
 import right from "../../../../img/iconCabinet/IconNavLink/right.png";
 import { goDownPage } from "../../../../redux/Cabinet/action";
-import { getDataUser } from "../../../api/user";
-interface IDataUserNavLink {
-  email: string;
-  phone: string;
-}
+import { RootState } from "../../../../redux/rootReducer";
 export const MainCabinetLink: React.FC = () => {
-  const [dataUser, setDataUser] = useState<IDataUserNavLink>({
-    email: "",
-    phone: "",
-  });
   const history = useHistory();
-  useEffect(() => {
-    getDataUser()
-      .then((res) => {
-        if (res) {
-          switch (res.status) {
-            case 200:
-              setDataUser(res.data[0]);
-              break;
-            case 401:
-              localStorage.removeItem("token");
-              history.push("/login");
-              break;
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [history]);
+  const dataUser = useSelector((state: RootState) => state.cabinet.dataUser);
 
   const pushHistory = (page: string) => {
     history.push(page);
@@ -113,7 +87,7 @@ export const MainCabinetLink: React.FC = () => {
           </div>
           <div className="inform-link-wrapper">
             <div className="bonus-wrapper">
-              <span>Бонусів:</span> <span>Не разраховано</span>
+              <span>Бонусів:</span> <span>{dataUser.bonusBalance} Lot</span>
             </div>
             <div className="dops-inform">
               <p>(за попередній період)</p>
