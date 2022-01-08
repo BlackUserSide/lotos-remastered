@@ -247,7 +247,7 @@ const getFullPrice = () => {
           });
           tmpPrice = tmpPrice - (tmpPrice * 20) / 100;
           parseData.map((e) => {
-            if (e.amount > 3 && !e.prodSale && !e.sale) {
+            if (e.amount >= 3 && !e.prodSale && !e.sale) {
               dispatch(activeSale());
             }
             return e;
