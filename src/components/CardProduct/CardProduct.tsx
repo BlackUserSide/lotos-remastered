@@ -56,6 +56,10 @@ export const CardProduct: React.FC = () => {
       })
       .catch((err) => console.log(err));
   }, [params.id]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   console.log(dataProduct);
 
   return (

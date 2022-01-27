@@ -14,6 +14,9 @@ export const ShopPage: React.FC = () => {
   useEffect(() => {
     dispatch(getCategoryAction());
   }, [dispatch]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="shop-page-wrapper">
       <Header />

@@ -6,6 +6,7 @@ import { IDataProduct } from "../type";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/Cart/actionsCart";
+
 type TParamas = {
   data: IDataProduct;
 };
@@ -17,6 +18,7 @@ export const MainCardContent: React.FC<TParamas> = ({ data }) => {
   let history = useHistory();
   const dispatch = useDispatch();
   const [amoun, setAmount] = useState<number>(1);
+  const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const changeAmount = (newAmount: number) => {
     if (newAmount <= 0) {
       setAmount(1);
@@ -26,6 +28,11 @@ export const MainCardContent: React.FC<TParamas> = ({ data }) => {
     setAmount(newAmount);
   };
   const addToCartHandler = () => {
+    if (showPopUp) {
+      setShowPopUp(false);
+      return;
+    }
+    setShowPopUp(true);
     dispatch(addToCart(+params.id, amoun));
   };
   return (

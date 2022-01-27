@@ -4,8 +4,17 @@ import photo1 from "../../../img/aktual_propos.jpg";
 import photo2 from "../../../img/actual3.jpg";
 import photo3 from "../../../img/actual2.jpg";
 import { useHistory } from "react-router";
+import Slider from "react-slick";
 export const ActualProducts: React.FC = () => {
   const history = useHistory();
+  const setings = {
+    dots: true,
+    infinite: true,
+    speed: 200,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+  };
   return (
     <div className="actual-products">
       <div className="top-line">
@@ -14,23 +23,42 @@ export const ActualProducts: React.FC = () => {
       <div className="actual-container-product">
         <div className="main-wrapper-actual">
           <div className="actual-item-main">
-            <div className="image-wrapper">
-              <img src={photo1} alt="" />
-            </div>
-            <div className="container-text-wrapper">
-              <h4 className="h4">Kardiofit</h4>
-              <p className="desc-product">
-                Покращує загальний стан фізичних навантажень, сприяючи
-                оптимальній працездатності. Оптимізує дію антиангінальних,
-                антигіпертензивних та антиаритмічних препаратів.
-              </p>
-              <div
-                className="btn-main-collection light-btn"
-                onClick={() => history.push("/card-product/21")}
-              >
-                <span>Перейти до товару</span>
+            <Slider {...setings}>
+              <div className="item-slider">
+                <div className="image-wrapper">
+                  <img src={photo1} alt="" />
+                </div>
+                <div className="container-text-wrapper">
+                  <h4 className="h4">Kardiofit</h4>
+                  <p className="desc-product">
+                    Покращує загальний стан фізичних навантажень, сприяючи
+                    оптимальній працездатності. Оптимізує дію антиангінальних,
+                    антигіпертензивних та антиаритмічних препаратів.
+                  </p>
+                  <div
+                    className="btn-main-collection light-btn"
+                    onClick={() => history.push("/card-product/21")}
+                  >
+                    <span>Перейти до товару</span>
+                  </div>
+                </div>
               </div>
-            </div>
+              <div className="item-slider">
+                <div className="image-wrapper">
+                  <img src={photo1} alt="" />
+                </div>
+                <div className="container-text-wrapper">
+                  <h4 className="h4">Test Item slider</h4>
+                  <p className="desc-product">test</p>
+                  <div
+                    className="btn-main-collection light-btn"
+                    onClick={() => history.push("/card-product/21")}
+                  >
+                    <span>Перейти до товару</span>
+                  </div>
+                </div>
+              </div>
+            </Slider>
           </div>
         </div>
         <div className="actual-second-product">
