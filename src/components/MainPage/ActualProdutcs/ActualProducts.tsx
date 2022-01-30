@@ -17,9 +17,6 @@ export const ActualProducts: React.FC = () => {
   };
   return (
     <div className="actual-products">
-      <div className="top-line">
-        <h2 className="h2">Актуальні пропозиції</h2>
-      </div>
       <div className="actual-container-product">
         <div className="main-wrapper-actual">
           <div className="actual-item-main">
