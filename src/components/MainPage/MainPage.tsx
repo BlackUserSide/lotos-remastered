@@ -16,6 +16,7 @@ export const MainPage: React.FC = () => {
   return (
     <div className="main-page">
       <Header />
+      <p>Test global async system</p>
       <MainScreeen />
       <ActualProducts />
       <SectionImage />
