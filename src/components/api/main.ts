@@ -24,3 +24,24 @@ export const getDiscountProduct = async () => {
   });
   return response;
 };
+export const getAllImageProducts = async (id: number) => {
+  let response: Ires = {
+    data: "",
+    status: 0,
+  };
+
+  await request({
+    method: "GET",
+    url: `/product/get_image_products/${id}`,
+    validateStatus: () => true,
+  }).then((res) => {
+    if (res) {
+      response = {
+        ...response,
+        data: res.data,
+        status: res.status,
+      };
+    }
+  });
+  return response;
+};

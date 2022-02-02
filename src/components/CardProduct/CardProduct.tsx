@@ -15,10 +15,16 @@ import { AuthSection } from "../MainPage/AuthSection/AuthSection";
 import { useParams } from "react-router";
 import { getProductById } from "../api/shop";
 import { IDataProduct } from "./type";
+import { getAllImage } from "../../functions/products/getAllImage";
 
 type TParams = {
   id: string;
 };
+export interface IDataImageProducts {
+  id: number;
+  productId: number;
+  src: string;
+}
 export const CardProduct: React.FC = () => {
   const params: TParams = useParams();
   //const [amount, setAmount] = useState<number>(1);
@@ -34,6 +40,7 @@ export const CardProduct: React.FC = () => {
     priceForUser: null,
     src: "",
   });
+  const [dataImage, setDataImage] = useState<IDataImageProducts[]>([]);
   useEffect(() => {
     getProductById(+params.id)
       .then((res) => {
@@ -49,6 +56,13 @@ export const CardProduct: React.FC = () => {
       .catch((err) => console.log(err));
   }, [params.id]);
   useEffect(() => {
+    getAllImage(+params.id).then((res) => {
+      if (res !== null) {
+        setDataImage(res);
+      }
+    });
+  }, [params]);
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -58,6 +72,7 @@ export const CardProduct: React.FC = () => {
     <>
       <Header />
       <div className="card-product">
+        <p>test-version</p>
         <MainCardContent data={dataProduct} />
         <InstuctionsProduct dataManual={dataProduct.menual} />
         {/* <ReviewCollection /> */}
