@@ -1,0 +1,45 @@
+.structure-list
+    max-width: 100%
+    box-sizing: border-box
+    .structure-item-list
+        background: #fff
+        width: 100%
+        padding: 10px 20px
+        margin-bottom: 30px
+        box-sizing: border-box
+        .block-structure-wrapper
+            width: calc( 100vw - 75% )
+            padding-left: 15px
+        .container-wrapper
+            display: flex
+            flex-direction: row
+            align-items: center
+        .status-open
+            width: 5%
+            height: auto
+            box-sizing: border-box
+            cursor: pointer
+        .status-open-active
+            width: 25px
+            height: 25px
+            border: 2px solid #4F4F4F
+            border-radius: 50%
+            box-sizing: border-box
+            .span-open-status
+                width: 100%
+                height: 100%
+                background: #1FBB83
+                box-sizing: border-box
+                display: inline-block
+                border-radius: 50%
+        .structure-item-list
+            max-width: 100%
+            padding: 10px
+            border: 1px solid rgba(#4F4F4F, .2)
+            border-radius: 5px
+@media screen and ( max-width: 520px )
+    .structure-list
+        .structure-item-list
+            .block-structure-wrapper
+                p
+                    font-size: 12px

@@ -34,14 +34,6 @@ export const CardProduct: React.FC = () => {
     priceForUser: null,
     src: "",
   });
-
-  // const changeHandler = (val: number) => {
-  //   if (val <= 0) {
-  //     setAmount(1);
-  //     return;
-  //   }
-  //   setAmount(val);
-  // };
   useEffect(() => {
     getProductById(+params.id)
       .then((res) => {
